@@ -3,6 +3,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@mui/material/IconButton/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -37,6 +38,9 @@ const Navbar = () => {
         </IconButton>
         <IconButton>
           <ShoppingCartIcon sx={{ width: "2em", height: "2em" }} />
+        </IconButton>
+        <IconButton>
+          <FavoriteBorderIcon sx={{ width: "2em", height: "2em" }} />
         </IconButton>
       </div>
     </AppBar>
