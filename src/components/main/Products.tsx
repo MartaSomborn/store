@@ -4,9 +4,9 @@ import Container from "@mui/material/Container/Container";
 
 const Products = () => {
   const [product, setProduct] = useState([
-    { id: 1, name: "Book1", price: "10" },
-    { id: 2, name: "Book2", price: "50" },
-    { id: 3, name: "Book3", price: "25" },
+    { id: 1, name: "Book1", price: 10 },
+    { id: 2, name: "Book2", price: 50 },
+    { id: 3, name: "Book3", price: 25 },
   ]);
   return (
     <Container
