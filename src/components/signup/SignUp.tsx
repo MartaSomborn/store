@@ -9,10 +9,23 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LogIn = () => {
+const SignUp = () => {
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [logInError, setLogInError] = useState("");
+
+  const onChangeName = (event: any) => {
+    setName(event.target.value);
+    console.log("name", name);
+  };
+
+  const onChangeSurname = (event: any) => {
+    setSurname(event.target.value);
+    console.log("surname", surname);
+  };
 
   const onChangeUserName = (event: any) => {
     setUserName(event.target.value);
@@ -24,23 +37,36 @@ const LogIn = () => {
     console.log("password", password);
   };
 
+  const onChangeConfirmPassword = (event: any) => {
+    setConfirmPassword(event.target.value);
+    console.log("confirmpassword", confirmPassword);
+  };
+
   const checkCredentials = () => {
-    if (userName.length === 0 || password.length === 0) {
+    if (
+      userName.length === 0 ||
+      password.length === 0 ||
+      name.length === 0 ||
+      surname.length === 0
+    ) {
       setLogInError("The field cannot be empty");
+      return;
     } else {
       setLogInError("");
-      console.log("Successfully login");
-      setUserName("");
-      setPassword("");
+      console.log("Successfuly login");
+    }
+    if (password !== confirmPassword) {
+      setLogInError("Password need to be the same");
+    } else {
+      setLogInError("");
     }
   };
 
   const navigate = useNavigate();
 
-  const moveToSignUp = () => {
-    navigate("/signup");
+  const moveToLogIn = () => {
+    navigate("/logIn");
   };
-
   return (
     <Container
       sx={{
@@ -64,12 +90,28 @@ const LogIn = () => {
         }}
       >
         <Typography variant="h3" gutterBottom>
-          Login
+          Sign up
         </Typography>
         <TextField
           sx={{ width: "40%", marginTop: "15px" }}
           id="standard-basic"
-          label="Username"
+          label="Name"
+          variant="standard"
+          onChange={onChangeName}
+          value={name}
+        />
+        <TextField
+          sx={{ width: "40%", marginTop: "15px" }}
+          id="standard-basic"
+          label="Surname"
+          variant="standard"
+          onChange={onChangeSurname}
+          value={surname}
+        />
+        <TextField
+          sx={{ width: "40%", marginTop: "15px" }}
+          id="standard-basic"
+          label="Email or username"
           variant="standard"
           onChange={onChangeUserName}
           value={userName}
@@ -82,22 +124,30 @@ const LogIn = () => {
           onChange={onChangePassword}
           value={password}
         />
+        <TextField
+          sx={{ width: "40%", marginTop: "15px" }}
+          id="standard-basic"
+          label="Conform password"
+          variant="standard"
+          onChange={onChangeConfirmPassword}
+          value={confirmPassword}
+        />
         <Button
           sx={{ width: "20%", marginTop: "15px" }}
           variant="contained"
           onClick={checkCredentials}
         >
-          Login
+          Sign up
         </Button>
         <Button sx={{ width: "20%", marginTop: "15px" }} variant="contained">
           Forget Password
         </Button>
         <Button
-          sx={{ width: "20%", marginTop: "15px" }}
+          sx={{ width: "20%", marginTop: "15px", marginBottom: "15px" }}
           variant="contained"
-          onClick={moveToSignUp}
+          onClick={moveToLogIn}
         >
-          Do you have an account?
+          Do you have already account?
         </Button>
         {logInError ? (
           <Alert severity="error">This is an error alert — check it out!</Alert>
@@ -107,4 +157,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default SignUp;
