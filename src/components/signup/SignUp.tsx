@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -42,7 +43,7 @@ const SignUp = () => {
     console.log("confirmpassword", confirmPassword);
   };
 
-  const checkCredentials = () => {
+  async function checkCredentials() {
     if (
       userName.length === 0 ||
       password.length === 0 ||
@@ -60,7 +61,15 @@ const SignUp = () => {
     } else {
       setLogInError("");
     }
-  };
+    try {
+      const res = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7dR70_Rzaj6DAmgNS1tbUvfV-LqDBLmQ",
+        { email: userName, password: password, returnSecureToken: true }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const navigate = useNavigate();
 

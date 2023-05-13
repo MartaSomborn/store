@@ -1,7 +1,8 @@
 import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import IconButton from "@mui/material/IconButton/IconButton";
+import CardContext from "./../../context/CardContext";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
@@ -17,6 +18,11 @@ const ProductItem = (props: any) => {
   const handleMouseOut = () => {
     setShowAddToFavourite(false);
   };
+
+  const { addToCard, removeSingle, items } = useContext(CardContext);
+
+  // console.log("items", items);
+
   return (
     // Box is like div
     <Box
@@ -29,6 +35,7 @@ const ProductItem = (props: any) => {
         flexWrap: "wrap",
         alignItems: "flex-start",
         justifyContent: "space-between",
+        marginTop: "20%",
       }}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
@@ -43,7 +50,13 @@ const ProductItem = (props: any) => {
       >
         <Typography>{props.product.name}</Typography>
         <Typography>{props.product.price}</Typography>
-        <Button>Add to box</Button>
+        <Button
+          onClick={() =>
+            addToCard(props.product.id, props.product.name, props.product.price)
+          }
+        >
+          Add to box
+        </Button>
       </div>
       {showAddToFavourite && (
         <IconButton>

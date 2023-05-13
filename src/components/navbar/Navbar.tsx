@@ -13,6 +13,10 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const moveToCheckout = () => {
+    navigate("/checkout");
+  };
+
   return (
     <AppBar
       sx={{
@@ -37,7 +41,10 @@ const Navbar = () => {
           />
         </IconButton>
         <IconButton>
-          <ShoppingCartIcon sx={{ width: "2em", height: "2em" }} />
+          <ShoppingCartIcon
+            onClick={moveToCheckout}
+            sx={{ width: "2em", height: "2em" }}
+          />
         </IconButton>
         <IconButton>
           <FavoriteBorderIcon sx={{ width: "2em", height: "2em" }} />

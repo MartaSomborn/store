@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LogIn = () => {
   const [userName, setUserName] = useState("");
@@ -24,7 +25,7 @@ const LogIn = () => {
     console.log("password", password);
   };
 
-  const checkCredentials = () => {
+  async function checkCredentials() {
     if (userName.length === 0 || password.length === 0) {
       setLogInError("The field cannot be empty");
     } else {
@@ -33,7 +34,15 @@ const LogIn = () => {
       setUserName("");
       setPassword("");
     }
-  };
+    try {
+      const res = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7dR70_Rzaj6DAmgNS1tbUvfV-LqDBLmQ",
+        { email: userName, password: password, returnSecureToken: true }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const navigate = useNavigate();
 

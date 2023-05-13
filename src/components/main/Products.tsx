@@ -1,13 +1,39 @@
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import Container from "@mui/material/Container/Container";
+import axios from "axios";
 
 const Products = () => {
-  const [product, setProduct] = useState([
-    { id: 1, name: "Book1", price: 10 },
-    { id: 2, name: "Book2", price: 50 },
-    { id: 3, name: "Book3", price: 25 },
-  ]);
+  const [products, setProducts] = useState<any[]>([]);
+
+  const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
+
+  // async function fetch() {
+  //   const res: any = await axios.get(url).then(
+  //     (response) => {
+  //       setProduct(response.data);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     }
+  //   );
+  //   //  setProducts(res);
+  //   console.log("products", products);
+  // }
+
+  useEffect(() => {
+    axios.get(url).then(
+      (response) => {
+        const getData = Object.values(response.data);
+        setProducts(getData);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    // fetch();
+  }, []);
+
   return (
     <Container
       sx={{
@@ -20,7 +46,7 @@ const Products = () => {
         marginTop: "10%",
       }}
     >
-      {product.map((prod) => {
+      {products.map((prod) => {
         return <ProductItem product={prod} key={prod.id} />;
       })}
     </Container>
