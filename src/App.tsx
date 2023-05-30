@@ -6,19 +6,30 @@ import Layout from "./components/layout/Layout";
 import LogIn from "./components/login/LogIn";
 import SignUp from "./components/signup/SignUp";
 import Checkout from "./components/checkout/Checkout";
+import { FavouriteProvider } from "./context/FavouriteContext";
+import Favourites from "./components/favourites/Favourites";
+import ProductPage from "./components/main/ProductPage";
+import Biography from "./components/Category/Biography";
+import Price from "./components/Category/Price";
 
 function App() {
   return (
-    <CardProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />} />
-          <Route path="/login" element={<LogIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/checkout" element={<Checkout />} />
-        </Routes>
-      </BrowserRouter>
-    </CardProvider>
+    <FavouriteProvider>
+      <CardProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/favourite" element={<Favourites />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/biography" element={<Biography />} />
+            <Route path="/price" element={<Price />} />
+          </Routes>
+        </BrowserRouter>
+      </CardProvider>
+    </FavouriteProvider>
   );
 }
 

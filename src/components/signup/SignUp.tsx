@@ -17,6 +17,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [logInError, setLogInError] = useState("");
+  const [formError, setFormError] = useState("");
 
   const onChangeName = (event: any) => {
     setName(event.target.value);
@@ -66,9 +67,10 @@ const SignUp = () => {
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7dR70_Rzaj6DAmgNS1tbUvfV-LqDBLmQ",
         { email: userName, password: password, returnSecureToken: true }
       );
-    } catch (error) {
-      console.log(error);
+    } catch (ex: any) {
+      setFormError(ex.response.data.error.message);
     }
+    //console.log("formError", ex.response.data.error.message);
   }
 
   const navigate = useNavigate();
@@ -158,8 +160,18 @@ const SignUp = () => {
         >
           Do you have already account?
         </Button>
-        {logInError ? (
-          <Alert severity="error">This is an error alert — check it out!</Alert>
+        {logInError ? <Alert severity="error">{logInError}</Alert> : null}
+        {formError === "INVALID_EMAIL" ? (
+          <Alert severity="error">Invalid email</Alert>
+        ) : null}
+        {formError ===
+        "WEAK_PASSWORD : Password should be at least 6 characters" ? (
+          <Alert severity="error">
+            Password should be at least 6 characters
+          </Alert>
+        ) : null}
+        {formError === "EMAIL_EXISTS" ? (
+          <Alert severity="error">Email exist</Alert>
         ) : null}
       </Box>
     </Container>

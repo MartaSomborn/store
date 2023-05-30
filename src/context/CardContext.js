@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { useState } from "react";
 
 const CardContext = createContext();
@@ -12,33 +12,24 @@ export function CardProvider({ children }) {
 
     if (existItem) {
       existItem.quantity++;
-      // existItem.price++;
-      setNewPrice(newPrice + Number(existItem.price));
-      const newItems = items;
-      newItems[id] = {
-        ...newItems[id],
-        price: newPrice,
-      };
-
-      setItems(newItems);
     } else {
       setItems([...items, { id: id, name: name, price: price, quantity: 1 }]);
     }
-
-    console.log("price", price);
-    console.log("newPrice", newPrice);
+    setNewPrice(newPrice + price);
   };
 
   const removeSingle = (id) => {
     const existItem = items.find((item) => item.id === id);
 
     if (existItem.quantity === 1) {
-      const itemAfterRemove = items.map((item) => item.id !== id);
+      const itemAfterRemove = items.filter((item) => item.id !== id);
       setItems(itemAfterRemove);
       console.log("itemAfterRemove", itemAfterRemove);
     } else {
       existItem.quantity--;
     }
+
+    setNewPrice(newPrice - existItem.price);
   };
 
   const removeAll = () => {
@@ -48,7 +39,7 @@ export function CardProvider({ children }) {
   return (
     <>
       <CardContext.Provider
-        value={{ addToCard, removeSingle, removeAll, items }}
+        value={{ addToCard, removeSingle, removeAll, items, newPrice }}
       >
         {children}
       </CardContext.Provider>

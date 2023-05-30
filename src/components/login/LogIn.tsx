@@ -14,6 +14,7 @@ const LogIn = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [logInError, setLogInError] = useState("");
+  const [logError, setLogError] = useState("");
 
   const onChangeUserName = (event: any) => {
     setUserName(event.target.value);
@@ -39,8 +40,11 @@ const LogIn = () => {
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7dR70_Rzaj6DAmgNS1tbUvfV-LqDBLmQ",
         { email: userName, password: password, returnSecureToken: true }
       );
-    } catch (error) {
-      console.log(error);
+      localStorage.setItem("name", userName);
+      navigate("/");
+    } catch (ex: any) {
+      setLogError(ex.response.data.error.message);
+      console.log("error", ex.response.data.error.message);
     }
   }
 
@@ -108,8 +112,18 @@ const LogIn = () => {
         >
           Do you have an account?
         </Button>
-        {logInError ? (
-          <Alert severity="error">This is an error alert — check it out!</Alert>
+        {logInError ? <Alert severity="error">{logInError}</Alert> : null}
+        {logError === "INVALID_EMAIL" ? (
+          <Alert severity="error">Invalid email</Alert>
+        ) : null}
+        {logError === "MISSING_PASSWORD" ? (
+          <Alert severity="error">Missing password</Alert>
+        ) : null}
+        {logError === "EMAIL_NOT_FOUND" ? (
+          <Alert severity="error">Email not found</Alert>
+        ) : null}
+        {logError === "INVALID_PASSWORD" ? (
+          <Alert severity="error">Invalid password</Alert>
         ) : null}
       </Box>
     </Container>

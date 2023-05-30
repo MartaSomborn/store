@@ -3,8 +3,10 @@ import { useContext, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 
 const Checkout = () => {
-  const { items, addToCard, removeSingle } = useContext(CardContext);
+  const { items, addToCard, removeSingle, newPrice } = useContext(CardContext);
   const [refresh, setRefresh] = useState(false);
+  console.log("newPrice", newPrice);
+  console.log("items", items);
   return (
     <>
       {items.length === 0 ? (
@@ -35,6 +37,7 @@ const Checkout = () => {
                   </Button>
                   <Typography>{item.price}</Typography>
                   <Typography>{item.quantity}</Typography>
+                  <Typography>{newPrice}</Typography>
                 </Box>
               );
             })}
