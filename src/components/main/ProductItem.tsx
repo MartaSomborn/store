@@ -6,7 +6,6 @@ import CardContext from "./../../context/CardContext";
 
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavouriteContext from "../../context/FavouriteContext";
-import ProductPage from "./ProductPage";
 import { Link } from "react-router-dom";
 
 const ProductItem = (props: any) => {
@@ -23,10 +22,6 @@ const ProductItem = (props: any) => {
   const { addToCard, removeSingle, items } = useContext(CardContext);
   const { addToFavourite, removeSingleFavourite, favouriteItems } =
     useContext(FavouriteContext);
-
-  // const navigateToProductPage = (product: any) => {
-  //   return <ProductPage product={product}></ProductPage>;
-  // };
 
   return (
     <Box

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Container from "@mui/material/Container/Container";
 import ProductItem from "../main/ProductItem";
 
-const Biography = () => {
+const ComputerInternet: any = () => {
   const [products, setProducts] = useState<any[]>([]);
 
   const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
@@ -15,12 +15,12 @@ const Biography = () => {
         console.log("response.data", response.data);
         setProducts([getData]);
         console.log("getData", getData);
-        console.log("biography products", products);
-        const biographyProduct = getData.filter(
-          (item: any) => item.Category === "Biography"
+        console.log("computer products", products);
+        const computerInternet = getData.filter(
+          (item: any) => item.Category === "Computer & Internet"
         );
-        setProducts(biographyProduct);
-        console.log("biographyProduct", biographyProduct);
+        setProducts(computerInternet);
+        console.log("computerInternet", computerInternet);
         console.log("products 2", products);
       },
       (error) => {
@@ -38,4 +38,4 @@ const Biography = () => {
   );
 };
 
-export default Biography;
+export default ComputerInternet;

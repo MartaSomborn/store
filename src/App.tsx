@@ -11,6 +11,9 @@ import Favourites from "./components/favourites/Favourites";
 import ProductPage from "./components/main/ProductPage";
 import Biography from "./components/Category/Biography";
 import Price from "./components/Category/Price";
+import Business from "./components/Category/Business";
+import ComputerInternet from "./components/Category/ComputerInternet";
+import JobsCareers from "./components/Category/JobCareers";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/biography" element={<Biography />} />
             <Route path="/price" element={<Price />} />
+            <Route path="/business" element={<Business />} />
+            <Route path="/computer" element={<ComputerInternet />} />
+            <Route path="/jobcareers" element={<JobsCareers />} />
           </Routes>
         </BrowserRouter>
       </CardProvider>

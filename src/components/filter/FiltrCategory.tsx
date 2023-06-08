@@ -17,12 +17,35 @@ const FiltrCategory = () => {
     navigate("/price");
   };
 
+  const moveToBusiness = () => {
+    navigate("/business");
+  };
+
+  const moveToComputerInternet = () => {
+    navigate("/computer");
+  };
+
+  const moveToJobCareers = () => {
+    navigate("/jobcareers");
+  };
+
   localStorage.setItem("minPrice", String(minPrice));
   localStorage.setItem("maxPrice", String(maxPrice));
 
   return (
-    <Container sx={{ marginTop: "15%" }}>
+    <Container
+      sx={{
+        marginTop: "15%",
+        display: "flex",
+        flexDirection: "column",
+        flexWrap: "nowrap",
+        alignItems: "flex-start",
+      }}
+    >
       <Button onClick={moveToBiography}>Biography</Button>
+      <Button onClick={moveToBusiness}>Business</Button>
+      <Button onClick={moveToComputerInternet}>Computer&Internet</Button>
+      <Button onClick={moveToJobCareers}>Job&Careers</Button>
       <div>
         <TextField
           id="standard-basic"
