@@ -1,78 +1,40 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import ProductItem from "./ProductItem";
-import { Container, Typography } from "@mui/material";
-import { devNull } from "os";
+import { Button, Container, IconButton, Typography } from "@mui/material";
+import Navbar from "../navbar/Navbar";
+import CardContext from "./../../context/CardContext";
+import FavouriteContext from "../../context/FavouriteContext";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import "./../../App.css";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "Domine serif",
+    fontSize: 30,
+  },
+});
+
+const themeButton = createTheme({
+  typography: {
+    fontSize: 20,
+  },
+});
+
+const themeTitle = createTheme({
+  typography: {
+    fontSize: 50,
+    fontWeightBold: 700,
+  },
+});
 
 const ProductPage = () => {
   let { id } = useParams();
 
   const [products, setProducts] = useState<any[]>([]);
-  const [myProducts, setMyProducts] = useState<any[] | null>([]);
-  const [product, setProduct] = useState<any[]>([]);
-
-  //   const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
-
-  //   useEffect(() => {
-  //     axios.get(url).then(
-  //       (response) => {
-  //         const getData = Object.values(response.data);
-  //         setProducts(getData);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
-  //   }, []);
-
-  //   useEffect(() => {
-  //     if (products) {
-  //       const existItem = products.filter((prod) => prod.id === id);
-  //       console.log("existItem", existItem);
-
-  //       //   setProducts(existItem);
-  //     }
-  //   }, [products]);
-
-  //   console.log("products", products);
-
-  // async function fetch() {
-  //   const res = await axios.get(
-  //     `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`
-  //   );
-
-  //   setProducts([res.data]);
-
-  //   console.log("ProdPage", products);
-  // }
-
-  // useEffect(() => {
-  //   fetch();
-  // }, []);
-
-  // useEffect(
-  //   () => {
-  //     setMyProducts(products.length > 0 ? Object.values(products[0]) : null);
-
-  //     console.log("myProduct", myProducts);
-
-  //     if (myProducts) {
-  //       const arr = myProducts.filter((product: any) => product.id == id);
-
-  //       console.log("arr", arr);
-
-  //       const product = arr[0];
-
-  //       setProducts([product]);
-
-  //       console.log(product);
-  //     }
-  //   }
-  //   //[products]
-  // );
+  const { addToCard } = useContext(CardContext);
+  const { addToFavourite } = useContext(FavouriteContext);
 
   const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
 
@@ -80,14 +42,10 @@ const ProductPage = () => {
     axios.get(url).then(
       (response) => {
         const getData = Object.values(response.data);
-        console.log("response.data", response.data);
+
         setProducts([getData]);
-        console.log("getData", getData);
-        console.log("biography products", products);
         const biographyProduct = getData.filter((item: any) => item.id == id);
         setProducts(biographyProduct);
-        console.log("biographyProduct", biographyProduct);
-        console.log("products 2", products);
       },
       (error) => {
         console.log(error);
@@ -95,12 +53,9 @@ const ProductPage = () => {
     );
   }, []);
 
-  console.log("products", products);
-
   return (
     <Container
       sx={{
-        backgroundColor: "gray",
         display: "flex",
         gap: "20px",
         justifyContent: "center",
@@ -109,11 +64,97 @@ const ProductPage = () => {
         marginTop: "10%",
       }}
     >
-      {products
-        ? products.map((prod) => {
-            return <ProductItem product={prod} key={prod.id} />;
-          })
-        : null}
+      <>
+        <Navbar />
+        <div className="background_layout">
+          {products.map((prod: any) => {
+            return (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: "400px",
+                }}
+              >
+                <img
+                  style={{ height: "600px", width: "500px" }}
+                  src={prod.photo}
+                />
+                <div
+                  style={{
+                    height: "600px",
+                    width: "500px",
+                    border: "2px solid blue",
+                    display: "flex",
+                    flexDirection: "column",
+                    flexWrap: "wrap",
+
+                    alignItems: "center",
+                    position: "relative",
+                  }}
+                >
+                  <ThemeProvider theme={themeTitle}>
+                    <Typography
+                      style={{
+                        textAlign: "center",
+                        marginTop: "40px",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {prod.name}
+                    </Typography>
+                  </ThemeProvider>
+                  <ThemeProvider theme={theme}>
+                    <Typography
+                      style={{ textAlign: "center", marginTop: "40px" }}
+                    >
+                      {prod.author}
+                    </Typography>
+                    <Typography
+                      style={{
+                        textAlign: "center",
+                        bottom: "120px",
+                        position: "absolute",
+                      }}
+                    >
+                      {prod.price + " €"}
+                    </Typography>
+                  </ThemeProvider>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "30px",
+                      bottom: "20px",
+                      position: "absolute",
+                    }}
+                  >
+                    <Button
+                      size="medium"
+                      variant="contained"
+                      sx={{ width: "350px" }}
+                      onClick={() => addToCard(prod.id, prod.name, prod.price)}
+                    >
+                      {" "}
+                      <ThemeProvider theme={themeButton}>
+                        <Typography>Add to box</Typography>
+                      </ThemeProvider>
+                    </Button>
+                    <IconButton>
+                      <FavoriteBorderIcon
+                        sx={{ width: "2em", height: "2em" }}
+                        onClick={() =>
+                          addToFavourite(prod.id, prod.name, prod.price)
+                        }
+                      />
+                    </IconButton>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </>
     </Container>
   );
 };

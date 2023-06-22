@@ -14,6 +14,7 @@ import Price from "./components/Category/Price";
 import Business from "./components/Category/Business";
 import ComputerInternet from "./components/Category/ComputerInternet";
 import JobsCareers from "./components/Category/JobCareers";
+import FilterBooks from "./components/Search/FilterBooks";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/business" element={<Business />} />
             <Route path="/computer" element={<ComputerInternet />} />
             <Route path="/jobcareers" element={<JobsCareers />} />
+            <Route path="/search/:bookname" element={<FilterBooks />} />
           </Routes>
         </BrowserRouter>
       </CardProvider>

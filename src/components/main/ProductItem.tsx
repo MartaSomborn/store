@@ -19,27 +19,24 @@ const ProductItem = (props: any) => {
     setShowAddToFavourite(false);
   };
 
-  const { addToCard, removeSingle, items } = useContext(CardContext);
-  const { addToFavourite, removeSingleFavourite, favouriteItems } =
-    useContext(FavouriteContext);
+  const { addToCard } = useContext(CardContext);
+  const { addToFavourite } = useContext(FavouriteContext);
 
   return (
     <Box
       sx={{
         width: "250px",
         height: "300px",
-        border: "2px solid black",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
         alignItems: "flex-start",
         justifyContent: "center",
-        marginTop: "20%",
+        marginTop: "5%",
         position: "relative",
       }}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
-      // onClick={navigateToProductPage}
     >
       <Link
         style={{
@@ -69,24 +66,28 @@ const ProductItem = (props: any) => {
               {props.product.name}
             </Typography>
             <Typography style={{ textAlign: "center" }}>
+              {props.product.author}
+            </Typography>
+            <Typography style={{ textAlign: "center" }}>
               {props.product.price}
             </Typography>
           </div>
-          <Button
-            size="medium"
-            variant="contained"
-            sx={{ width: "150px", position: "absolute", bottom: "0" }}
-            onClick={() =>
-              addToCard(
-                props.product.id,
-                props.product.name,
-                // props.product.photo,
-                props.product.price
-              )
-            }
-          >
-            Add to box
-          </Button>
+          {showAddToFavourite && (
+            <Button
+              size="medium"
+              variant="contained"
+              sx={{ width: "150px", position: "absolute", bottom: "0" }}
+              onClick={() =>
+                addToCard(
+                  props.product.id,
+                  props.product.name,
+                  props.product.price
+                )
+              }
+            >
+              Add to box
+            </Button>
+          )}
         </div>
         {showAddToFavourite && (
           <IconButton>
@@ -96,7 +97,6 @@ const ProductItem = (props: any) => {
                 addToFavourite(
                   props.product.id,
                   props.product.name,
-                  // props.product.photo,
                   props.product.price
                 )
               }

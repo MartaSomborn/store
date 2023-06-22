@@ -13,7 +13,6 @@ const Products = () => {
       (response) => {
         const getData = Object.values(response.data);
         setProducts(getData);
-        console.log("martas products", products);
       },
       (error) => {
         console.log(error);
@@ -24,13 +23,12 @@ const Products = () => {
   return (
     <Container
       sx={{
-        backgroundColor: "#e2e4e5", //"#006eaa",
         display: "flex",
         gap: "20px",
         justifyContent: "center",
-        height: "1000px",
+        height: "100vh",
         minWidth: "90vw",
-        marginTop: "10%",
+        marginTop: "200px",
       }}
     >
       {products.map((prod) => {

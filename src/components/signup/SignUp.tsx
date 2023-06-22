@@ -70,7 +70,6 @@ const SignUp = () => {
     } catch (ex: any) {
       setFormError(ex.response.data.error.message);
     }
-    //console.log("formError", ex.response.data.error.message);
   }
 
   const navigate = useNavigate();

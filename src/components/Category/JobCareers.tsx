@@ -12,17 +12,12 @@ const JobsCareers = () => {
     axios.get(url).then(
       (response) => {
         const getData = Object.values(response.data);
-        console.log("response.data", response.data);
         setProducts([getData]);
-        console.log("getData", getData);
-        console.log("computer products", products);
 
         const jobsCareers = getData.filter(
           (item: any) => item.Category === "Job & Careers"
         );
         setProducts(jobsCareers);
-        console.log("jobsCareers", jobsCareers);
-        console.log("products 2", products);
       },
       (error) => {
         console.log(error);

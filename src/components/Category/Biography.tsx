@@ -12,16 +12,13 @@ const Biography = () => {
     axios.get(url).then(
       (response) => {
         const getData = Object.values(response.data);
-        console.log("response.data", response.data);
+
         setProducts([getData]);
-        console.log("getData", getData);
-        console.log("biography products", products);
+
         const biographyProduct = getData.filter(
           (item: any) => item.Category === "Biography"
         );
         setProducts(biographyProduct);
-        console.log("biographyProduct", biographyProduct);
-        console.log("products 2", products);
       },
       (error) => {
         console.log(error);

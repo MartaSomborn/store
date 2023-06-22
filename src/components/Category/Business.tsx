@@ -12,16 +12,13 @@ const Business = () => {
     axios.get(url).then(
       (response) => {
         const getData = Object.values(response.data);
-        console.log("response.data", response.data);
+
         setProducts([getData]);
-        console.log("getData", getData);
-        console.log("business products", products);
+
         const businessProduct = getData.filter(
           (item: any) => item.Category === "Business"
         );
         setProducts(businessProduct);
-        console.log("businessProduct", businessProduct);
-        console.log("products 2", products);
       },
       (error) => {
         console.log(error);

@@ -1,4 +1,13 @@
-import { AppBar, Badge, Box, Typography } from "@mui/material";
+import {
+  AppBar,
+  Badge,
+  Box,
+  Typography,
+  Input,
+  Button,
+  TextField,
+  Container,
+} from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@mui/material/IconButton/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
@@ -10,12 +19,26 @@ import CardContext from "../../context/CardContext";
 import FavouriteContext from "../../context/FavouriteContext";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { addToCard, removeSingle, items } = useContext(CardContext);
 
   const { addToFavourite, removeSingleFavourite, favouriteItems } =
     useContext(FavouriteContext);
+
+  const [searchValue, setSearchValue] = useState("");
+  const ariaLabel = { "aria-label": "description" };
+
+  const [showAddToFavourite, setShowAddToFavourite] = useState(false);
+
+  const handleMouseOver = () => {
+    setShowAddToFavourite(true);
+  };
+
+  const handleMouseOut = () => {
+    setShowAddToFavourite(false);
+  };
 
   const user = localStorage.getItem("name");
 
@@ -49,6 +72,32 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [minPrice, setMinPrice] = useState(0);
+
+  const moveToBiography = () => {
+    navigate("/biography");
+  };
+
+  const moveToPrice = () => {
+    navigate("/price");
+  };
+
+  const moveToBusiness = () => {
+    navigate("/business");
+  };
+
+  const moveToComputerInternet = () => {
+    navigate("/computer");
+  };
+
+  const moveToJobCareers = () => {
+    navigate("/jobcareers");
+  };
+
+  localStorage.setItem("minPrice", String(minPrice));
+  localStorage.setItem("maxPrice", String(maxPrice));
+
   return (
     <AppBar
       sx={{
@@ -67,6 +116,55 @@ const Navbar = () => {
       <IconButton>
         <HomeIcon sx={{ width: "2em", height: "2em" }} />
       </IconButton>
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1 },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <Input
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          placeholder="Placeholder"
+          inputProps={ariaLabel}
+        />
+        <Link to={"/search/" + searchValue}>
+          <Button>Search</Button>
+        </Link>
+      </Box>
+      <Box
+        sx={{ position: "relative", border: "2px solid red" }}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
+      >
+        <Typography
+          sx={{ cursor: "pointer", display: "block", color: "black" }}
+        >
+          Category
+        </Typography>
+
+        {showAddToFavourite && (
+          <Container
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "nowrap",
+              alignItems: "flex-start",
+              position: "absolute",
+              border: "2px solid black",
+              marginLeft: "-30px",
+            }}
+          >
+            <Button onClick={moveToBiography}>Biography</Button>
+            <Button onClick={moveToBusiness}>Business</Button>
+            <Button onClick={moveToComputerInternet}>Computer&Internet</Button>
+            <Button onClick={moveToJobCareers}>Job&Careers</Button>
+            <Button onClick={moveToPrice}>Price</Button>
+          </Container>
+        )}
+      </Box>
       <div>
         <IconButton>
           <Box sx={{ flexDirection: "column" }}>
