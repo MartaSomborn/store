@@ -1,10 +1,9 @@
 import axios from "axios";
-
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import Container from "@mui/material/Container/Container";
 import ProductItem from "../main/ProductItem";
+import Navbar from "../navbar/Navbar";
+import { Box, Typography } from "@mui/material";
 
 const FilterBooks = () => {
   const [filteredNameProducts, setFilteredNameProducts] = useState<any>([]);
@@ -40,12 +39,41 @@ const FilterBooks = () => {
     }
   }, [filteredNameProducts]);
 
+  const searchResults = "Search results: " + bookname;
+
   return (
-    <Container>
-      {filteredNameProducts.map((prod: any) => {
-        return <ProductItem product={prod} key={prod.id} />;
-      })}
-    </Container>
+    <>
+      <Navbar />
+      <Box
+        sx={{
+          width: "100vw",
+          height: "100vh",
+          marginTop: "130px",
+          background: "#f5ebe0",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "50px",
+            textAlign: "center",
+            paddingTop: "100px",
+            paddingBottom: "40px",
+          }}
+        >
+          {searchResults}
+        </Typography>
+        <Box sx={{ display: "flex" }}>
+          {filteredNameProducts.map((prod: any) => {
+            return <ProductItem product={prod} key={prod.id} />;
+          })}
+        </Box>
+      </Box>
+    </>
   );
 };
 export default FilterBooks;

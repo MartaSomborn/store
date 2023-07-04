@@ -25,9 +25,6 @@ const Price = () => {
     );
   };
 
-  // localStorage.setItem("minPrice", String(minPrice));
-  // localStorage.setItem("maxPrice", String(maxPrice));
-
   const filterPrice = () => {
     if (products.length > 0) {
       const minPrice = localStorage.getItem("minPrice");

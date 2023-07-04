@@ -22,15 +22,16 @@ import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@mui/material/IconButton/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import CardContext from "../../context/CardContext";
 import FavouriteContext from "../../context/FavouriteContext";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import CloseIcon from "@mui/icons-material/Close";
 
 type Anchor = "right";
 
@@ -125,9 +126,23 @@ const Navbar = () => {
           (text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                }}
                 onClick={() => navigate("/" + text.toLowerCase())}
               >
-                <ListItemText primary={text} />
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontWeight: 500,
+                    fontSize: "20px",
+                  }}
+                >
+                  {text}
+                </Typography>
               </ListItemButton>
             </ListItem>
           )
@@ -136,11 +151,13 @@ const Navbar = () => {
     </Box>
   );
 
+  //TODO:
+  useEffect(() => console.log("Search value", searchValue), []);
+
   return (
     <AppBar
       sx={{
         background: "white",
-        // height: "10%",
         height: "130px",
         width: "100%",
         display: "flex",
@@ -155,36 +172,32 @@ const Navbar = () => {
       <IconButton onClick={moveToHome}>
         <HomeIcon sx={{ width: "2em", height: "2em" }} />
       </IconButton>
-      {/* <Box
-        component="form"
-        sx={{
-          "& > :not(style)": { m: 1 },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <Input
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          placeholder="Search..."
-          inputProps={ariaLabel}
-        />
-        <Link to={"/search/" + searchValue}>
-          <Button>Search</Button>
-        </Link>
-      </Box> */}
+
       <Paper
         component="form"
         sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 800 }}
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}
-          // value={searchValue}
+          value={searchValue}
           placeholder="Search..."
           inputProps={ariaLabel}
+          onChange={(e) => setSearchValue(e.target.value)}
         />
+        {searchValue.length > 0 ? (
+          <IconButton onClick={() => setSearchValue("")}>
+            <CloseIcon />
+          </IconButton>
+        ) : (
+          ""
+        )}
         <Link to={"/search/" + searchValue}>
-          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+          <IconButton
+            type="button"
+            sx={{ p: "10px" }}
+            aria-label="search"
+            onClick={() => setSearchValue("")}
+          >
             <SearchIcon />
           </IconButton>
         </Link>
@@ -218,11 +231,11 @@ const Navbar = () => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={moveToLogin}>Zaloguj się</MenuItem>
+                <MenuItem onClick={moveToLogin}>Login</MenuItem>
 
-                <MenuItem>Załóż konto</MenuItem>
+                <MenuItem>Create an account</MenuItem>
 
-                <MenuItem onClick={handleClose}>Zamknij</MenuItem>
+                <MenuItem onClick={handleClose}>Close</MenuItem>
               </Menu>
             )}
           </Box>
@@ -237,7 +250,7 @@ const Navbar = () => {
         </Badge>
         <Badge badgeContent={favouriteItems.length} color="primary">
           <IconButton>
-            <FavoriteBorderIcon
+            <FavouriteBorderIcon
               onClick={moveToFavourite}
               sx={{ width: "2em", height: "2em" }}
             />

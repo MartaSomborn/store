@@ -5,8 +5,7 @@ import { Button, Container, IconButton, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import CardContext from "./../../context/CardContext";
 import FavouriteContext from "../../context/FavouriteContext";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./../../App.css";
 import "./Product.css";
 
@@ -144,7 +143,7 @@ const ProductPage = () => {
                       </Typography>
                     </Button>
                     <IconButton>
-                      <FavoriteBorderIcon
+                      <FavouriteBorderIcon
                         sx={{ width: "2em", height: "2em" }}
                         onClick={() =>
                           addToFavourite(prod.id, prod.name, prod.price)

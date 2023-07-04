@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../navbar/Navbar";
 
 const LogIn = () => {
   const [userName, setUserName] = useState("");
@@ -55,16 +56,17 @@ const LogIn = () => {
   };
 
   return (
-    <Container
+    <Box
       sx={{
         display: "flex",
         width: "100vw",
         height: "100vh",
         justifyContent: "center",
         alignItems: "center",
-        border: "2px solid red",
+        background: "#f5ebe0",
       }}
     >
+      <Navbar />
       <Box
         sx={{
           display: "flex",
@@ -72,15 +74,25 @@ const LogIn = () => {
           flexWrap: "wrap",
           alignContent: "center",
           alignItems: "center",
-          border: "2px solid blue",
           width: "100%",
+          maxWidth: "1200px",
         }}
       >
-        <Typography variant="h3" gutterBottom>
+        <Typography
+          sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "60px" }}
+          variant="h3"
+          gutterBottom
+        >
           Login
         </Typography>
         <TextField
-          sx={{ width: "40%", marginTop: "15px" }}
+          sx={{
+            width: "40%",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "60px",
+          }}
           id="standard-basic"
           label="Username"
           variant="standard"
@@ -96,37 +108,120 @@ const LogIn = () => {
           value={password}
         />
         <Button
-          sx={{ width: "20%", marginTop: "15px" }}
+          sx={{
+            width: "20%",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "15px",
+            backgroundColor: "#c75146",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#ad2e24",
+            },
+          }}
           variant="contained"
           onClick={checkCredentials}
         >
           Login
         </Button>
-        <Button sx={{ width: "20%", marginTop: "15px" }} variant="contained">
+        <Button
+          sx={{
+            width: "20%",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "15px",
+            backgroundColor: "#c75146",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#ad2e24",
+            },
+          }}
+          variant="contained"
+        >
           Forget Password
         </Button>
         <Button
-          sx={{ width: "20%", marginTop: "15px" }}
+          sx={{
+            width: "20%",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "15px",
+            backgroundColor: "#c75146",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#ad2e24",
+            },
+          }}
           variant="contained"
           onClick={moveToSignUp}
         >
           Do you have an account?
         </Button>
-        {logInError ? <Alert severity="error">{logInError}</Alert> : null}
+        {logInError ? (
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            {logInError}
+          </Alert>
+        ) : null}
         {logError === "INVALID_EMAIL" ? (
-          <Alert severity="error">Invalid email</Alert>
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            Invalid email
+          </Alert>
         ) : null}
         {logError === "MISSING_PASSWORD" ? (
-          <Alert severity="error">Missing password</Alert>
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            Missing password
+          </Alert>
         ) : null}
         {logError === "EMAIL_NOT_FOUND" ? (
-          <Alert severity="error">Email not found</Alert>
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            Email not found
+          </Alert>
         ) : null}
         {logError === "INVALID_PASSWORD" ? (
-          <Alert severity="error">Invalid password</Alert>
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            Invalid password
+          </Alert>
         ) : null}
       </Box>
-    </Container>
+    </Box>
   );
 };
 

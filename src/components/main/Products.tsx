@@ -26,10 +26,15 @@ const Products = () => {
         display: "flex",
         gap: "20px",
         justifyContent: "center",
-        height: "100vh",
+        // height: "100vh",
         minWidth: "90vw",
         marginTop: "200px",
         border: "2 px black solid",
+        backgroundColor: "white",
+        width: "80%",
+        borderRadius: "55px",
+        padding: "100px",
+        marginBottom: "200px",
       }}
     >
       {products.map((prod) => {

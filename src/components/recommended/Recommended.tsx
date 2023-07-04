@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ProductItem from "../main/ProductItem";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const Recommended = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -41,7 +40,7 @@ const Recommended = () => {
       }}
     >
       <Typography
-        sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "60px" }}
+        sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "40px" }}
       >
         Recommended
       </Typography>
@@ -52,6 +51,7 @@ const Recommended = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
+          gap: "20px",
         }}
       >
         {products.map((prod) => {

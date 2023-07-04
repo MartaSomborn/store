@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ProductItem from "../main/ProductItem";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const Promotions = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -42,7 +41,7 @@ const Promotions = () => {
       }}
     >
       <Typography
-        sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "60px" }}
+        sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "40px" }}
       >
         Promotions
       </Typography>
@@ -54,6 +53,7 @@ const Promotions = () => {
           flexDirection: "row",
           alignItems: "flex-start",
           justifyContent: "center",
+          gap: "10px",
         }}
       >
         {products.map((prod) => {

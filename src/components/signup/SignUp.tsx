@@ -1,14 +1,8 @@
-import {
-  Box,
-  Button,
-  Container,
-  TextField,
-  Typography,
-  Alert,
-} from "@mui/material";
+import { Box, Button, TextField, Typography, Alert } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../navbar/Navbar";
 
 const SignUp = () => {
   const [name, setName] = useState("");
@@ -78,16 +72,17 @@ const SignUp = () => {
     navigate("/logIn");
   };
   return (
-    <Container
+    <Box
       sx={{
         display: "flex",
         width: "100vw",
         height: "100vh",
         justifyContent: "center",
         alignItems: "center",
-        border: "2px solid red",
+        background: "#f5ebe0",
       }}
     >
+      <Navbar />
       <Box
         sx={{
           display: "flex",
@@ -95,15 +90,25 @@ const SignUp = () => {
           flexWrap: "wrap",
           alignContent: "center",
           alignItems: "center",
-          border: "2px solid blue",
           width: "100%",
+          maxWidth: "1200px",
         }}
       >
-        <Typography variant="h3" gutterBottom>
+        <Typography
+          sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "60px" }}
+          variant="h3"
+          gutterBottom
+        >
           Sign up
         </Typography>
         <TextField
-          sx={{ width: "40%", marginTop: "15px" }}
+          sx={{
+            width: "40%",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "60px",
+          }}
           id="standard-basic"
           label="Name"
           variant="standard"
@@ -143,37 +148,110 @@ const SignUp = () => {
           value={confirmPassword}
         />
         <Button
-          sx={{ width: "20%", marginTop: "15px" }}
+          sx={{
+            width: "20%",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "15px",
+            backgroundColor: "#c75146",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#ad2e24",
+            },
+          }}
           variant="contained"
           onClick={checkCredentials}
         >
           Sign up
         </Button>
-        <Button sx={{ width: "20%", marginTop: "15px" }} variant="contained">
+        <Button
+          sx={{
+            width: "20%",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "15px",
+            backgroundColor: "#c75146",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#ad2e24",
+            },
+          }}
+          variant="contained"
+        >
           Forget Password
         </Button>
         <Button
-          sx={{ width: "20%", marginTop: "15px", marginBottom: "15px" }}
+          sx={{
+            width: "20%",
+            marginTop: "15px",
+            marginBottom: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "15px",
+            backgroundColor: "#c75146",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#ad2e24",
+            },
+          }}
           variant="contained"
           onClick={moveToLogIn}
         >
           Do you have already account?
         </Button>
-        {logInError ? <Alert severity="error">{logInError}</Alert> : null}
+        {logInError ? (
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            {logInError}
+          </Alert>
+        ) : null}
         {formError === "INVALID_EMAIL" ? (
-          <Alert severity="error">Invalid email</Alert>
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            Invalid email
+          </Alert>
         ) : null}
         {formError ===
         "WEAK_PASSWORD : Password should be at least 6 characters" ? (
-          <Alert severity="error">
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
             Password should be at least 6 characters
           </Alert>
         ) : null}
         {formError === "EMAIL_EXISTS" ? (
-          <Alert severity="error">Email exist</Alert>
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            Email exist
+          </Alert>
         ) : null}
       </Box>
-    </Container>
+    </Box>
   );
 };
 

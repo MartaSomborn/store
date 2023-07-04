@@ -41,7 +41,7 @@ const Announcement = () => {
       }}
     >
       <Typography
-        sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "60px" }}
+        sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "40px" }}
       >
         Announcements
       </Typography>
@@ -52,6 +52,7 @@ const Announcement = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
+          gap: "10px",
         }}
       >
         {products.map((prod) => {
