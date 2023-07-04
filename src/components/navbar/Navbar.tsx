@@ -7,19 +7,32 @@ import {
   Button,
   TextField,
   Container,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  Drawer,
+  Paper,
+  InputBase,
 } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@mui/material/IconButton/IconButton";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import CardContext from "../../context/CardContext";
 import FavouriteContext from "../../context/FavouriteContext";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+
+type Anchor = "right";
 
 const Navbar = () => {
   const { addToCard, removeSingle, items } = useContext(CardContext);
@@ -75,34 +88,60 @@ const Navbar = () => {
   const [maxPrice, setMaxPrice] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
 
-  const moveToBiography = () => {
-    navigate("/biography");
-  };
-
-  const moveToPrice = () => {
-    navigate("/price");
-  };
-
-  const moveToBusiness = () => {
-    navigate("/business");
-  };
-
-  const moveToComputerInternet = () => {
-    navigate("/computer");
-  };
-
-  const moveToJobCareers = () => {
-    navigate("/jobcareers");
+  const moveToHome = () => {
+    navigate("/");
   };
 
   localStorage.setItem("minPrice", String(minPrice));
   localStorage.setItem("maxPrice", String(maxPrice));
 
+  const [state, setState] = useState({
+    right: false,
+  });
+
+  const toggleDrawer =
+    (anchor: Anchor, open: boolean) =>
+    (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === "keydown" &&
+        ((event as React.KeyboardEvent).key === "Tab" ||
+          (event as React.KeyboardEvent).key === "Shift")
+      ) {
+        return;
+      }
+
+      setState({ ...state, [anchor]: open });
+    };
+
+  const list = (anchor: Anchor) => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {["Biography", "Business", "Computer", "Careers", "Price"].map(
+          (text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton
+                onClick={() => navigate("/" + text.toLowerCase())}
+              >
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          )
+        )}
+      </List>
+    </Box>
+  );
+
   return (
     <AppBar
       sx={{
         background: "white",
-        height: "10%",
+        // height: "10%",
+        height: "130px",
         width: "100%",
         display: "flex",
         flexDirection: "row",
@@ -113,10 +152,10 @@ const Navbar = () => {
         paddingRight: "15px",
       }}
     >
-      <IconButton>
+      <IconButton onClick={moveToHome}>
         <HomeIcon sx={{ width: "2em", height: "2em" }} />
       </IconButton>
-      <Box
+      {/* <Box
         component="form"
         sx={{
           "& > :not(style)": { m: 1 },
@@ -127,45 +166,31 @@ const Navbar = () => {
         <Input
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          placeholder="Placeholder"
+          placeholder="Search..."
           inputProps={ariaLabel}
         />
         <Link to={"/search/" + searchValue}>
           <Button>Search</Button>
         </Link>
-      </Box>
-      <Box
-        sx={{ position: "relative", border: "2px solid red" }}
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
+      </Box> */}
+      <Paper
+        component="form"
+        sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 800 }}
       >
-        <Typography
-          sx={{ cursor: "pointer", display: "block", color: "black" }}
-        >
-          Category
-        </Typography>
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          // value={searchValue}
+          placeholder="Search..."
+          inputProps={ariaLabel}
+        />
+        <Link to={"/search/" + searchValue}>
+          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Link>
+      </Paper>
 
-        {showAddToFavourite && (
-          <Container
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              flexWrap: "nowrap",
-              alignItems: "flex-start",
-              position: "absolute",
-              border: "2px solid black",
-              marginLeft: "-30px",
-            }}
-          >
-            <Button onClick={moveToBiography}>Biography</Button>
-            <Button onClick={moveToBusiness}>Business</Button>
-            <Button onClick={moveToComputerInternet}>Computer&Internet</Button>
-            <Button onClick={moveToJobCareers}>Job&Careers</Button>
-            <Button onClick={moveToPrice}>Price</Button>
-          </Container>
-        )}
-      </Box>
-      <div>
+      <div style={{ display: "flex" }}>
         <IconButton>
           <Box sx={{ flexDirection: "column" }}>
             <PersonIcon
@@ -218,6 +243,22 @@ const Navbar = () => {
             />
           </IconButton>
         </Badge>
+
+        {(["right"] as const).map((anchor) => (
+          <Fragment key={anchor}>
+            <IconButton onClick={toggleDrawer(anchor, true)}>
+              <MenuBookIcon sx={{ width: "2em", height: "2em" }} />
+            </IconButton>
+            <Drawer
+              sx={{ marginTop: "140px" }}
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
+          </Fragment>
+        ))}
       </div>
     </AppBar>
   );

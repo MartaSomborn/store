@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Container from "@mui/material/Container/Container";
 import ProductItem from "../main/ProductItem";
+import Navbar from "../navbar/Navbar";
+import { Box } from "@mui/material";
 
 const Business = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -27,11 +28,25 @@ const Business = () => {
   }, []);
 
   return (
-    <Container>
-      {products.map((prod) => {
-        return <ProductItem product={prod} key={prod.id} />;
-      })}
-    </Container>
+    <>
+      <Navbar />
+      <Box
+        sx={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "150px",
+          background: "#f5ebe0",
+        }}
+      >
+        {products.map((prod) => {
+          return <ProductItem product={prod} key={prod.id} />;
+        })}
+      </Box>
+    </>
   );
 };
 

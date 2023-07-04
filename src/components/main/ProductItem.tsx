@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import { useState, useContext } from "react";
 import IconButton from "@mui/material/IconButton/IconButton";
 import CardContext from "./../../context/CardContext";
-
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavouriteContext from "../../context/FavouriteContext";
 import { Link } from "react-router-dom";
@@ -25,15 +24,14 @@ const ProductItem = (props: any) => {
   return (
     <Box
       sx={{
-        width: "250px",
-        height: "300px",
+        width: "300px",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
         alignItems: "flex-start",
         justifyContent: "center",
         marginTop: "5%",
-        position: "relative",
+        // position: "relative",
       }}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
@@ -42,41 +40,78 @@ const ProductItem = (props: any) => {
         style={{
           textDecoration: "none",
           color: "black",
-          display: " flex",
-          flexDirection: "row",
-          alignItems: "center",
         }}
         to={"product/" + props.product.id}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            flexWrap: "wrap",
-            alignItems: "flex-start",
-          }}
-        >
-          <div>
+        <div>
+          <div
+            style={{
+              width: "220px",
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "wrap",
+              alignContent: "center",
+              alignItems: "center",
+            }}
+          >
             <img
-              style={{ maxHeight: "200px", width: "150px" }}
+              style={{
+                height: "300px",
+                width: "200px",
+              }}
               src={props.product.photo}
             />
 
-            <Typography style={{ textAlign: "center" }}>
+            <Typography
+              sx={{
+                fontFamily: "Montserrat",
+                fontWeight: 500,
+                fontSize: "30px",
+                textAlign: "center",
+                padding: "10px 0",
+              }}
+            >
               {props.product.name}
             </Typography>
-            <Typography style={{ textAlign: "center" }}>
+            {/* <Typography
+              sx={{
+                fontFamily: "Montserrat",
+                fontWeight: 300,
+                fontSize: "25px",
+                textAlign: "center",
+                padding: "10px 0",
+              }}
+            >
               {props.product.author}
-            </Typography>
-            <Typography style={{ textAlign: "center" }}>
-              {props.product.price}
+            </Typography> */}
+            <Typography
+              sx={{
+                fontFamily: "Montserrat",
+                fontWeight: 500,
+                fontSize: "20px",
+                textAlign: "center",
+                padding: "10px 0",
+              }}
+            >
+              {"Price " + props.product.price + " €"}
             </Typography>
           </div>
-          {showAddToFavourite && (
+          {/* {showAddToFavourite && ( */}
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Button
               size="medium"
               variant="contained"
-              sx={{ width: "150px", position: "absolute", bottom: "0" }}
+              sx={{
+                width: "150px",
+                fontFamily: "Montserrat",
+                fontWeight: 500,
+                fontSize: "15px",
+                backgroundColor: "#c75146",
+                color: "black",
+                "&:hover": {
+                  backgroundColor: "#ad2e24",
+                },
+              }}
               onClick={() =>
                 addToCard(
                   props.product.id,
@@ -87,22 +122,23 @@ const ProductItem = (props: any) => {
             >
               Add to box
             </Button>
-          )}
+            {/* )} */}
+            <IconButton>
+              <FavoriteBorderIcon
+                sx={{ width: "1.5em", height: "1.5em" }}
+                onClick={() =>
+                  addToFavourite(
+                    props.product.id,
+                    props.product.name,
+                    props.product.price
+                  )
+                }
+              />
+            </IconButton>
+          </div>
         </div>
-        {showAddToFavourite && (
-          <IconButton>
-            <FavoriteBorderIcon
-              sx={{ width: "2em", height: "2em" }}
-              onClick={() =>
-                addToFavourite(
-                  props.product.id,
-                  props.product.name,
-                  props.product.price
-                )
-              }
-            />
-          </IconButton>
-        )}
+        {/* {showAddToFavourite && ( */}
+        {/* )} */}
       </Link>
     </Box>
   );

@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Container from "@mui/material/Container/Container";
 import ProductItem from "../main/ProductItem";
 import TextField from "@mui/material/TextField";
+import { Box } from "@mui/material";
+import Navbar from "../navbar/Navbar";
 
 const Price = () => {
   const [priceProducts, setPriceProducts] = useState<any[]>([]);
@@ -58,7 +59,19 @@ const Price = () => {
 
   return (
     <>
-      <Container>
+      <Navbar />
+      <Box
+        sx={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "150px",
+          background: "#f5ebe0",
+        }}
+      >
         <TextField
           id="standard-basic"
           label="Min price"
@@ -82,7 +95,7 @@ const Price = () => {
               return <ProductItem product={prod} key={prod.id} />;
             })
           : "Tablice pusta"}
-      </Container>
+      </Box>
     </>
   );
 };

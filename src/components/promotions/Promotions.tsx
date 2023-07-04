@@ -4,13 +4,6 @@ import { useEffect, useState } from "react";
 import ProductItem from "../main/ProductItem";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const theme = createTheme({
-  typography: {
-    fontFamily: "Domine serif",
-    fontSize: 40,
-  },
-});
-
 const Promotions = () => {
   const [products, setProducts] = useState<any[]>([]);
 
@@ -41,20 +34,25 @@ const Promotions = () => {
         backgroundColor: "white",
         width: "80%",
         borderRadius: "55px",
-        padding: "20px",
+        padding: "100px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        position: "relative",
       }}
     >
-      <ThemeProvider theme={theme}>
-        <Typography>Promotions</Typography>
-      </ThemeProvider>
+      <Typography
+        sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "60px" }}
+      >
+        Promotions
+      </Typography>
+
       <div
         style={{
           display: "flex",
+          flexWrap: "wrap",
           flexDirection: "row",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "center",
         }}
       >

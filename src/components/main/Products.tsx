@@ -29,6 +29,7 @@ const Products = () => {
         height: "100vh",
         minWidth: "90vw",
         marginTop: "200px",
+        border: "2 px black solid",
       }}
     >
       {products.map((prod) => {

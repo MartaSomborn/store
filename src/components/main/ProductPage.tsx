@@ -8,26 +8,7 @@ import FavouriteContext from "../../context/FavouriteContext";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./../../App.css";
-
-const theme = createTheme({
-  typography: {
-    fontFamily: "Domine serif",
-    fontSize: 30,
-  },
-});
-
-const themeButton = createTheme({
-  typography: {
-    fontSize: 20,
-  },
-});
-
-const themeTitle = createTheme({
-  typography: {
-    fontSize: 50,
-    fontWeightBold: 700,
-  },
-});
+import "./Product.css";
 
 const ProductPage = () => {
   let { id } = useParams();
@@ -59,9 +40,9 @@ const ProductPage = () => {
         display: "flex",
         gap: "20px",
         justifyContent: "center",
-        height: "1000px",
-        minWidth: "90vw",
-        marginTop: "10%",
+        height: "100vh",
+        minWidth: "100vw",
+        background: "#f5ebe0",
       }}
     >
       <>
@@ -74,7 +55,7 @@ const ProductPage = () => {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
-                  gap: "400px",
+                  gap: "200px",
                 }}
               >
                 <img
@@ -85,7 +66,6 @@ const ProductPage = () => {
                   style={{
                     height: "600px",
                     width: "500px",
-                    border: "2px solid blue",
                     display: "flex",
                     flexDirection: "column",
                     flexWrap: "wrap",
@@ -94,51 +74,74 @@ const ProductPage = () => {
                     position: "relative",
                   }}
                 >
-                  <ThemeProvider theme={themeTitle}>
-                    <Typography
-                      style={{
-                        textAlign: "center",
-                        marginTop: "40px",
-                        fontWeight: "700",
-                      }}
-                    >
-                      {prod.name}
-                    </Typography>
-                  </ThemeProvider>
-                  <ThemeProvider theme={theme}>
-                    <Typography
-                      style={{ textAlign: "center", marginTop: "40px" }}
-                    >
-                      {prod.author}
-                    </Typography>
-                    <Typography
-                      style={{
-                        textAlign: "center",
-                        bottom: "120px",
-                        position: "absolute",
-                      }}
-                    >
-                      {prod.price + " €"}
-                    </Typography>
-                  </ThemeProvider>
+                  <Typography
+                    sx={{
+                      fontFamily: "Montserrat",
+                      fontWeight: 500,
+                      fontSize: "60px",
+                      textAlign: "center",
+                      padding: "10px 0",
+                    }}
+                  >
+                    {prod.name}
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      fontFamily: "Montserrat",
+                      fontWeight: 500,
+                      fontSize: "30px",
+                      textAlign: "center",
+                      padding: "10px 0",
+                    }}
+                  >
+                    {prod.author}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontFamily: "Montserrat",
+                      fontWeight: 500,
+                      fontSize: "30px",
+                      textAlign: "center",
+                      padding: "10px 0",
+                    }}
+                  >
+                    {"Price " + prod.price + " €"}
+                  </Typography>
+
                   <div
                     style={{
                       display: "flex",
                       gap: "30px",
-                      bottom: "20px",
-                      position: "absolute",
+                      paddingTop: "15px",
+                      // top: "320px",
+                      // position: "absolute",
                     }}
                   >
                     <Button
+                      className="button-color"
                       size="medium"
                       variant="contained"
-                      sx={{ width: "350px" }}
+                      sx={{
+                        width: "350px",
+                        backgroundColor: "#c75146",
+                        color: "black",
+                        "&:hover": {
+                          backgroundColor: "#ad2e24",
+                        },
+                      }}
                       onClick={() => addToCard(prod.id, prod.name, prod.price)}
                     >
-                      {" "}
-                      <ThemeProvider theme={themeButton}>
-                        <Typography>Add to box</Typography>
-                      </ThemeProvider>
+                      <Typography
+                        sx={{
+                          fontFamily: "Montserrat",
+                          fontWeight: 500,
+                          fontSize: "20px",
+                          textAlign: "center",
+                        }}
+                      >
+                        Add to box
+                      </Typography>
                     </Button>
                     <IconButton>
                       <FavoriteBorderIcon
