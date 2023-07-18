@@ -124,7 +124,7 @@ const ProductPage = () => {
                       sx={{
                         width: "350px",
                         backgroundColor: "#c75146",
-                        color: "black",
+                        color: "white",
                         "&:hover": {
                           backgroundColor: "#ad2e24",
                         },

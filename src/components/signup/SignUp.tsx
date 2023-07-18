@@ -155,7 +155,7 @@ const SignUp = () => {
             fontWeight: 500,
             fontSize: "15px",
             backgroundColor: "#c75146",
-            color: "black",
+            color: "white",
             "&:hover": {
               backgroundColor: "#ad2e24",
             },
@@ -173,7 +173,7 @@ const SignUp = () => {
             fontWeight: 500,
             fontSize: "15px",
             backgroundColor: "#c75146",
-            color: "black",
+            color: "white",
             "&:hover": {
               backgroundColor: "#ad2e24",
             },
@@ -191,7 +191,7 @@ const SignUp = () => {
             fontWeight: 500,
             fontSize: "15px",
             backgroundColor: "#c75146",
-            color: "black",
+            color: "white",
             "&:hover": {
               backgroundColor: "#ad2e24",
             },

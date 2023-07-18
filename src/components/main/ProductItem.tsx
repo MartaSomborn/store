@@ -5,7 +5,8 @@ import IconButton from "@mui/material/IconButton/IconButton";
 import CardContext from "./../../context/CardContext";
 import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavouriteContext from "../../context/FavouriteContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Rating from "@mui/material/Rating";
 
 const ProductItem = (props: any) => {
   const [showAddToFavourite, setShowAddToFavourite] = useState(false);
@@ -27,11 +28,13 @@ const ProductItem = (props: any) => {
     navigate("/product/" + id);
   };
 
+  const value = 2;
+
   return (
     <Box
       sx={{
         width: "300px",
-        height: "500px",
+        height: "550px",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
@@ -74,7 +77,14 @@ const ProductItem = (props: any) => {
             >
               {props.product.name}
             </Typography>
-
+            <Rating
+              sx={{
+                padding: "10px 0",
+              }}
+              name="read-only"
+              value={value}
+              readOnly
+            />
             <Typography
               sx={{
                 fontFamily: "Montserrat",

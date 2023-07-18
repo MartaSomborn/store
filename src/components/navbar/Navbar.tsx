@@ -32,6 +32,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CloseIcon from "@mui/icons-material/Close";
+import Tooltip from "@mui/material/Tooltip";
 
 type Anchor = "right";
 
@@ -60,6 +61,10 @@ const Navbar = () => {
 
   const moveToLogin = () => {
     navigate("/login");
+  };
+
+  const moveToSignUp = () => {
+    navigate("/signup");
   };
 
   const moveToCheckout = () => {
@@ -169,9 +174,11 @@ const Navbar = () => {
         paddingRight: "15px",
       }}
     >
-      <IconButton onClick={moveToHome}>
-        <HomeIcon sx={{ width: "2em", height: "2em" }} />
-      </IconButton>
+      <Tooltip title="Home">
+        <IconButton onClick={moveToHome}>
+          <HomeIcon sx={{ width: "2em", height: "2em" }} />
+        </IconButton>
+      </Tooltip>
 
       <Paper
         component="form"
@@ -204,57 +211,63 @@ const Navbar = () => {
       </Paper>
 
       <div style={{ display: "flex" }}>
-        <IconButton>
-          <Box sx={{ flexDirection: "column" }}>
-            <PersonIcon
-              onClick={handleClick}
-              sx={{ width: "2em", height: "2em" }}
-            />
-            {user ? (
-              <Box>
-                <Typography>{user}</Typography>
+        <Tooltip title="Login">
+          <IconButton>
+            <Box sx={{ flexDirection: "column" }}>
+              <PersonIcon
+                onClick={handleClick}
+                sx={{ width: "2em", height: "2em" }}
+              />
+              {user ? (
+                <Box>
+                  <Typography>{user}</Typography>
+                  <Menu
+                    anchorEl={anchorEl}
+                    id="basic-menu"
+                    open={open}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={logOut}>Wyloguj się</MenuItem>
+
+                    <MenuItem onClick={handleClose}>Zamknij</MenuItem>
+                  </Menu>
+                </Box>
+              ) : (
                 <Menu
                   anchorEl={anchorEl}
                   id="basic-menu"
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={logOut}>Wyloguj się</MenuItem>
+                  <MenuItem onClick={moveToLogin}>Login</MenuItem>
 
-                  <MenuItem onClick={handleClose}>Zamknij</MenuItem>
+                  <MenuItem onClick={moveToSignUp}>Create an account</MenuItem>
+
+                  <MenuItem onClick={handleClose}>Close</MenuItem>
                 </Menu>
-              </Box>
-            ) : (
-              <Menu
-                anchorEl={anchorEl}
-                id="basic-menu"
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={moveToLogin}>Login</MenuItem>
-
-                <MenuItem>Create an account</MenuItem>
-
-                <MenuItem onClick={handleClose}>Close</MenuItem>
-              </Menu>
-            )}
-          </Box>
-        </IconButton>
-        <Badge badgeContent={items.length} color="primary">
-          <IconButton>
-            <ShoppingCartIcon
-              onClick={moveToCheckout}
-              sx={{ width: "2em", height: "2em" }}
-            />
+              )}
+            </Box>
           </IconButton>
+        </Tooltip>
+        <Badge badgeContent={items.length} color="primary">
+          <Tooltip title="Shopping basket">
+            <IconButton>
+              <ShoppingCartIcon
+                onClick={moveToCheckout}
+                sx={{ width: "2em", height: "2em" }}
+              />
+            </IconButton>
+          </Tooltip>
         </Badge>
         <Badge badgeContent={favouriteItems.length} color="primary">
-          <IconButton>
-            <FavouriteBorderIcon
-              onClick={moveToFavourite}
-              sx={{ width: "2em", height: "2em" }}
-            />
-          </IconButton>
+          <Tooltip title="Favorites">
+            <IconButton>
+              <FavouriteBorderIcon
+                onClick={moveToFavourite}
+                sx={{ width: "2em", height: "2em" }}
+              />
+            </IconButton>
+          </Tooltip>
         </Badge>
 
         {(["right"] as const).map((anchor) => (
