@@ -34,7 +34,7 @@ const ProductItem = (props: any) => {
     <Box
       sx={{
         width: "300px",
-        height: "550px",
+        height: "640px",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
@@ -82,7 +82,8 @@ const ProductItem = (props: any) => {
                 padding: "10px 0",
               }}
               name="read-only"
-              value={value}
+              precision={0.5}
+              value={props.product.rating}
               readOnly
             />
             <Typography

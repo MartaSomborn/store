@@ -7,13 +7,16 @@ export function CardProvider({ children }) {
   const [items, setItems] = useState([]);
   const [newPrice, setNewPrice] = useState(0);
 
-  const addToCard = (id, name, price) => {
+  const addToCard = (id, photo, name, price) => {
     const existItem = items.find((item) => item.id === id);
 
     if (existItem) {
       existItem.quantity++;
     } else {
-      setItems([...items, { id: id, name: name, price: price, quantity: 1 }]);
+      setItems([
+        ...items,
+        { id: id, photo: photo, name: name, price: price, quantity: 1 },
+      ]);
     }
     setNewPrice(newPrice + price);
   };

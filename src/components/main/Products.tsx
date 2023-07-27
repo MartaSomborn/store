@@ -24,6 +24,7 @@ const Products = () => {
     <Container
       sx={{
         display: "flex",
+        flexWrap: "wrap",
         gap: "20px",
         justifyContent: "center",
         // height: "100vh",

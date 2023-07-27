@@ -3,15 +3,22 @@ import { useContext, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import "./../../App.css";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const { items, addToCard, removeSingle, newPrice } = useContext(CardContext);
   const [refresh, setRefresh] = useState(false);
+
+  const navigate = useNavigate();
+
+  const showProduct = (id: any): void => {
+    navigate("/product/" + id);
+  };
   return (
     <Box
       sx={{
         width: "100vw",
-        height: "100vh",
+        minHeight: "100vh",
         background: "#f5ebe0",
         marginTop: "130px",
       }}
@@ -66,28 +73,32 @@ const Checkout = () => {
                       width: "600px",
                       display: "flex",
                       justifyContent: "space-between",
-                      // flexDirection: "column",
-                      // flexWrap: "wrap",
-                      // alignContent: "center",
-                      // alignItems: "center",
-                      // marginTop: "30px",
+                      alignItems: "center",
                     }}
                   >
                     <img
+                      onClick={() => showProduct(item.id)}
                       style={{
                         height: "300px",
                         width: "200px",
                       }}
                       src={item.photo}
                     />
-                    <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "300px",
+                        alignItems: "center",
+                      }}
+                    >
                       <Typography
                         sx={{
                           fontFamily: "Montserrat",
                           fontWeight: 500,
                           fontSize: "30px",
                           textAlign: "center",
-                          padding: "3px 0",
+                          padding: "10px 0",
                         }}
                       >
                         {item.name}
@@ -99,7 +110,7 @@ const Checkout = () => {
                           fontWeight: 500,
                           fontSize: "20px",
                           textAlign: "center",
-                          padding: "3px 0",
+                          padding: "10px 0",
                         }}
                       >
                         {"Price " + item.price + " €"}
@@ -111,26 +122,16 @@ const Checkout = () => {
                           fontWeight: 500,
                           fontSize: "20px",
                           textAlign: "center",
-                          padding: "3px 0",
+                          padding: "10px 0",
                         }}
                       >
                         {"Quantity " + item.quantity}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontFamily: "Montserrat",
-                          fontWeight: 500,
-                          fontSize: "20px",
-                          textAlign: "center",
-                          padding: "3px 0",
-                        }}
-                      >
-                        {newPrice}
                       </Typography>
                       <div
                         style={{
                           display: "flex",
                           gap: "10px",
+                          padding: "10px 0",
                         }}
                       >
                         <Button
@@ -140,6 +141,7 @@ const Checkout = () => {
                             fontFamily: "Montserrat",
                             fontWeight: 500,
                             fontSize: "15px",
+
                             backgroundColor: "#c75146",
                             color: "white",
                             "&:hover": {
@@ -147,7 +149,12 @@ const Checkout = () => {
                             },
                           }}
                           onClick={() => {
-                            addToCard(item.id, item.name, item.price);
+                            addToCard(
+                              item.id,
+                              item.photo,
+                              item.name,
+                              item.price
+                            );
                             setRefresh(!refresh);
                           }}
                         >
@@ -179,6 +186,19 @@ const Checkout = () => {
                 </Box>
               );
             })}
+            <Typography
+              sx={{
+                fontFamily: "Montserrat",
+                fontWeight: 500,
+                fontSize: "40px",
+                textAlign: "center",
+                padding: "25px 0",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {"To pay: " + newPrice.toFixed(2) + " €"}
+            </Typography>
           </Box>
         </div>
       )}

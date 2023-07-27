@@ -50,6 +50,7 @@ const Announcement = () => {
         style={{
           display: "flex",
           flexDirection: "row",
+          flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "center",
           gap: "10px",

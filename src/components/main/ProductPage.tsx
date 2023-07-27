@@ -49,110 +49,130 @@ const ProductPage = () => {
         <div className="background_layout">
           {products.map((prod: any) => {
             return (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: "200px",
-                }}
-              >
-                <img
-                  style={{ height: "600px", width: "500px" }}
-                  src={prod.photo}
-                />
+              <>
                 <div
                   style={{
-                    height: "600px",
-                    width: "500px",
                     display: "flex",
-                    flexDirection: "column",
-                    flexWrap: "wrap",
-
+                    flexDirection: "row",
                     alignItems: "center",
-                    position: "relative",
+                    gap: "200px",
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontFamily: "Montserrat",
-                      fontWeight: 500,
-                      fontSize: "60px",
-                      textAlign: "center",
-                      padding: "10px 0",
-                    }}
-                  >
-                    {prod.name}
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      fontFamily: "Montserrat",
-                      fontWeight: 500,
-                      fontSize: "30px",
-                      textAlign: "center",
-                      padding: "10px 0",
-                    }}
-                  >
-                    {prod.author}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: "Montserrat",
-                      fontWeight: 500,
-                      fontSize: "30px",
-                      textAlign: "center",
-                      padding: "10px 0",
-                    }}
-                  >
-                    {"Price " + prod.price + " €"}
-                  </Typography>
-
+                  <img
+                    style={{ height: "600px", width: "500px" }}
+                    src={prod.photo}
+                  />
                   <div
                     style={{
+                      height: "600px",
+                      width: "500px",
                       display: "flex",
-                      gap: "30px",
-                      paddingTop: "15px",
-                      // top: "320px",
-                      // position: "absolute",
+                      flexDirection: "column",
+                      flexWrap: "wrap",
+
+                      alignItems: "center",
+                      position: "relative",
                     }}
                   >
-                    <Button
-                      className="button-color"
-                      size="medium"
-                      variant="contained"
+                    <Typography
                       sx={{
-                        width: "350px",
-                        backgroundColor: "#c75146",
-                        color: "white",
-                        "&:hover": {
-                          backgroundColor: "#ad2e24",
-                        },
+                        fontFamily: "Montserrat",
+                        fontWeight: 500,
+                        fontSize: "60px",
+                        textAlign: "center",
+                        padding: "10px 0",
                       }}
-                      onClick={() => addToCard(prod.id, prod.name, prod.price)}
                     >
-                      <Typography
+                      {prod.name}
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        fontFamily: "Montserrat",
+                        fontWeight: 500,
+                        fontSize: "30px",
+                        textAlign: "center",
+                        padding: "10px 0",
+                      }}
+                    >
+                      {prod.author}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: "Montserrat",
+                        fontWeight: 500,
+                        fontSize: "30px",
+                        textAlign: "center",
+                        padding: "10px 0",
+                      }}
+                    >
+                      {"Price " + prod.price + " €"}
+                    </Typography>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "30px",
+                        paddingTop: "15px",
+                        // top: "320px",
+                        // position: "absolute",
+                      }}
+                    >
+                      <Button
+                        className="button-color"
+                        size="medium"
+                        variant="contained"
                         sx={{
-                          fontFamily: "Montserrat",
-                          fontWeight: 500,
-                          fontSize: "20px",
-                          textAlign: "center",
+                          width: "350px",
+                          backgroundColor: "#c75146",
+                          color: "white",
+                          "&:hover": {
+                            backgroundColor: "#ad2e24",
+                          },
                         }}
-                      >
-                        Add to box
-                      </Typography>
-                    </Button>
-                    <IconButton>
-                      <FavouriteBorderIcon
-                        sx={{ width: "2em", height: "2em" }}
                         onClick={() =>
-                          addToFavourite(prod.id, prod.name, prod.price)
+                          addToCard(prod.id, prod.name, prod.price)
                         }
-                      />
-                    </IconButton>
+                      >
+                        <Typography
+                          sx={{
+                            fontFamily: "Montserrat",
+                            fontWeight: 500,
+                            fontSize: "20px",
+                            textAlign: "center",
+                          }}
+                        >
+                          Add to box
+                        </Typography>
+                      </Button>
+                      <IconButton>
+                        <FavouriteBorderIcon
+                          sx={{ width: "2em", height: "2em" }}
+                          onClick={() =>
+                            addToFavourite(
+                              prod.id,
+                              prod.photo,
+                              prod.name,
+                              prod.price
+                            )
+                          }
+                        />
+                      </IconButton>
+                    </div>
                   </div>
                 </div>
-              </div>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontWeight: 500,
+                    fontSize: "20px",
+                    textAlign: "center",
+                    padding: "0px 300px",
+                  }}
+                >
+                  {prod.description}
+                </Typography>
+              </>
             );
           })}
         </div>

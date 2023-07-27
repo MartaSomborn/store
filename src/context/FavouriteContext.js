@@ -5,14 +5,14 @@ const FavouriteContext = createContext();
 export function FavouriteProvider({ children }) {
   const [favouriteItems, setFavouriteItems] = useState([]);
 
-  const addToFavourite = (id, name, price) => {
+  const addToFavourite = (id, photo, name, price) => {
     const existItem = favouriteItems.find((item) => item.id === id);
     if (existItem) {
       console.log("Item exist");
     } else {
       setFavouriteItems([
         ...favouriteItems,
-        { id: id, name: name, price: price },
+        { id: id, photo: photo, name: name, price: price },
       ]);
     }
   };

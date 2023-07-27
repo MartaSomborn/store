@@ -7,6 +7,7 @@ import { Box, Typography } from "@mui/material";
 
 const FilterBooks = () => {
   const [filteredNameProducts, setFilteredNameProducts] = useState<any>([]);
+  const [allBooks, setAllBooks] = useState<any>([]);
   let { bookname } = useParams();
   console.log("useParams", bookname);
 
@@ -16,6 +17,7 @@ const FilterBooks = () => {
       (response) => {
         const getData = Object.values(response.data);
         setFilteredNameProducts([...getData]);
+        setAllBooks([...getData]);
       },
       (error) => {
         console.log(error);
@@ -28,16 +30,16 @@ const FilterBooks = () => {
   }, []);
 
   useEffect(() => {
-    if (filteredNameProducts.length > 0) {
+    if (allBooks.length > 0) {
       console.log("filteredNameProducts", filteredNameProducts);
-      const getTheName = filteredNameProducts.filter((item: any) =>
+      const getTheName = allBooks.filter((item: any) =>
         item.name.toLowerCase().includes(bookname?.toLowerCase())
       );
 
       console.log("getTheName", getTheName);
       setFilteredNameProducts(getTheName);
     }
-  }, [filteredNameProducts]);
+  }, [bookname]);
 
   const searchResults = "Search results: " + bookname;
 
