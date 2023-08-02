@@ -1,40 +1,20 @@
-import {
-  AppBar,
-  Badge,
-  Box,
-  Typography,
-  Input,
-  Button,
-  TextField,
-  Container,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-  Drawer,
-  Paper,
-  InputBase,
-} from "@mui/material";
+import { AppBar, Badge, Paper, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@mui/material/IconButton/IconButton";
-import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useNavigate } from "react-router-dom";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CardContext from "../../context/CardContext";
 import FavouriteContext from "../../context/FavouriteContext";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CloseIcon from "@mui/icons-material/Close";
 import Tooltip from "@mui/material/Tooltip";
-
-type Anchor = "right";
+import NavbarLoginIcon from "./NavbarLoginIcon";
+import NavbarDrawer from "./NavbarDrawer";
+import NavbarBasketIcon from "./NavbarBasketIcon";
+import NavbarFavoriteIcon from "./NavbarFavoriteIcon";
 
 const Navbar = () => {
   const { addToCard, removeSingle, items } = useContext(CardContext);
@@ -45,51 +25,7 @@ const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const ariaLabel = { "aria-label": "description" };
 
-  const [showAddToFavourite, setShowAddToFavourite] = useState(false);
-
-  const handleMouseOver = () => {
-    setShowAddToFavourite(true);
-  };
-
-  const handleMouseOut = () => {
-    setShowAddToFavourite(false);
-  };
-
-  const user = localStorage.getItem("name");
-
   const navigate = useNavigate();
-
-  const moveToLogin = () => {
-    navigate("/login");
-  };
-
-  const moveToSignUp = () => {
-    navigate("/signup");
-  };
-
-  const moveToCheckout = () => {
-    navigate("/checkout");
-  };
-
-  const moveToFavourite = () => {
-    navigate("/favourite");
-  };
-
-  const handleClick = (event: any) => {
-    setOpen(!open);
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setOpen(!open);
-  };
-  const [anchorEl, setAnchorEl] = useState(null);
-
-  const [open, setOpen] = useState(false);
-
-  const logOut = () => {
-    localStorage.removeItem("name");
-    navigate("/");
-  };
 
   const [maxPrice, setMaxPrice] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
@@ -100,61 +36,6 @@ const Navbar = () => {
 
   localStorage.setItem("minPrice", String(minPrice));
   localStorage.setItem("maxPrice", String(maxPrice));
-
-  const [state, setState] = useState({
-    right: false,
-  });
-
-  const toggleDrawer =
-    (anchor: Anchor, open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === "keydown" &&
-        ((event as React.KeyboardEvent).key === "Tab" ||
-          (event as React.KeyboardEvent).key === "Shift")
-      ) {
-        return;
-      }
-
-      setState({ ...state, [anchor]: open });
-    };
-
-  const list = (anchor: Anchor) => (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {["Biography", "Business", "Computer", "Careers", "Price"].map(
-          (text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "10px",
-                }}
-                onClick={() => navigate("/" + text.toLowerCase())}
-              >
-                <Typography
-                  sx={{
-                    fontFamily: "Montserrat",
-                    fontWeight: 500,
-                    fontSize: "20px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </ListItemButton>
-            </ListItem>
-          )
-        )}
-      </List>
-    </Box>
-  );
 
   //TODO:
   useEffect(() => console.log("Search value", searchValue), []);
@@ -209,82 +90,11 @@ const Navbar = () => {
           </IconButton>
         </Link>
       </Paper>
-
       <div style={{ display: "flex" }}>
-        <Tooltip title="Login">
-          <IconButton>
-            <Box sx={{ flexDirection: "column" }}>
-              <PersonIcon
-                onClick={handleClick}
-                sx={{ width: "2em", height: "2em" }}
-              />
-              {user ? (
-                <Box>
-                  <Typography>{user}</Typography>
-                  <Menu
-                    anchorEl={anchorEl}
-                    id="basic-menu"
-                    open={open}
-                    onClose={handleClose}
-                  >
-                    <MenuItem onClick={logOut}>Wyloguj się</MenuItem>
-
-                    <MenuItem onClick={handleClose}>Zamknij</MenuItem>
-                  </Menu>
-                </Box>
-              ) : (
-                <Menu
-                  anchorEl={anchorEl}
-                  id="basic-menu"
-                  open={open}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={moveToLogin}>Login</MenuItem>
-
-                  <MenuItem onClick={moveToSignUp}>Create an account</MenuItem>
-
-                  <MenuItem onClick={handleClose}>Close</MenuItem>
-                </Menu>
-              )}
-            </Box>
-          </IconButton>
-        </Tooltip>
-        <Badge badgeContent={items.length} color="primary">
-          <Tooltip title="Shopping basket">
-            <IconButton>
-              <ShoppingCartIcon
-                onClick={moveToCheckout}
-                sx={{ width: "2em", height: "2em" }}
-              />
-            </IconButton>
-          </Tooltip>
-        </Badge>
-        <Badge badgeContent={favouriteItems.length} color="primary">
-          <Tooltip title="Favorites">
-            <IconButton>
-              <FavouriteBorderIcon
-                onClick={moveToFavourite}
-                sx={{ width: "2em", height: "2em" }}
-              />
-            </IconButton>
-          </Tooltip>
-        </Badge>
-
-        {(["right"] as const).map((anchor) => (
-          <Fragment key={anchor}>
-            <IconButton onClick={toggleDrawer(anchor, true)}>
-              <MenuBookIcon sx={{ width: "2em", height: "2em" }} />
-            </IconButton>
-            <Drawer
-              sx={{ marginTop: "140px" }}
-              anchor={anchor}
-              open={state[anchor]}
-              onClose={toggleDrawer(anchor, false)}
-            >
-              {list(anchor)}
-            </Drawer>
-          </Fragment>
-        ))}
+        <NavbarLoginIcon />
+        <NavbarBasketIcon />
+        <NavbarFavoriteIcon />
+        <NavbarDrawer />
       </div>
     </AppBar>
   );
