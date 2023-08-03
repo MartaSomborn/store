@@ -9,7 +9,6 @@ import Checkout from "./components/checkout/Checkout";
 import { FavouriteProvider } from "./context/FavouriteContext";
 import Favourites from "./components/favourites/Favourites";
 import ProductPage from "./components/main/ProductPage";
-import Price from "./components/Category/Price";
 import FilterBooks from "./components/Search/FilterBooks";
 import { CategoryProvider } from "./context/CategoryContext";
 import CategoryFilter from "./components/Category/CategoryFilter";
@@ -28,7 +27,6 @@ function App() {
               <Route path="/favourite" element={<Favourites />} />
               <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/biography" element={<CategoryFilter />} />
-              <Route path="/price" element={<Price />} />
               <Route path="/business" element={<CategoryFilter />} />
               <Route path="/computer" element={<CategoryFilter />} />
               <Route path="/careers" element={<CategoryFilter />} />

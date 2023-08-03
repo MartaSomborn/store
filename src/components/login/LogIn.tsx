@@ -5,41 +5,59 @@ import axios from "axios";
 import Navbar from "../navbar/Navbar";
 
 const LogIn = () => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [logInError, setLogInError] = useState("");
-  const [logError, setLogError] = useState("");
+  const [form, setForm] = useState({ login: "", password: "" });
+  const [logError, setLogError] = useState({ login: "", password: "" });
+  const [msgError, setMsgError] = useState("");
 
-  const onChangeUserName = (event: any) => {
-    setUserName(event.target.value);
-    console.log("userName", userName);
+  const onChangeForm = (event: any) => {
+    setForm({ ...form, [event.target.name]: event.target.value });
   };
 
-  const onChangePassword = (event: any) => {
-    setPassword(event.target.value);
-    console.log("password", password);
+  const checkErrors = () => {
+    if (form.login.length === 0) {
+      setLogError({ ...logError, login: "The field cannot be empty" });
+      return "The field cannot be empty";
+    } else if (form.password.length === 0) {
+      setLogError({ ...logError, password: "The field cannot be empty" });
+      return "The field cannot be empty";
+    } else if (form.login.length < 4) {
+      setLogError({
+        ...logError,
+        login: "The field cannot have less than 4 signs",
+      });
+      return "The field cannot have less than 4 signs";
+    } else if (form.password.length < 5) {
+      setLogError({
+        ...logError,
+        password: "The field cannot have less than 5 signs",
+      });
+      return "The field cannot have less than 5 signs";
+    }
   };
 
   async function checkCredentials() {
-    if (userName.length === 0 || password.length === 0) {
-      setLogInError("The field cannot be empty");
-    } else {
-      setLogInError("");
-      console.log("Successfully login");
-      setUserName("");
-      setPassword("");
+    const checkedErrors = checkErrors();
+
+    if (checkedErrors) {
+      return;
     }
     try {
       const res = await axios.post(
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA7dR70_Rzaj6DAmgNS1tbUvfV-LqDBLmQ",
-        { email: userName, password: password, returnSecureToken: true }
+        {
+          email: form.login,
+          password: form.password,
+          returnSecureToken: true,
+        }
       );
-      localStorage.setItem("name", userName);
+      localStorage.setItem("name", form.login);
       navigate("/");
     } catch (ex: any) {
-      setLogError(ex.response.data.error.message);
+      setMsgError(ex.response.data.error.message);
       console.log("error", ex.response.data.error.message);
+      console.log(ex);
     }
+    setForm({ login: "", password: "" });
   }
 
   const navigate = useNavigate();
@@ -89,16 +107,18 @@ const LogIn = () => {
           id="standard-basic"
           label="Username"
           variant="standard"
-          onChange={onChangeUserName}
-          value={userName}
+          onChange={onChangeForm}
+          value={form.login}
+          name="login"
         />
         <TextField
           sx={{ width: "40%", marginTop: "15px" }}
           id="standard-basic"
           label="Password"
           variant="standard"
-          onChange={onChangePassword}
-          value={password}
+          onChange={onChangeForm}
+          value={form.password}
+          name="password"
         />
         <Button
           sx={{
@@ -153,7 +173,7 @@ const LogIn = () => {
         >
           Do you have an account?
         </Button>
-        {logInError ? (
+        {logError.login ? (
           <Alert
             sx={{
               fontFamily: "Montserrat",
@@ -162,10 +182,34 @@ const LogIn = () => {
             }}
             severity="error"
           >
-            {logInError}
+            {logError.login}
           </Alert>
         ) : null}
-        {logError === "INVALID_EMAIL" ? (
+        {logError.password ? (
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            {logError.password}
+          </Alert>
+        ) : null}
+        {msgError ? (
+          <Alert
+            sx={{
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+            }}
+            severity="error"
+          >
+            {msgError}
+          </Alert>
+        ) : null}
+        {msgError === "INVALID_EMAIL" ? (
           <Alert
             sx={{
               fontFamily: "Montserrat",
@@ -177,7 +221,7 @@ const LogIn = () => {
             Invalid email
           </Alert>
         ) : null}
-        {logError === "MISSING_PASSWORD" ? (
+        {msgError === "MISSING_PASSWORD" ? (
           <Alert
             sx={{
               fontFamily: "Montserrat",
@@ -189,7 +233,7 @@ const LogIn = () => {
             Missing password
           </Alert>
         ) : null}
-        {logError === "EMAIL_NOT_FOUND" ? (
+        {msgError === "EMAIL_NOT_FOUND" ? (
           <Alert
             sx={{
               fontFamily: "Montserrat",
@@ -201,7 +245,7 @@ const LogIn = () => {
             Email not found
           </Alert>
         ) : null}
-        {logError === "INVALID_PASSWORD" ? (
+        {msgError === "INVALID_PASSWORD" ? (
           <Alert
             sx={{
               fontFamily: "Montserrat",

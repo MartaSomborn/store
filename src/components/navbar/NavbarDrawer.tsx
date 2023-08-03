@@ -45,35 +45,33 @@ const NavbarDrawer = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Biography", "Business", "Computer", "Careers", "Price"].map(
-          (text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton
+        {["Biography", "Business", "Computer", "Careers"].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "10px",
+              }}
+              onClick={() => {
+                navigate("/" + text.toLowerCase());
+                declareCategory(text);
+                setRefresh(!refresh);
+              }}
+            >
+              <Typography
                 sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "10px",
-                }}
-                onClick={() => {
-                  navigate("/" + text.toLowerCase());
-                  declareCategory(text);
-                  setRefresh(!refresh);
+                  fontFamily: "Montserrat",
+                  fontWeight: 500,
+                  fontSize: "20px",
                 }}
               >
-                <Typography
-                  sx={{
-                    fontFamily: "Montserrat",
-                    fontWeight: 500,
-                    fontSize: "20px",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </ListItemButton>
-            </ListItem>
-          )
-        )}
+                {text}
+              </Typography>
+            </ListItemButton>
+          </ListItem>
+        ))}
       </List>
     </Box>
   );
