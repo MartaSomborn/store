@@ -9,33 +9,33 @@ import Checkout from "./components/checkout/Checkout";
 import { FavouriteProvider } from "./context/FavouriteContext";
 import Favourites from "./components/favourites/Favourites";
 import ProductPage from "./components/main/ProductPage";
-import Biography from "./components/Category/Biography";
 import Price from "./components/Category/Price";
-import Business from "./components/Category/Business";
-import ComputerInternet from "./components/Category/ComputerInternet";
-import JobsCareers from "./components/Category/JobCareers";
 import FilterBooks from "./components/Search/FilterBooks";
+import { CategoryProvider } from "./context/CategoryContext";
+import CategoryFilter from "./components/Category/CategoryFilter";
 
 function App() {
   return (
     <FavouriteProvider>
       <CardProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />} />
-            <Route path="/login" element={<LogIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/favourite" element={<Favourites />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/biography" element={<Biography />} />
-            <Route path="/price" element={<Price />} />
-            <Route path="/business" element={<Business />} />
-            <Route path="/computer" element={<ComputerInternet />} />
-            <Route path="/careers" element={<JobsCareers />} />
-            <Route path="/search/:bookname" element={<FilterBooks />} />
-          </Routes>
-        </BrowserRouter>
+        <CategoryProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />} />
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/favourite" element={<Favourites />} />
+              <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/biography" element={<CategoryFilter />} />
+              <Route path="/price" element={<Price />} />
+              <Route path="/business" element={<CategoryFilter />} />
+              <Route path="/computer" element={<CategoryFilter />} />
+              <Route path="/careers" element={<CategoryFilter />} />
+              <Route path="/search/:bookname" element={<FilterBooks />} />
+            </Routes>
+          </BrowserRouter>
+        </CategoryProvider>
       </CardProvider>
     </FavouriteProvider>
   );

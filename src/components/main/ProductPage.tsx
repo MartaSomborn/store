@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import { useContext } from "react";
 import { Button, Container, IconButton, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import CardContext from "./../../context/CardContext";
@@ -8,30 +7,18 @@ import FavouriteContext from "../../context/FavouriteContext";
 import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./../../App.css";
 import "./Product.css";
+import useFetchFeatured from "../customHook/useEffectFeatured";
 
 const ProductPage = () => {
   let { id } = useParams();
 
-  const [products, setProducts] = useState<any[]>([]);
   const { addToCard } = useContext(CardContext);
   const { addToFavourite } = useContext(FavouriteContext);
 
   const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
 
-  useEffect(() => {
-    axios.get(url).then(
-      (response) => {
-        const getData = Object.values(response.data);
-
-        setProducts([getData]);
-        const biographyProduct = getData.filter((item: any) => item.id == id);
-        setProducts(biographyProduct);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }, []);
+  const feature = "promotion";
+  const { products } = useFetchFeatured(url, id);
 
   return (
     <Container

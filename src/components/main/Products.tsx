@@ -1,24 +1,10 @@
-import { useEffect, useLayoutEffect, useState } from "react";
 import ProductItem from "./ProductItem";
 import Container from "@mui/material/Container/Container";
-import axios from "axios";
+import useFetch from "../customHook/useFetch";
 
 const Products = () => {
-  const [products, setProducts] = useState<any[]>([]);
-
   const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
-
-  useEffect(() => {
-    axios.get(url).then(
-      (response) => {
-        const getData = Object.values(response.data);
-        setProducts(getData);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }, []);
+  const { products } = useFetch(url);
 
   return (
     <Container
@@ -27,7 +13,6 @@ const Products = () => {
         flexWrap: "wrap",
         gap: "20px",
         justifyContent: "center",
-        // height: "100vh",
         minWidth: "90vw",
         marginTop: "200px",
         border: "2 px black solid",

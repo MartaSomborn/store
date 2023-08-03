@@ -1,13 +1,11 @@
 import { useContext, useState } from "react";
 import FavouriteContext from "../../context/FavouriteContext";
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
-import Tooltip from "@mui/material/Tooltip";
 import { useNavigate } from "react-router-dom";
 
 const Favourites = () => {
-  const { addToFavourite, removeSingleFavourite, favouriteItems } =
+  const { removeSingleFavourite, favouriteItems } =
     useContext(FavouriteContext);
   const [refresh, setRefresh] = useState(false);
 

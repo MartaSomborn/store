@@ -10,12 +10,15 @@ import {
 
 import IconButton from "@mui/material/IconButton/IconButton";
 import { useNavigate } from "react-router-dom";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import CategoryContext from "../../context/CategoryContext";
 
 type Anchor = "right";
 
 const NavbarDrawer = () => {
+  const { declareCategory, category } = useContext(CategoryContext);
+  const [refresh, setRefresh] = useState(false);
   const [state, setState] = useState({
     right: false,
   });
@@ -52,7 +55,11 @@ const NavbarDrawer = () => {
                   alignItems: "flex-start",
                   gap: "10px",
                 }}
-                onClick={() => navigate("/" + text.toLowerCase())}
+                onClick={() => {
+                  navigate("/" + text.toLowerCase());
+                  declareCategory(text);
+                  setRefresh(!refresh);
+                }}
               >
                 <Typography
                   sx={{

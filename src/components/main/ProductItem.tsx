@@ -1,4 +1,4 @@
-import { Badge, Button, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState, useContext } from "react";
 import IconButton from "@mui/material/IconButton/IconButton";
