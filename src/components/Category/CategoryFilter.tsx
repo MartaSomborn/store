@@ -131,15 +131,8 @@ const CategoryFilter = () => {
               justifyContent: "space-evenly",
             }}
           >
-            <Typography>TODO: Value</Typography>
-            <TextField
-              sx={{ width: "100px" }}
-              id="outlined-basic"
-              // label={value[1]}
-              variant="outlined"
-              value={value[1]}
-              // onChange={() => setValue(value[0])}
-            />
+            <Typography>{value[0]}</Typography>
+            <Typography>{value[1]}</Typography>
           </Box>
           <Button
             onClick={filterBooksByPrice}
