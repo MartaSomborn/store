@@ -31,6 +31,7 @@ const Recommended = () => {
         style={{
           display: "flex",
           flexDirection: "row",
+          flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "center",
           gap: "20px",
