@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography, Alert } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../navbar/Navbar";
 
@@ -61,10 +61,6 @@ const LogIn = () => {
   }
 
   const navigate = useNavigate();
-
-  const moveToSignUp = () => {
-    navigate("/signup");
-  };
 
   return (
     <Box
@@ -155,24 +151,25 @@ const LogIn = () => {
         >
           Forget Password
         </Button>
-        <Button
-          sx={{
-            width: "20%",
-            marginTop: "15px",
-            fontFamily: "Montserrat",
-            fontWeight: 500,
-            fontSize: "15px",
-            backgroundColor: "#c75146",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "#ad2e24",
-            },
-          }}
-          variant="contained"
-          onClick={moveToSignUp}
-        >
-          Do you have an account?
-        </Button>
+        <Link to={"/signup"}>
+          <Button
+            sx={{
+              width: "20%",
+              marginTop: "15px",
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+              backgroundColor: "#c75146",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "#ad2e24",
+              },
+            }}
+            variant="contained"
+          >
+            Do you have an account?
+          </Button>
+        </Link>
         {logError.login ? (
           <Alert
             sx={{

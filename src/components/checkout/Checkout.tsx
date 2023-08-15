@@ -3,17 +3,12 @@ import { useContext, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import "./../../App.css";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const { items, addToCard, removeSingle, newPrice } = useContext(CardContext);
   const [refresh, setRefresh] = useState(false);
 
-  const navigate = useNavigate();
-
-  const showProduct = (id: any): void => {
-    navigate("/product/" + id);
-  };
   return (
     <Box
       sx={{
@@ -76,14 +71,15 @@ const Checkout = () => {
                       alignItems: "center",
                     }}
                   >
-                    <img
-                      onClick={() => showProduct(item.id)}
-                      style={{
-                        height: "300px",
-                        width: "200px",
-                      }}
-                      src={item.photo}
-                    />
+                    <Link to={"/product/" + item.id}>
+                      <img
+                        style={{
+                          height: "300px",
+                          width: "200px",
+                        }}
+                        src={item.photo}
+                      />
+                    </Link>
                     <Box
                       sx={{
                         display: "flex",

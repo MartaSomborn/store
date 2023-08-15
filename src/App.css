@@ -2,14 +2,14 @@
 
 .background_layout {
   background: #f5ebe0;
-  width: "100vw";
+  /* width: "100vw";
   min-height: "100vh";
   padding-top: "200px";
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 50px;
-  align-items: center;
+  gap: 50px; */
+  /* align-items: center; */
 }
 
 .google-fonts {

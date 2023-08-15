@@ -8,6 +8,7 @@ import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./../../App.css";
 import "./Product.css";
 import useFetchFeatured from "../customHook/useEffectFeatured";
+import ButtonNavigation from "./ButtonNavigation";
 
 const ProductPage = () => {
   let { id } = useParams();
@@ -148,17 +149,10 @@ const ProductPage = () => {
                     </div>
                   </div>
                 </div>
-                <Typography
-                  sx={{
-                    fontFamily: "Montserrat",
-                    fontWeight: 500,
-                    fontSize: "20px",
-                    textAlign: "center",
-                    padding: "0px 300px",
-                  }}
-                >
-                  {prod.description}
-                </Typography>
+                <ButtonNavigation
+                  imgDescription={prod.description}
+                  imgId={prod.id}
+                />
               </>
             );
           })}

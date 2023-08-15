@@ -5,20 +5,15 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const NavbarLoginIcon = () => {
   const user = localStorage.getItem("name");
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const navigate = useNavigate();
-  const moveToLogin = () => {
-    navigate("/login");
-  };
 
-  const moveToSignUp = () => {
-    navigate("/signup");
-  };
+  const navigate = useNavigate();
+
   const handleClick = (event: any) => {
     setOpen(!open);
     setAnchorEl(event.currentTarget);
@@ -28,7 +23,6 @@ const NavbarLoginIcon = () => {
   };
   const logOut = () => {
     localStorage.removeItem("name");
-    navigate("/");
   };
   return (
     <Tooltip title="Login">
@@ -47,8 +41,9 @@ const NavbarLoginIcon = () => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={logOut}>Wyloguj się</MenuItem>
-
+                <Link to={"/"}>
+                  <MenuItem onClick={logOut}>Wyloguj się</MenuItem>
+                </Link>
                 <MenuItem onClick={handleClose}>Zamknij</MenuItem>
               </Menu>
             </Box>
@@ -59,10 +54,12 @@ const NavbarLoginIcon = () => {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem onClick={moveToLogin}>Login</MenuItem>
-
-              <MenuItem onClick={moveToSignUp}>Create an account</MenuItem>
-
+              <Link to={"/login"}>
+                <MenuItem>Login</MenuItem>
+              </Link>
+              <Link to={"/signup"}>
+                <MenuItem>Create an account</MenuItem>
+              </Link>
               <MenuItem onClick={handleClose}>Close</MenuItem>
             </Menu>
           )}

@@ -2,20 +2,12 @@ import { useContext, useState } from "react";
 import FavouriteContext from "../../context/FavouriteContext";
 import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Favourites = () => {
   const { removeSingleFavourite, favouriteItems } =
     useContext(FavouriteContext);
   const [refresh, setRefresh] = useState(false);
-
-  console.log(favouriteItems, "favouriteItems");
-
-  const navigate = useNavigate();
-
-  const showProduct = (id: any): void => {
-    navigate("/product/" + id);
-  };
 
   return (
     <Box
@@ -83,14 +75,15 @@ const Favourites = () => {
                       justifyContent: "space-between",
                     }}
                   >
-                    <img
-                      onClick={() => showProduct(item.id)}
-                      style={{
-                        height: "300px",
-                        width: "200px",
-                      }}
-                      src={item.photo}
-                    />
+                    <Link to={"/product/" + item.id}>
+                      <img
+                        style={{
+                          height: "300px",
+                          width: "200px",
+                        }}
+                        src={item.photo}
+                      />
+                    </Link>
                     <Box
                       sx={{
                         display: "flex",

@@ -1,5 +1,7 @@
+import Slider from "../carousel/Slider";
 import Announcement from "../announcement/Announcement";
-import CarouselWrapper from "../carousel/CarouselWrapper";
+// import Carousel from "../carousel/Carousel";
+// import CarouselWrapper from "../carousel/CarouselWrapper";
 import Products from "../main/Products";
 import Navbar from "../navbar/Navbar";
 import Promotions from "../promotions/Promotions";
@@ -11,7 +13,7 @@ const Layout = () => {
     <>
       <Navbar />
       <div className="background_layout">
-        <CarouselWrapper />
+        <Slider />
         <Promotions />
         <Announcement />
         <Recommended />

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import IconButton from "@mui/material/IconButton/IconButton";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Fragment, useState, useContext } from "react";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CategoryContext from "../../context/CategoryContext";
@@ -22,7 +22,7 @@ const NavbarDrawer = () => {
   const [state, setState] = useState({
     right: false,
   });
-  const navigate = useNavigate();
+
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -47,29 +47,30 @@ const NavbarDrawer = () => {
       <List>
         {["Biography", "Business", "Computer", "Careers"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "10px",
-              }}
-              onClick={() => {
-                navigate("/" + text.toLowerCase());
-                declareCategory(text);
-                setRefresh(!refresh);
-              }}
-            >
-              <Typography
+            <Link to={"/" + text.toLowerCase()}>
+              <ListItemButton
                 sx={{
-                  fontFamily: "Montserrat",
-                  fontWeight: 500,
-                  fontSize: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                }}
+                onClick={() => {
+                  declareCategory(text);
+                  setRefresh(!refresh);
                 }}
               >
-                {text}
-              </Typography>
-            </ListItemButton>
+                <Typography
+                  sx={{
+                    fontFamily: "Montserrat",
+                    fontWeight: 500,
+                    fontSize: "20px",
+                  }}
+                >
+                  {text}
+                </Typography>
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>

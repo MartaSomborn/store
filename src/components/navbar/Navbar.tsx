@@ -1,10 +1,7 @@
-import { AppBar, Badge, Paper, InputBase } from "@mui/material";
+import { AppBar, Paper, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@mui/material/IconButton/IconButton";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import CardContext from "../../context/CardContext";
 import FavouriteContext from "../../context/FavouriteContext";
@@ -17,22 +14,11 @@ import NavbarBasketIcon from "./NavbarBasketIcon";
 import NavbarFavoriteIcon from "./NavbarFavoriteIcon";
 
 const Navbar = () => {
-  const { addToCard, removeSingle, items } = useContext(CardContext);
-
-  const { addToFavourite, removeSingleFavourite, favouriteItems } =
-    useContext(FavouriteContext);
-
   const [searchValue, setSearchValue] = useState("");
   const ariaLabel = { "aria-label": "description" };
 
-  const navigate = useNavigate();
-
   const [maxPrice, setMaxPrice] = useState(0);
   const [minPrice, setMinPrice] = useState(0);
-
-  const moveToHome = () => {
-    navigate("/");
-  };
 
   localStorage.setItem("minPrice", String(minPrice));
   localStorage.setItem("maxPrice", String(maxPrice));
@@ -56,9 +42,11 @@ const Navbar = () => {
       }}
     >
       <Tooltip title="Home">
-        <IconButton onClick={moveToHome}>
-          <HomeIcon sx={{ width: "2em", height: "2em" }} />
-        </IconButton>
+        <Link to={"/"}>
+          <IconButton>
+            <HomeIcon sx={{ width: "2em", height: "2em" }} />
+          </IconButton>
+        </Link>
       </Tooltip>
 
       <Paper

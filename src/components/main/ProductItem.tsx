@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton/IconButton";
 import CardContext from "./../../context/CardContext";
 import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavouriteContext from "../../context/FavouriteContext";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 
 const ProductItem = (props: any) => {
@@ -21,12 +21,6 @@ const ProductItem = (props: any) => {
 
   const { addToCard } = useContext(CardContext);
   const { addToFavourite } = useContext(FavouriteContext);
-
-  const navigate = useNavigate();
-
-  const showProduct = (id: any): void => {
-    navigate("/product/" + id);
-  };
 
   const value = 2;
 
@@ -47,58 +41,60 @@ const ProductItem = (props: any) => {
       onMouseOut={handleMouseOut}
     >
       <div>
-        <div onClick={() => showProduct(props.product.id)}>
-          <div
-            style={{
-              width: "220px",
-              display: "flex",
-              flexDirection: "column",
-              flexWrap: "wrap",
-              alignContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <img
+        <Link to={"/product/" + props.product.id}>
+          <div>
+            <div
               style={{
-                height: "300px",
-                width: "200px",
+                width: "220px",
+                display: "flex",
+                flexDirection: "column",
+                flexWrap: "wrap",
+                alignContent: "center",
+                alignItems: "center",
               }}
-              src={props.product.photo}
-            />
+            >
+              <img
+                style={{
+                  height: "300px",
+                  width: "200px",
+                }}
+                src={props.product.photo}
+              />
 
-            <Typography
-              sx={{
-                fontFamily: "Montserrat",
-                fontWeight: 500,
-                fontSize: "25px",
-                textAlign: "center",
-                padding: "10px 0",
-              }}
-            >
-              {props.product.name}
-            </Typography>
-            <Rating
-              sx={{
-                padding: "10px 0",
-              }}
-              name="read-only"
-              precision={0.5}
-              value={props.product.rating}
-              readOnly
-            />
-            <Typography
-              sx={{
-                fontFamily: "Montserrat",
-                fontWeight: 500,
-                fontSize: "20px",
-                textAlign: "center",
-                padding: "10px 0",
-              }}
-            >
-              {"Price " + props.product.price + " €"}
-            </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontWeight: 500,
+                  fontSize: "25px",
+                  textAlign: "center",
+                  padding: "10px 0",
+                }}
+              >
+                {props.product.name}
+              </Typography>
+              <Rating
+                sx={{
+                  padding: "10px 0",
+                }}
+                name="read-only"
+                precision={0.5}
+                value={props.product.rating}
+                readOnly
+              />
+              <Typography
+                sx={{
+                  fontFamily: "Montserrat",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  textAlign: "center",
+                  padding: "10px 0",
+                }}
+              >
+                {"Price " + props.product.price + " €"}
+              </Typography>
+            </div>
           </div>
-        </div>
+        </Link>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             size="medium"

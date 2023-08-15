@@ -103,8 +103,16 @@ const CategoryFilter = () => {
       >
         <Box
           sx={{
+            width: {
+              xl: "80vw",
+              lg: "80vw",
+              md: "80vw",
+              sm: "90vw",
+              xs: "95vw",
+            },
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             paddingTop: "40px",
             gap: "50px",
           }}

@@ -13,7 +13,7 @@ const Promotions = () => {
       sx={{
         marginTop: "200px",
         backgroundColor: "white",
-        width: "80%",
+        width: { xl: "80vw", lg: "80vw", md: "80vw", sm: "90vw", xs: "95vw" },
         borderRadius: "55px",
         padding: "100px",
         display: "flex",
