@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import ProductItem from "../main/ProductItem";
+import ProductItem, { IProductTypes } from "../main/ProductItem";
 import useFetchFeatured from "../customHook/useEffectFeatured";
 
 const Recommended = () => {
-  const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
+  const url: string = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
 
   const feature = "recommended";
   const { products } = useFetchFeatured(url, feature);
@@ -13,7 +13,7 @@ const Recommended = () => {
       sx={{
         marginTop: "200px",
         backgroundColor: "white",
-        width: "80%",
+        width: { xl: "80vw", lg: "80vw", md: "80vw", sm: "90vw", xs: "95vw" },
         borderRadius: "55px",
         padding: "100px",
         display: "flex",
@@ -37,7 +37,7 @@ const Recommended = () => {
           gap: "20px",
         }}
       >
-        {products.map((prod) => {
+        {products.map((prod: IProductTypes) => {
           return <ProductItem product={prod} key={prod.id} />;
         })}
       </div>

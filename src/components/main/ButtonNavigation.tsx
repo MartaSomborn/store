@@ -15,6 +15,17 @@ interface TabPanelProps {
   value: number;
 }
 
+interface IDescription {
+  imgDescription: string;
+  id: number;
+}
+
+interface IComment {
+  id: number;
+  username: string;
+  comment: string;
+}
+
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
@@ -42,11 +53,11 @@ function a11yProps(index: number) {
   };
 }
 
-const ButtonNavigation = (props: any) => {
+const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
   const [value, setValue] = useState(0);
 
   const [addedComment, setAddedComment] = useState("");
-  //   const [products, setProducts] = useState<any[]>([]);
+  const [productsWithComment, setProductsWithComment] = useState<any[]>([]);
 
   const fireBaseUrl =
     "https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Comments.json";
@@ -63,25 +74,29 @@ const ButtonNavigation = (props: any) => {
     setAddedComment(event.target.value);
   };
 
-  //   useEffect(()=>(
-  //  axios.get(url).then(
-  //       (response) => {
-  //         const getData = Object.values(response.data);
-  //         setProducts(getData);
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     );
+  useEffect(() => {
+    setTimeout(() => {
+      axios.get(fireBaseUrl).then(
+        (response) => {
+          const getData = Object.values(response.data);
+          setProductsWithComment(getData);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }, 5000); // wait 5 seconds
+  }, [addedComment]);
 
-  //   ), [addedComment])
+  const getProductWithComment =
+    productsWithComment.length > 0 ? productsWithComment : products;
 
   const commentHandler = () => {
-    if (addedComment.trim().length < 0) {
+    if (addedComment.trim().length < 5) {
       return;
     }
     axios.post(fireBaseUrl, {
-      id: props.imgId,
+      id: id,
       username: userIsLoggedIn,
       comment: addedComment,
     });
@@ -91,6 +106,7 @@ const ButtonNavigation = (props: any) => {
   return (
     <Box
       sx={{
+        paddingTop: "120px",
         width: {
           xl: "80vw",
           lg: "80vw",
@@ -121,12 +137,12 @@ const ButtonNavigation = (props: any) => {
             fontStyle: "italic",
           }}
         >
-          {props.imgDescription}
+          {imgDescription}
         </Typography>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        {products.length > 0
-          ? products.map((comment) => {
+        {getProductWithComment.length > 0
+          ? getProductWithComment.map((comment: IComment) => {
               return <div>{comment.comment}</div>;
             })
           : null}

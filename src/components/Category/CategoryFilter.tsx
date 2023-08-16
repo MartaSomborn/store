@@ -1,10 +1,8 @@
-import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import ProductItem from "../main/ProductItem";
+import ProductItem, { IProductTypes } from "../main/ProductItem";
 import Navbar from "../navbar/Navbar";
 import { Box } from "@mui/material";
 import Slider from "@mui/material/Slider";
-import TextField from "@mui/material/TextField";
 import { Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,9 +13,9 @@ import useFetchDependecies from "../customHook/useFetchDependecies";
 const CategoryFilter = () => {
   const { declareCategory, category } = useContext(CategoryContext);
 
-  const [productByPrice, setProductsByPrice] = useState<any>([]);
-
-  const [checked, setChecked] = useState(true);
+  const [productByPrice, setProductsByPrice] = useState<any | IProductTypes>(
+    []
+  );
 
   const [ratingChecked, setRatingChecked] = useState({
     1: false,
@@ -27,7 +25,7 @@ const CategoryFilter = () => {
     5: false,
   });
 
-  const [filterByRating, setFilterByRating] = useState<any>([]);
+  const [filterByRating, setFilterByRating] = useState<any | IProductTypes>([]);
 
   const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
 
@@ -45,39 +43,45 @@ const CategoryFilter = () => {
 
   const getFilteredBooks = () => {
     console.log("test");
-    const minPrice = products.filter((product) => product.price > value[0]);
-    const maxPrice = minPrice.filter((product) => product.price < value[1]);
+    const minPrice = products.filter(
+      (product: IProductTypes) => product.price > value[0]
+    );
+    const maxPrice = minPrice.filter(
+      (product: IProductTypes) => product.price < value[1]
+    );
     setProductsByPrice(maxPrice);
     console.log(maxPrice, "maxprice");
 
     setProductsByPrice([]);
     if (ratingChecked[5] === true) {
-      const filterCheckbox = products.filter((prod) => prod.rating >= 4.5);
+      const filterCheckbox = products.filter(
+        (prod: IProductTypes) => prod.rating >= 4.5
+      );
       setFilterByRating(filterCheckbox);
       console.log(filterCheckbox, "filterCheckbox5");
     }
     if (ratingChecked[4] === true) {
       const filterCheckbox2 = products.filter(
-        (prod) => prod.rating >= 3.5 && prod.rating < 4.5
+        (prod: IProductTypes) => prod.rating >= 3.5 && prod.rating < 4.5
       );
       setFilterByRating(filterCheckbox2);
     }
     if (ratingChecked[3] === true) {
       const filterCheckbox3 = products.filter(
-        (prod) => prod.rating >= 2.5 && prod.rating < 3.5
+        (prod: IProductTypes) => prod.rating >= 2.5 && prod.rating < 3.5
       );
       setFilterByRating(filterCheckbox3);
       console.log(filterCheckbox3, "filterCheckbox3");
     }
     if (ratingChecked[2] === true) {
       const filterCheckbox4 = products.filter(
-        (prod) => prod.rating >= 1.5 && prod.rating < 2.5
+        (prod: IProductTypes) => prod.rating >= 1.5 && prod.rating < 2.5
       );
       setFilterByRating(filterCheckbox4);
     }
     if (ratingChecked[1] === true) {
       const filterCheckbox5 = products.filter(
-        (prod) => prod.rating >= 0.5 && prod.rating < 1.5
+        (prod: IProductTypes) => prod.rating >= 0.5 && prod.rating < 1.5
       );
       setFilterByRating(filterCheckbox5);
       console.log(filterCheckbox5, "filterCheckbox5");
@@ -98,7 +102,6 @@ const CategoryFilter = () => {
           flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
-          background: "#f5ebe0",
         }}
       >
         <Box
@@ -111,6 +114,7 @@ const CategoryFilter = () => {
               xs: "95vw",
             },
             display: "flex",
+            flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "center",
             paddingTop: "40px",
@@ -360,17 +364,17 @@ const CategoryFilter = () => {
           }}
         >
           {filterByRating.length > 0
-            ? filterByRating.map((item: any) => {
+            ? filterByRating.map((item: IProductTypes) => {
                 return <ProductItem product={item} key={item.id} />;
               })
             : null}
           {productByPrice.length > 0
-            ? productByPrice.map((item: any) => {
+            ? productByPrice.map((item: IProductTypes) => {
                 return <ProductItem product={item} key={item.id} />;
               })
             : null}
           {filterByRating.length === 0 && productByPrice.length === 0
-            ? products.map((prod) => {
+            ? products.map((prod: IProductTypes) => {
                 return <ProductItem product={prod} key={prod.id} />;
               })
             : null}

@@ -2,9 +2,7 @@ import { AppBar, Paper, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import IconButton from "@mui/material/IconButton/IconButton";
-import { useContext, useEffect, useState } from "react";
-import CardContext from "../../context/CardContext";
-import FavouriteContext from "../../context/FavouriteContext";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import Tooltip from "@mui/material/Tooltip";
@@ -17,20 +15,11 @@ const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
   const ariaLabel = { "aria-label": "description" };
 
-  const [maxPrice, setMaxPrice] = useState(0);
-  const [minPrice, setMinPrice] = useState(0);
-
-  localStorage.setItem("minPrice", String(minPrice));
-  localStorage.setItem("maxPrice", String(maxPrice));
-
-  //TODO:
-  useEffect(() => console.log("Search value", searchValue), []);
-
   return (
     <AppBar
       sx={{
         background: "white",
-        height: "130px",
+        minHeight: "130px",
         width: "100%",
         display: "flex",
         flexDirection: "row",
@@ -51,7 +40,18 @@ const Navbar = () => {
 
       <Paper
         component="form"
-        sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 800 }}
+        sx={{
+          p: "2px 4px",
+          display: "flex",
+          alignItems: "center",
+          width: {
+            xl: "800px",
+            lg: "700px",
+            md: "400px",
+            sm: "200px",
+            xs: "300px",
+          },
+        }}
       >
         <InputBase
           sx={{ ml: 1, flex: 1 }}

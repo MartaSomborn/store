@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
-import { Button, Container, IconButton, Typography } from "@mui/material";
+import { Button, Container, IconButton, Typography, Box } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import CardContext from "./../../context/CardContext";
 import FavouriteContext from "../../context/FavouriteContext";
@@ -9,6 +9,7 @@ import "./../../App.css";
 import "./Product.css";
 import useFetchFeatured from "../customHook/useEffectFeatured";
 import ButtonNavigation from "./ButtonNavigation";
+import { IProductTypes } from "./ProductItem";
 
 const ProductPage = () => {
   let { id } = useParams();
@@ -16,9 +17,8 @@ const ProductPage = () => {
   const { addToCard } = useContext(CardContext);
   const { addToFavourite } = useContext(FavouriteContext);
 
-  const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
+  const url: string = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
 
-  const feature = "promotion";
   const { products } = useFetchFeatured(url, id);
 
   return (
@@ -27,15 +27,34 @@ const ProductPage = () => {
         display: "flex",
         gap: "20px",
         justifyContent: "center",
+        alignItems: "center",
         height: "100vh",
         minWidth: "100vw",
-        background: "#f5ebe0",
       }}
     >
       <>
         <Navbar />
-        <div className="background_layout">
-          {products.map((prod: any) => {
+
+        <Box
+          sx={{
+            marginTop: {
+              xl: "200px",
+              lg: "900px",
+              md: "900px",
+              sm: "900px",
+              xs: "900px",
+            },
+            paddingTop: "140px",
+            width: {
+              xl: "80vw",
+              lg: "80vw",
+              md: "80vw",
+              sm: "90vw",
+              xs: "95vw",
+            },
+          }}
+        >
+          {products.map((prod: IProductTypes) => {
             return (
               <>
                 <div
@@ -43,6 +62,8 @@ const ProductPage = () => {
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
+                    justifyContent: "space-evenly",
+                    flexWrap: "wrap",
                     gap: "200px",
                   }}
                 >
@@ -151,12 +172,12 @@ const ProductPage = () => {
                 </div>
                 <ButtonNavigation
                   imgDescription={prod.description}
-                  imgId={prod.id}
+                  id={prod.id}
                 />
               </>
             );
           })}
-        </div>
+        </Box>
       </>
     </Container>
   );

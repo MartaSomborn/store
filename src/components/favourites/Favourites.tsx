@@ -3,6 +3,7 @@ import FavouriteContext from "../../context/FavouriteContext";
 import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import { Link } from "react-router-dom";
+import { IProductTypes } from "../main/ProductItem";
 
 const Favourites = () => {
   const { removeSingleFavourite, favouriteItems } =
@@ -15,7 +16,6 @@ const Favourites = () => {
         width: "100vw",
         minHeight: "100vh",
         marginTop: "130px",
-        background: "#f5ebe0",
       }}
     >
       <Navbar />
@@ -60,7 +60,7 @@ const Favourites = () => {
             Your box:
           </Typography>
           <div>
-            {favouriteItems.map((item: any, index: number) => {
+            {favouriteItems.map((item: IProductTypes, index: number) => {
               return (
                 <Box key={index + " " + item.id}>
                   <div

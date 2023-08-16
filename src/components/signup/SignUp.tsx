@@ -13,27 +13,37 @@ const SignUp = () => {
   const [logInError, setLogInError] = useState("");
   const [formError, setFormError] = useState("");
 
-  const onChangeName = (event: any) => {
+  const onChangeName = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setName(event.target.value);
     console.log("name", name);
   };
 
-  const onChangeSurname = (event: any) => {
+  const onChangeSurname = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setSurname(event.target.value);
     console.log("surname", surname);
   };
 
-  const onChangeUserName = (event: any) => {
+  const onChangeUserName = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setUserName(event.target.value);
     console.log("userName", userName);
   };
 
-  const onChangePassword = (event: any) => {
+  const onChangePassword = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setPassword(event.target.value);
     console.log("password", password);
   };
 
-  const onChangeConfirmPassword = (event: any) => {
+  const onChangeConfirmPassword = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setConfirmPassword(event.target.value);
     console.log("confirmpassword", confirmPassword);
   };
@@ -74,7 +84,6 @@ const SignUp = () => {
         height: "100vh",
         justifyContent: "center",
         alignItems: "center",
-        background: "#f5ebe0",
       }}
     >
       <Navbar />
@@ -144,7 +153,7 @@ const SignUp = () => {
         />
         <Button
           sx={{
-            width: "20%",
+            width: "210px",
             marginTop: "15px",
             fontFamily: "Montserrat",
             fontWeight: 500,
@@ -162,7 +171,7 @@ const SignUp = () => {
         </Button>
         <Button
           sx={{
-            width: "20%",
+            width: "210px",
             marginTop: "15px",
             fontFamily: "Montserrat",
             fontWeight: 500,
@@ -180,7 +189,7 @@ const SignUp = () => {
         <Link to={"/logIn"}>
           <Button
             sx={{
-              width: "20%",
+              width: "210px",
               marginTop: "15px",
               marginBottom: "15px",
               fontFamily: "Montserrat",

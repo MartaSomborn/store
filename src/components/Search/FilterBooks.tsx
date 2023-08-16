@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ProductItem from "../main/ProductItem";
+import ProductItem, { IProductTypes } from "../main/ProductItem";
 import Navbar from "../navbar/Navbar";
 import { Box, Typography } from "@mui/material";
 
@@ -11,7 +11,7 @@ const FilterBooks = () => {
   let { bookname } = useParams();
   console.log("useParams", bookname);
 
-  const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
+  const url: string = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
   const fetchData = () => {
     axios.get(url).then(
       (response) => {
@@ -51,7 +51,6 @@ const FilterBooks = () => {
           width: "100vw",
           height: "100vh",
           marginTop: "130px",
-          background: "#f5ebe0",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -70,7 +69,7 @@ const FilterBooks = () => {
           {searchResults}
         </Typography>
         <Box sx={{ display: "flex" }}>
-          {filteredNameProducts.map((prod: any) => {
+          {filteredNameProducts.map((prod: IProductTypes) => {
             return <ProductItem product={prod} key={prod.id} />;
           })}
         </Box>

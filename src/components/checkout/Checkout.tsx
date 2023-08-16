@@ -4,6 +4,7 @@ import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import "./../../App.css";
 import { Link } from "react-router-dom";
+import { IProductTypes } from "../main/ProductItem";
 
 const Checkout = () => {
   const { items, addToCard, removeSingle, newPrice } = useContext(CardContext);
@@ -14,7 +15,6 @@ const Checkout = () => {
       sx={{
         width: "100vw",
         minHeight: "100vh",
-        background: "#f5ebe0",
         marginTop: "130px",
       }}
     >

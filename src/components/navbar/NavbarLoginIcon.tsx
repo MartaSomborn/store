@@ -5,14 +5,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NavbarLoginIcon = () => {
   const user = localStorage.getItem("name");
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-
-  const navigate = useNavigate();
 
   const handleClick = (event: any) => {
     setOpen(!open);

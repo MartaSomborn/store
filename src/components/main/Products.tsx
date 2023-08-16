@@ -1,4 +1,4 @@
-import ProductItem from "./ProductItem";
+import ProductItem, { IProductTypes } from "./ProductItem";
 import Container from "@mui/material/Container/Container";
 import useFetch from "../customHook/useFetch";
 
@@ -20,10 +20,9 @@ const Products = () => {
         width: "80%",
         borderRadius: "55px",
         padding: "100px",
-        marginBottom: "200px",
       }}
     >
-      {products.map((prod) => {
+      {products.map((prod: IProductTypes) => {
         return <ProductItem product={prod} key={prod.id} />;
       })}
     </Container>

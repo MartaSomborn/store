@@ -8,7 +8,26 @@ import FavouriteContext from "../../context/FavouriteContext";
 import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 
-const ProductItem = (props: any) => {
+export interface IProductTypes {
+  Category: string;
+  announcement: boolean;
+  author: string;
+  description: string;
+  id: number;
+  name: string;
+  photo: string;
+  price: number;
+  promotion: boolean;
+  rating: number;
+  recommended: boolean;
+}
+
+interface IPropsTypes {
+  product: IProductTypes;
+  key: number;
+}
+
+const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
   const [showAddToFavourite, setShowAddToFavourite] = useState(false);
 
   const handleMouseOver = () => {
@@ -22,10 +41,9 @@ const ProductItem = (props: any) => {
   const { addToCard } = useContext(CardContext);
   const { addToFavourite } = useContext(FavouriteContext);
 
-  const value = 2;
-
   return (
     <Box
+      key={key}
       sx={{
         width: "300px",
         height: "640px",
@@ -41,7 +59,7 @@ const ProductItem = (props: any) => {
       onMouseOut={handleMouseOut}
     >
       <div>
-        <Link to={"/product/" + props.product.id}>
+        <Link to={"/product/" + product.id}>
           <div>
             <div
               style={{
@@ -58,7 +76,7 @@ const ProductItem = (props: any) => {
                   height: "300px",
                   width: "200px",
                 }}
-                src={props.product.photo}
+                src={product.photo}
               />
 
               <Typography
@@ -70,7 +88,7 @@ const ProductItem = (props: any) => {
                   padding: "10px 0",
                 }}
               >
-                {props.product.name}
+                {product.name}
               </Typography>
               <Rating
                 sx={{
@@ -78,7 +96,7 @@ const ProductItem = (props: any) => {
                 }}
                 name="read-only"
                 precision={0.5}
-                value={props.product.rating}
+                value={product.rating}
                 readOnly
               />
               <Typography
@@ -90,7 +108,7 @@ const ProductItem = (props: any) => {
                   padding: "10px 0",
                 }}
               >
-                {"Price " + props.product.price + " €"}
+                {"Price " + product.price + " €"}
               </Typography>
             </div>
           </div>
@@ -113,12 +131,7 @@ const ProductItem = (props: any) => {
               },
             }}
             onClick={() =>
-              addToCard(
-                props.product.id,
-                props.product.photo,
-                props.product.name,
-                props.product.price
-              )
+              addToCard(product.id, product.photo, product.name, product.price)
             }
           >
             Add to box
@@ -134,10 +147,10 @@ const ProductItem = (props: any) => {
               }}
               onClick={() =>
                 addToFavourite(
-                  props.product.id,
-                  props.product.photo,
-                  props.product.name,
-                  props.product.price
+                  product.id,
+                  product.photo,
+                  product.name,
+                  product.price
                 )
               }
             />

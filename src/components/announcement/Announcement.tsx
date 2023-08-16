@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import ProductItem from "../main/ProductItem";
+import ProductItem, { IProductTypes } from "../main/ProductItem";
 import useFetchFeatured from "../customHook/useEffectFeatured";
 
 const Announcement = () => {
@@ -36,7 +36,7 @@ const Announcement = () => {
           gap: "10px",
         }}
       >
-        {products.map((prod) => {
+        {products.map((prod: IProductTypes) => {
           return <ProductItem product={prod} key={prod.id} />;
         })}
       </div>

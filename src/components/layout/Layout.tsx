@@ -1,7 +1,5 @@
 import Slider from "../carousel/Slider";
 import Announcement from "../announcement/Announcement";
-// import Carousel from "../carousel/Carousel";
-// import CarouselWrapper from "../carousel/CarouselWrapper";
 import Products from "../main/Products";
 import Navbar from "../navbar/Navbar";
 import Promotions from "../promotions/Promotions";
@@ -12,7 +10,14 @@ const Layout = () => {
   return (
     <>
       <Navbar />
-      <div className="background_layout">
+      <div
+        style={{
+          paddingBottom: "200px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <Slider />
         <Promotions />
         <Announcement />

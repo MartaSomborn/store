@@ -2,6 +2,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import "./Slider.css";
 import useFetch from "../customHook/useFetch";
+import { Box } from "@mui/material";
+import { IProductTypes } from "../main/ProductItem";
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -21,11 +23,18 @@ const responsive = {
 };
 
 const Slider = () => {
-  const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
+  const url: string = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
 
   const { products } = useFetch(url);
   return (
-    <div className="parent" style={{ marginTop: "130px", paddingTop: "150px" }}>
+    <Box
+      className="parent"
+      sx={{
+        marginTop: "130px",
+        paddingTop: "150px",
+        width: { xl: "80vw", lg: "80vw", md: "80vw", sm: "90vw", xs: "95vw" },
+      }}
+    >
       <Carousel
         responsive={responsive}
         autoPlay={true}
@@ -36,15 +45,15 @@ const Slider = () => {
         partialVisible={false}
         dotListClass="custom-dot-list-style"
       >
-        {products.map((imageUrl, index) => {
+        {products.map((product: IProductTypes, index: number) => {
           return (
             <div className="slider" key={index}>
-              <img src={imageUrl.photo} alt="book" />
+              <img src={product.photo} alt="book" />
             </div>
           );
         })}
       </Carousel>
-    </div>
+    </Box>
   );
 };
 export default Slider;

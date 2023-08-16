@@ -4,12 +4,22 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../navbar/Navbar";
 
+interface IFormTypes {
+  login: string;
+  password: string;
+}
+
 const LogIn = () => {
-  const [form, setForm] = useState({ login: "", password: "" });
-  const [logError, setLogError] = useState({ login: "", password: "" });
+  const [form, setForm] = useState<IFormTypes>({ login: "", password: "" });
+  const [logError, setLogError] = useState<IFormTypes>({
+    login: "",
+    password: "",
+  });
   const [msgError, setMsgError] = useState("");
 
-  const onChangeForm = (event: any) => {
+  const onChangeForm = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
@@ -70,7 +80,6 @@ const LogIn = () => {
         height: "100vh",
         justifyContent: "center",
         alignItems: "center",
-        background: "#f5ebe0",
       }}
     >
       <Navbar />
@@ -118,7 +127,7 @@ const LogIn = () => {
         />
         <Button
           sx={{
-            width: "20%",
+            width: "210px",
             marginTop: "15px",
             fontFamily: "Montserrat",
             fontWeight: 500,
@@ -136,7 +145,7 @@ const LogIn = () => {
         </Button>
         <Button
           sx={{
-            width: "20%",
+            width: "210px",
             marginTop: "15px",
             fontFamily: "Montserrat",
             fontWeight: 500,
@@ -151,10 +160,11 @@ const LogIn = () => {
         >
           Forget Password
         </Button>
+
         <Link to={"/signup"}>
           <Button
             sx={{
-              width: "20%",
+              width: "210px",
               marginTop: "15px",
               fontFamily: "Montserrat",
               fontWeight: 500,
@@ -170,6 +180,7 @@ const LogIn = () => {
             Do you have an account?
           </Button>
         </Link>
+
         {logError.login ? (
           <Alert
             sx={{

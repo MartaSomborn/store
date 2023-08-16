@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
-import ProductItem from "../main/ProductItem";
+import ProductItem, { IProductTypes } from "../main/ProductItem";
 import useFetchFeatured from "../customHook/useEffectFeatured";
 
 const Promotions = () => {
-  const url = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
+  const url: string = `https://bookstore-ce144-default-rtdb.europe-west1.firebasedatabase.app/Products.json`;
 
   const feature = "promotion";
   const { products } = useFetchFeatured(url, feature);
@@ -38,7 +38,7 @@ const Promotions = () => {
           gap: "10px",
         }}
       >
-        {products.map((prod) => {
+        {products.map((prod: IProductTypes) => {
           return <ProductItem product={prod} key={prod.id} />;
         })}
       </div>
