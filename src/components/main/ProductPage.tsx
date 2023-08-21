@@ -10,6 +10,8 @@ import "./Product.css";
 import useFetchFeatured from "../customHook/useEffectFeatured";
 import ButtonNavigation from "./ButtonNavigation";
 import { IProductTypes } from "./ProductItem";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductPage = () => {
   let { id } = useParams();
@@ -38,13 +40,13 @@ const ProductPage = () => {
         <Box
           sx={{
             marginTop: {
-              xl: "200px",
-              lg: "900px",
-              md: "900px",
-              sm: "900px",
-              xs: "900px",
+              xl: "90%",
+              lg: "90%",
+              md: "90%",
+              sm: "90%",
+              xs: "90%",
             },
-            paddingTop: "140px",
+            // paddingTop: "140px",
             width: {
               xl: "80vw",
               lg: "80vw",
@@ -64,16 +66,22 @@ const ProductPage = () => {
                     alignItems: "center",
                     justifyContent: "space-evenly",
                     flexWrap: "wrap",
-                    gap: "200px",
+                    gap: "20px",
                   }}
                 >
                   <img
                     style={{ height: "600px", width: "500px" }}
                     src={prod.photo}
                   />
-                  <div
-                    style={{
-                      height: "600px",
+                  <Box
+                    sx={{
+                      height: {
+                        xl: "400px",
+                        lg: "400px",
+                        md: "300px",
+                        sm: "300px",
+                        xs: "300px",
+                      },
                       width: "500px",
                       display: "flex",
                       flexDirection: "column",
@@ -87,7 +95,13 @@ const ProductPage = () => {
                       sx={{
                         fontFamily: "Montserrat",
                         fontWeight: 500,
-                        fontSize: "60px",
+                        fontSize: {
+                          xl: "50px",
+                          lg: "50px",
+                          md: "30px",
+                          sm: "30px",
+                          xs: "30px",
+                        },
                         textAlign: "center",
                         padding: "10px 0",
                       }}
@@ -99,7 +113,13 @@ const ProductPage = () => {
                       sx={{
                         fontFamily: "Montserrat",
                         fontWeight: 500,
-                        fontSize: "30px",
+                        fontSize: {
+                          xl: "30px",
+                          lg: "30px",
+                          md: "20px",
+                          sm: "20px",
+                          xs: "20px",
+                        },
                         textAlign: "center",
                         padding: "10px 0",
                       }}
@@ -110,7 +130,13 @@ const ProductPage = () => {
                       sx={{
                         fontFamily: "Montserrat",
                         fontWeight: 500,
-                        fontSize: "30px",
+                        fontSize: {
+                          xl: "30px",
+                          lg: "30px",
+                          md: "20px",
+                          sm: "20px",
+                          xs: "20px",
+                        },
                         textAlign: "center",
                         padding: "10px 0",
                       }}
@@ -123,8 +149,6 @@ const ProductPage = () => {
                         display: "flex",
                         gap: "30px",
                         paddingTop: "15px",
-                        // top: "320px",
-                        // position: "absolute",
                       }}
                     >
                       <Button
@@ -132,7 +156,13 @@ const ProductPage = () => {
                         size="medium"
                         variant="contained"
                         sx={{
-                          width: "350px",
+                          width: {
+                            xl: "350px",
+                            lg: "350px",
+                            md: "200px",
+                            sm: "200px",
+                            xs: "200px",
+                          },
                           backgroundColor: "#c75146",
                           color: "white",
                           "&:hover": {
@@ -147,7 +177,13 @@ const ProductPage = () => {
                           sx={{
                             fontFamily: "Montserrat",
                             fontWeight: 500,
-                            fontSize: "20px",
+                            fontSize: {
+                              xl: "20px",
+                              lg: "20px",
+                              md: "15px",
+                              sm: "15px",
+                              xs: "15px",
+                            },
                             textAlign: "center",
                           }}
                         >
@@ -168,7 +204,7 @@ const ProductPage = () => {
                         />
                       </IconButton>
                     </div>
-                  </div>
+                  </Box>
                 </div>
                 <ButtonNavigation
                   imgDescription={prod.description}
@@ -179,6 +215,7 @@ const ProductPage = () => {
           })}
         </Box>
       </>
+      <ToastContainer />
     </Container>
   );
 };

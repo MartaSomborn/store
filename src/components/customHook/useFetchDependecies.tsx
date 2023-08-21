@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { IProductTypes } from "../main/ProductItem";
 
 const useFetchDependecies = (url: string, category: string) => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<IProductTypes[]>([]);
 
   useEffect(() => {
     axios.get(url).then(
       (response) => {
-        const getData = Object.values(response.data);
+        const getData: IProductTypes[] = Object.values(response.data);
 
-        setProducts([getData]);
+        setProducts(getData);
 
         const filteredCategory = getData.filter(
-          (item: any) => item.Category === category
+          (item: IProductTypes) => item.Category === category
         );
         setProducts(filteredCategory);
       },
-      (error: any) => {
+      (error: IProductTypes) => {
         console.log(error);
       }
     );

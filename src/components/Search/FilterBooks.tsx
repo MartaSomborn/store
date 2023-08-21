@@ -68,7 +68,7 @@ const FilterBooks = () => {
         >
           {searchResults}
         </Typography>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           {filteredNameProducts.map((prod: IProductTypes) => {
             return <ProductItem product={prod} key={prod.id} />;
           })}

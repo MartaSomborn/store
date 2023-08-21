@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../navbar/Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface IFormTypes {
   login: string;
@@ -49,6 +51,9 @@ const LogIn = () => {
     const checkedErrors = checkErrors();
 
     if (checkedErrors) {
+      toast.error("Login was not successful", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       return;
     }
     try {
@@ -62,6 +67,9 @@ const LogIn = () => {
       );
       localStorage.setItem("name", form.login);
       navigate("/");
+      toast.success("You are log in", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     } catch (ex: any) {
       setMsgError(ex.response.data.error.message);
       console.log("error", ex.response.data.error.message);
@@ -266,6 +274,7 @@ const LogIn = () => {
           </Alert>
         ) : null}
       </Box>
+      <ToastContainer />
     </Box>
   );
 };

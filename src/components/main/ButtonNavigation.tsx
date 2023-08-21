@@ -8,6 +8,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useFetch from "../customHook/useFetch";
 import axios from "axios";
+import React from "react";
+
+import { Avatar, Grid, Paper } from "@material-ui/core";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -93,6 +96,7 @@ const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
 
   const commentHandler = () => {
     if (addedComment.trim().length < 5) {
+      toast.error("Not possible to add comment");
       return;
     }
     axios.post(fireBaseUrl, {
@@ -100,13 +104,27 @@ const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
       username: userIsLoggedIn,
       comment: addedComment,
     });
+    toast.success("Added comment !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
     setAddedComment("");
   };
+
+  const imgLink =
+    "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
+
+  const user = localStorage.getItem("name");
 
   return (
     <Box
       sx={{
-        paddingTop: "120px",
+        paddingTop: {
+          xl: "40px",
+          lg: "40px",
+          md: "40px",
+          sm: "20px",
+          xs: "20px",
+        },
         width: {
           xl: "80vw",
           lg: "80vw",
@@ -132,7 +150,13 @@ const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
           sx={{
             fontFamily: "Montserrat",
             fontWeight: 500,
-            fontSize: "20px",
+            fontSize: {
+              xl: "20px",
+              lg: "20px",
+              md: "15px",
+              sm: "15px",
+              xs: "15px",
+            },
             textAlign: "center",
             fontStyle: "italic",
           }}
@@ -143,19 +167,43 @@ const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
       <CustomTabPanel value={value} index={1}>
         {getProductWithComment.length > 0
           ? getProductWithComment.map((comment: IComment) => {
-              return <div>{comment.comment}</div>;
+              return (
+                <Paper style={{ padding: "40px 20px", marginBottom: "10px" }}>
+                  <Grid container wrap="nowrap" spacing={2}>
+                    <Grid item>
+                      <Avatar alt="Ubuntu" src={imgLink} />
+                    </Grid>
+                    <Grid
+                      style={{ justifyContent: "left" }}
+                      item
+                      xs
+                      zeroMinWidth
+                    >
+                      <h4 style={{ margin: 0, textAlign: "left" }}>{user}</h4>
+                      <p style={{ textAlign: "left" }}>{comment.comment}</p>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              );
             })
           : null}
         {userIsLoggedIn ? (
-          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <TextField
               sx={{
                 width: {
-                  xl: "80vw",
-                  lg: "80vw",
-                  md: "80vw",
-                  sm: "90vw",
-                  xs: "95vw",
+                  xl: "75vw",
+                  lg: "75vw",
+                  md: "70vw",
+                  sm: "70vw",
+                  xs: "70vw",
                 },
               }}
               id="outlined-multiline-static"
@@ -171,7 +219,14 @@ const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
               size="medium"
               variant="contained"
               sx={{
-                width: "350px",
+                marginTop: "4px",
+                width: {
+                  xl: "350px",
+                  lg: "350px",
+                  md: "200px",
+                  sm: "200px",
+                  xs: "200px",
+                },
                 backgroundColor: "#c75146",
                 color: "white",
                 "&:hover": {
@@ -206,6 +261,7 @@ const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
           </Typography>
         )}
       </CustomTabPanel>
+      <ToastContainer />
     </Box>
   );
 };

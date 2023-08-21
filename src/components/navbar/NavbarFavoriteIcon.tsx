@@ -6,11 +6,23 @@ import { useContext } from "react";
 import FavouriteContext from "../../context/FavouriteContext";
 import Tooltip from "@mui/material/Tooltip";
 
-const NavbarFavoriteIcon = () => {
+const NavbarFavoriteIcon = (props: any) => {
   const { favouriteItems } = useContext(FavouriteContext);
 
   return (
-    <Badge badgeContent={favouriteItems.length} color="primary">
+    <Badge
+      badgeContent={favouriteItems.length}
+      color="primary"
+      sx={{
+        display: {
+          xl: "block",
+          lg: "block",
+          md: "block",
+          sm: props.mobile ? "block" : "none",
+          xs: props.mobile ? "block" : "none",
+        },
+      }}
+    >
       <Tooltip title="Favorites">
         <Link to={"/favourite"}>
           <IconButton>

@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import ProductItem, { IProductTypes } from "../main/ProductItem";
 import Navbar from "../navbar/Navbar";
 import { Box } from "@mui/material";
@@ -9,9 +9,10 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import CategoryContext from "../../context/CategoryContext";
 import useFetchDependecies from "../customHook/useFetchDependecies";
+import RatingFilter from "./RatingFilter";
 
 const CategoryFilter = () => {
-  const { declareCategory, category } = useContext(CategoryContext);
+  const { category } = useContext(CategoryContext);
 
   const [productByPrice, setProductsByPrice] = useState<any | IProductTypes>(
     []
@@ -42,7 +43,6 @@ const CategoryFilter = () => {
   };
 
   const getFilteredBooks = () => {
-    console.log("test");
     const minPrice = products.filter(
       (product: IProductTypes) => product.price > value[0]
     );
@@ -52,35 +52,35 @@ const CategoryFilter = () => {
     setProductsByPrice(maxPrice);
     console.log(maxPrice, "maxprice");
 
-    setProductsByPrice([]);
     if (ratingChecked[5] === true) {
-      const filterCheckbox = products.filter(
+      const filterCheckbox = maxPrice.filter(
         (prod: IProductTypes) => prod.rating >= 4.5
       );
       setFilterByRating(filterCheckbox);
       console.log(filterCheckbox, "filterCheckbox5");
+      console.log(maxPrice, "maxPrice in if");
     }
     if (ratingChecked[4] === true) {
-      const filterCheckbox2 = products.filter(
+      const filterCheckbox2 = maxPrice.filter(
         (prod: IProductTypes) => prod.rating >= 3.5 && prod.rating < 4.5
       );
       setFilterByRating(filterCheckbox2);
     }
     if (ratingChecked[3] === true) {
-      const filterCheckbox3 = products.filter(
+      const filterCheckbox3 = maxPrice.filter(
         (prod: IProductTypes) => prod.rating >= 2.5 && prod.rating < 3.5
       );
       setFilterByRating(filterCheckbox3);
       console.log(filterCheckbox3, "filterCheckbox3");
     }
     if (ratingChecked[2] === true) {
-      const filterCheckbox4 = products.filter(
+      const filterCheckbox4 = maxPrice.filter(
         (prod: IProductTypes) => prod.rating >= 1.5 && prod.rating < 2.5
       );
       setFilterByRating(filterCheckbox4);
     }
     if (ratingChecked[1] === true) {
-      const filterCheckbox5 = products.filter(
+      const filterCheckbox5 = maxPrice.filter(
         (prod: IProductTypes) => prod.rating >= 0.5 && prod.rating < 1.5
       );
       setFilterByRating(filterCheckbox5);
@@ -95,13 +95,12 @@ const CategoryFilter = () => {
         sx={{
           width: "100vw",
           minHeight: "100vh",
-          marginTop: "130px",
-          border: "2px solid red",
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
+          padding: "10%",
         }}
       >
         <Box
@@ -123,7 +122,13 @@ const CategoryFilter = () => {
         >
           <Box
             sx={{
-              width: "400px",
+              width: {
+                xl: "400px",
+                lg: "400px",
+                md: "200px",
+                sm: "200px",
+                xs: "200px",
+              },
               display: "flex",
               justifyContent: "center",
               flexDirection: "column",
@@ -352,7 +357,7 @@ const CategoryFilter = () => {
             },
           }}
         >
-          Filter by Rating
+          Filter
         </Button>
         <Box
           sx={{
@@ -365,11 +370,6 @@ const CategoryFilter = () => {
         >
           {filterByRating.length > 0
             ? filterByRating.map((item: IProductTypes) => {
-                return <ProductItem product={item} key={item.id} />;
-              })
-            : null}
-          {productByPrice.length > 0
-            ? productByPrice.map((item: IProductTypes) => {
                 return <ProductItem product={item} key={item.id} />;
               })
             : null}

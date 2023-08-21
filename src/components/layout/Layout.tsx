@@ -1,4 +1,3 @@
-import Slider from "../carousel/Slider";
 import Announcement from "../announcement/Announcement";
 import Products from "../main/Products";
 import Navbar from "../navbar/Navbar";
@@ -18,7 +17,6 @@ const Layout = () => {
           alignItems: "center",
         }}
       >
-        <Slider />
         <Promotions />
         <Announcement />
         <Recommended />

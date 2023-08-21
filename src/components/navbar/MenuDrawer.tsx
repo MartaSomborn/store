@@ -9,19 +9,23 @@ import {
 } from "@mui/material";
 
 import IconButton from "@mui/material/IconButton/IconButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Fragment, useState, useContext } from "react";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CategoryContext from "../../context/CategoryContext";
+import MenuIcon from "@mui/icons-material/Menu";
+import NavbarBasketIcon from "./NavbarBasketIcon";
+import NavbarFavoriteIcon from "./NavbarFavoriteIcon";
+import NavbarDrawer from "./NavbarDrawer";
 
 type Anchor = "right";
 
-const NavbarDrawer = (props: any) => {
-  const { declareCategory, category } = useContext(CategoryContext);
-  const [refresh, setRefresh] = useState(false);
+const MenuDrawer = () => {
   const [state, setState] = useState({
     right: false,
   });
+
+  const navigate = useNavigate();
 
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
@@ -39,13 +43,19 @@ const NavbarDrawer = (props: any) => {
 
   const list = (anchor: Anchor) => (
     <Box
-      sx={{ width: 250 }}
+      sx={{
+        width: "100vw",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        border: "2px solid red",
+      }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Biography", "Business", "Computer", "Careers"].map((text, index) => (
+        {["checkout", "favourite", "category"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <Link to={"/" + text.toLowerCase()}>
               <ListItemButton
@@ -55,10 +65,10 @@ const NavbarDrawer = (props: any) => {
                   alignItems: "flex-start",
                   gap: "10px",
                 }}
-                onClick={() => {
-                  declareCategory(text);
-                  setRefresh(!refresh);
-                }}
+                // onClick={() => {
+                //   //   declareCategory(text);
+                //   //   setRefresh(!refresh);
+                // }}
               >
                 <Typography
                   sx={{
@@ -80,18 +90,35 @@ const NavbarDrawer = (props: any) => {
     <Container
       sx={{
         display: {
-          xl: "block",
-          lg: "block",
-          md: "block",
-          sm: props.mobile ? "flex" : "none",
-          xs: props.mobile ? "flex" : "none",
+          xl: "none",
+          lg: "none",
+          md: "none",
+          sm: "flex",
+          xs: "flex",
         },
       }}
     >
       {(["right"] as const).map((anchor) => (
         <Fragment key={anchor}>
           <IconButton onClick={toggleDrawer(anchor, true)}>
-            <MenuBookIcon sx={{ width: "2em", height: "2em" }} />
+            <MenuIcon
+              sx={{
+                width: {
+                  xl: "40px",
+                  lg: "40px",
+                  md: "40px",
+                  sm: "40px",
+                  xs: "40px",
+                },
+                height: {
+                  xl: "40px",
+                  lg: "40px",
+                  md: "40px",
+                  sm: "40px",
+                  xs: "40px",
+                },
+              }}
+            ></MenuIcon>
           </IconButton>
           <Drawer
             anchor={anchor}
@@ -105,4 +132,4 @@ const NavbarDrawer = (props: any) => {
     </Container>
   );
 };
-export default NavbarDrawer;
+export default MenuDrawer;

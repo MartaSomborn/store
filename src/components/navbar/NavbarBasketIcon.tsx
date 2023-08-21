@@ -6,11 +6,23 @@ import { useContext } from "react";
 import CardContext from "../../context/CardContext";
 import Tooltip from "@mui/material/Tooltip";
 
-const NavbarBasketIcon = () => {
+const NavbarBasketIcon = (props: any) => {
   const { items } = useContext(CardContext);
 
   return (
-    <Badge badgeContent={items.length} color="primary">
+    <Badge
+      badgeContent={items.length}
+      color="primary"
+      sx={{
+        display: {
+          xl: "block",
+          lg: "block",
+          md: "block",
+          sm: props.mobile ? "block" : "none",
+          xs: props.mobile ? "block" : "none",
+        },
+      }}
+    >
       <Link to={"/checkout"}>
         <Tooltip title="Shopping basket">
           <IconButton>

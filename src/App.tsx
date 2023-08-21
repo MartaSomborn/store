@@ -14,23 +14,29 @@ import { CategoryProvider } from "./context/CategoryContext";
 import CategoryFilter from "./components/Category/CategoryFilter";
 
 function App() {
+  const routes = [
+    { path: "/", element: <Layout /> },
+    { path: "/login", element: <LogIn /> },
+    { path: "/signup", element: <SignUp /> },
+    { path: "/checkout", element: <Checkout /> },
+    { path: "/favourite", element: <Favourites /> },
+    { path: "/product/:id", element: <ProductPage /> },
+    { path: "/biography", element: <CategoryFilter /> },
+    { path: "/business", element: <CategoryFilter /> },
+    { path: "/computer", element: <CategoryFilter /> },
+    { path: "/careers", element: <CategoryFilter /> },
+    { path: "/search/:bookname", element: <FilterBooks /> },
+  ];
+
   return (
     <FavouriteProvider>
       <CardProvider>
         <CategoryProvider>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<Layout />} />
-              <Route path="/login" element={<LogIn />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/favourite" element={<Favourites />} />
-              <Route path="/product/:id" element={<ProductPage />} />
-              <Route path="/biography" element={<CategoryFilter />} />
-              <Route path="/business" element={<CategoryFilter />} />
-              <Route path="/computer" element={<CategoryFilter />} />
-              <Route path="/careers" element={<CategoryFilter />} />
-              <Route path="/search/:bookname" element={<FilterBooks />} />
+              {routes.map((route) => (
+                <Route path={route.path} element={route.element} />
+              ))}
             </Routes>
           </BrowserRouter>
         </CategoryProvider>

@@ -10,6 +10,7 @@ import NavbarLoginIcon from "./NavbarLoginIcon";
 import NavbarDrawer from "./NavbarDrawer";
 import NavbarBasketIcon from "./NavbarBasketIcon";
 import NavbarFavoriteIcon from "./NavbarFavoriteIcon";
+import MenuDrawer from "./MenuDrawer";
 
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -20,20 +21,35 @@ const Navbar = () => {
       sx={{
         background: "white",
         minHeight: "130px",
-        width: "100%",
+        maxWidth: "100vw",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
         alignItems: "center",
         justifyContent: "space-between",
-        paddingLeft: "15px",
-        paddingRight: "15px",
       }}
     >
       <Tooltip title="Home">
         <Link to={"/"}>
           <IconButton>
-            <HomeIcon sx={{ width: "2em", height: "2em" }} />
+            <HomeIcon
+              sx={{
+                width: {
+                  xl: "40px",
+                  lg: "40px",
+                  md: "40px",
+                  sm: "40px",
+                  xs: "40px",
+                },
+                height: {
+                  xl: "40px",
+                  lg: "40px",
+                  md: "40px",
+                  sm: "40px",
+                  xs: "40px",
+                },
+              }}
+            />
           </IconButton>
         </Link>
       </Tooltip>
@@ -48,8 +64,8 @@ const Navbar = () => {
             xl: "800px",
             lg: "700px",
             md: "400px",
-            sm: "200px",
-            xs: "300px",
+            sm: "500px",
+            xs: "200px",
           },
         }}
       >
@@ -83,6 +99,7 @@ const Navbar = () => {
         <NavbarBasketIcon />
         <NavbarFavoriteIcon />
         <NavbarDrawer />
+        <MenuDrawer />
       </div>
     </AppBar>
   );

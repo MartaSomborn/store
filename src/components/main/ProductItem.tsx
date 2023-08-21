@@ -7,6 +7,8 @@ import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavouriteContext from "../../context/FavouriteContext";
 import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export interface IProductTypes {
   Category: string;
@@ -41,12 +43,19 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
   const { addToCard } = useContext(CardContext);
   const { addToFavourite } = useContext(FavouriteContext);
 
+  const addToBox = () => {
+    addToCard(product.id, product.photo, product.name, product.price);
+    toast.success("Added to box !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
   return (
     <Box
       key={key}
       sx={{
         width: "300px",
-        height: "640px",
+        height: "600px",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
@@ -130,9 +139,7 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
                 backgroundColor: "#ad2e24",
               },
             }}
-            onClick={() =>
-              addToCard(product.id, product.photo, product.name, product.price)
-            }
+            onClick={addToBox}
           >
             Add to box
           </Button>
@@ -157,6 +164,7 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
           </IconButton>
         </div>
       </div>
+      <ToastContainer />
     </Box>
   );
 };

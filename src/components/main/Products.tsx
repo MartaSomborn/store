@@ -15,7 +15,6 @@ const Products = () => {
         justifyContent: "center",
         minWidth: "90vw",
         marginTop: "200px",
-        border: "2 px black solid",
         backgroundColor: "white",
         width: "80%",
         borderRadius: "55px",

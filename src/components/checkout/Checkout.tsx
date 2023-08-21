@@ -4,7 +4,6 @@ import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import "./../../App.css";
 import { Link } from "react-router-dom";
-import { IProductTypes } from "../main/ProductItem";
 
 const Checkout = () => {
   const { items, addToCard, removeSingle, newPrice } = useContext(CardContext);
@@ -52,7 +51,13 @@ const Checkout = () => {
             sx={{
               fontFamily: "Montserrat",
               fontWeight: 500,
-              fontSize: "50px",
+              fontSize: {
+                xl: "50px",
+                lg: "50px",
+                md: "30px",
+                sm: "30px",
+                xs: "30px",
+              },
               textAlign: "center",
               padding: "20px 0",
             }}
@@ -63,12 +68,20 @@ const Checkout = () => {
             {items.map((item: any, index: number) => {
               return (
                 <Box key={index + " " + item.id}>
-                  <div
-                    style={{
-                      width: "600px",
+                  <Box
+                    sx={{
+                      width: {
+                        xl: "80vw",
+                        lg: "80vw",
+                        md: "80vw",
+                        sm: "60vw",
+                        xs: "60vw",
+                      },
                       display: "flex",
-                      justifyContent: "space-between",
+                      flexDirection: "row",
                       alignItems: "center",
+                      justifyContent: "space-evenly",
+                      flexWrap: "wrap",
                     }}
                   >
                     <Link to={"/product/" + item.id}>
@@ -92,7 +105,13 @@ const Checkout = () => {
                         sx={{
                           fontFamily: "Montserrat",
                           fontWeight: 500,
-                          fontSize: "30px",
+                          fontSize: {
+                            xl: "30px",
+                            lg: "30px",
+                            md: "30px",
+                            sm: "20px",
+                            xs: "20px",
+                          },
                           textAlign: "center",
                           padding: "10px 0",
                         }}
@@ -104,7 +123,13 @@ const Checkout = () => {
                         sx={{
                           fontFamily: "Montserrat",
                           fontWeight: 500,
-                          fontSize: "20px",
+                          fontSize: {
+                            xl: "20px",
+                            lg: "20px",
+                            md: "20px",
+                            sm: "18px",
+                            xs: "18px",
+                          },
                           textAlign: "center",
                           padding: "10px 0",
                         }}
@@ -178,7 +203,7 @@ const Checkout = () => {
                         </Button>
                       </div>
                     </Box>
-                  </div>
+                  </Box>
                 </Box>
               );
             })}
@@ -186,7 +211,13 @@ const Checkout = () => {
               sx={{
                 fontFamily: "Montserrat",
                 fontWeight: 500,
-                fontSize: "40px",
+                fontSize: {
+                  xl: "50px",
+                  lg: "50px",
+                  md: "30px",
+                  sm: "30px",
+                  xs: "30px",
+                },
                 textAlign: "center",
                 padding: "25px 0",
                 display: "flex",
