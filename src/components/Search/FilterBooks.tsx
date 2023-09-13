@@ -60,7 +60,13 @@ const FilterBooks = () => {
           sx={{
             fontFamily: "Montserrat",
             fontWeight: 500,
-            fontSize: "50px",
+            fontSize: {
+              xl: "50px",
+              lg: "50px",
+              md: "40px",
+              sm: "30px",
+              xs: "25px",
+            },
             textAlign: "center",
             paddingTop: "100px",
             paddingBottom: "40px",
@@ -68,7 +74,15 @@ const FilterBooks = () => {
         >
           {searchResults}
         </Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "40px",
+            paddingBottom: "40px",
+          }}
+        >
           {filteredNameProducts.map((prod: IProductTypes) => {
             return <ProductItem product={prod} key={prod.id} />;
           })}

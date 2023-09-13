@@ -30,7 +30,7 @@ const ProductPage = () => {
         gap: "20px",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        minHeight: "100vh",
         minWidth: "100vw",
       }}
     >
@@ -40,11 +40,11 @@ const ProductPage = () => {
         <Box
           sx={{
             marginTop: {
-              xl: "90%",
-              lg: "90%",
-              md: "90%",
-              sm: "90%",
-              xs: "90%",
+              xl: "240px",
+              lg: "240px",
+              md: "240px",
+              sm: "240px",
+              xs: "240px",
             },
             // paddingTop: "140px",
             width: {

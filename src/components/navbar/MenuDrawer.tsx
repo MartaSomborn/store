@@ -27,6 +27,10 @@ const MenuDrawer = () => {
 
   const navigate = useNavigate();
 
+  const toogleCategoryDrawer = () => {
+    return;
+  };
+
   const toggleDrawer =
     (anchor: Anchor, open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -48,14 +52,13 @@ const MenuDrawer = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        border: "2px solid red",
       }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["checkout", "favourite", "category"].map((text, index) => (
+        {["checkout", "favourite"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <Link to={"/" + text.toLowerCase()}>
               <ListItemButton
@@ -65,10 +68,6 @@ const MenuDrawer = () => {
                   alignItems: "flex-start",
                   gap: "10px",
                 }}
-                // onClick={() => {
-                //   //   declareCategory(text);
-                //   //   setRefresh(!refresh);
-                // }}
               >
                 <Typography
                   sx={{

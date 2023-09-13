@@ -103,7 +103,18 @@ const LogIn = () => {
         }}
       >
         <Typography
-          sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "60px" }}
+          sx={{
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: {
+              xl: "60px",
+              lg: "60px",
+              md: "50px",
+              sm: "40px",
+              xs: "30px",
+            },
+            marginTop: { sm: "-40px", xs: "80px" },
+          }}
           variant="h3"
           gutterBottom
         >
@@ -125,7 +136,7 @@ const LogIn = () => {
           name="login"
         />
         <TextField
-          sx={{ width: "40%", marginTop: "15px" }}
+          sx={{ width: "40%", marginTop: "15px", marginBottom: "20px" }}
           id="standard-basic"
           label="Password"
           variant="standard"
