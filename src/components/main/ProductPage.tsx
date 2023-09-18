@@ -69,8 +69,25 @@ const ProductPage = () => {
                     gap: "20px",
                   }}
                 >
-                  <img
-                    style={{ height: "600px", width: "500px" }}
+                  <Box
+                    component="img"
+                    // sx={{
+                    //   height: {
+                    //     xl: "500px",
+                    //     lg: "500px",
+                    //     md: "400px",
+                    //     sm: "300px",
+                    //     xs: "300px",
+                    //   },
+                    //   width: {
+                    //     xl: "400px",
+                    //     lg: "400px",
+                    //     md: "300px",
+                    //     sm: "200px",
+                    //     xs: "200px",
+                    //   },
+                    // }}
+                    sx={{ height: "500px", width: "400px" }}
                     src={prod.photo}
                   />
                   <Box
@@ -96,8 +113,8 @@ const ProductPage = () => {
                         fontFamily: "Montserrat",
                         fontWeight: 500,
                         fontSize: {
-                          xl: "50px",
-                          lg: "50px",
+                          xl: "40px",
+                          lg: "40px",
                           md: "30px",
                           sm: "30px",
                           xs: "30px",
@@ -106,7 +123,7 @@ const ProductPage = () => {
                         padding: "10px 0",
                       }}
                     >
-                      {prod.name}
+                      Tytuł: {prod.name}
                     </Typography>
 
                     <Typography
@@ -124,7 +141,7 @@ const ProductPage = () => {
                         padding: "10px 0",
                       }}
                     >
-                      {prod.author}
+                      Author: {prod.author}
                     </Typography>
                     <Typography
                       sx={{
@@ -141,7 +158,7 @@ const ProductPage = () => {
                         padding: "10px 0",
                       }}
                     >
-                      {"Price " + prod.price + " €"}
+                      Cena: {prod.price + "$"}
                     </Typography>
 
                     <div
@@ -157,11 +174,18 @@ const ProductPage = () => {
                         variant="contained"
                         sx={{
                           width: {
-                            xl: "350px",
-                            lg: "350px",
-                            md: "200px",
-                            sm: "200px",
-                            xs: "200px",
+                            xl: "250px",
+                            lg: "250px",
+                            md: "150px",
+                            sm: "150px",
+                            xs: "150px",
+                          },
+                          height: {
+                            xl: "50px",
+                            lg: "50px",
+                            md: "50px",
+                            sm: "50px",
+                            xs: "50px",
                           },
                           backgroundColor: "#c75146",
                           color: "white",

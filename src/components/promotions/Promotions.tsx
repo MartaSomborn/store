@@ -6,19 +6,24 @@ import "react-multi-carousel/lib/styles.css";
 import "../carousel/Slider.css";
 
 const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 4,
-    slidesToSlide: 4, // optional, default to 1.
+    breakpoint: { max: 3000, min: 1300 },
+    items: 3,
+    slidesToSlide: 3, // optional, default to 1.
   },
   tablet: {
-    breakpoint: { max: 1024, min: 768 },
+    breakpoint: { max: 1300, min: 1218 },
     items: 3,
     slidesToSlide: 3, // optional, default to 1.
   },
   mobile: {
-    breakpoint: { max: 767, min: 464 },
-    items: 2,
+    breakpoint: { max: 1218, min: 464 },
+    items: 1,
     slidesToSlide: 1, // optional, default to 1.
   },
 };
@@ -32,12 +37,13 @@ const Promotions = () => {
     <Box
       className="parent"
       sx={{
-        marginTop: "200px",
+        marginTop: "190px",
         backgroundColor: "white",
-        borderRadius: "55px",
-        paddingTop: "100px",
-        paddingBottom: "100px",
-        width: { xl: "80vw", lg: "80vw", md: "80vw", sm: "90vw", xs: "95vw" },
+        borderRadius: "25px",
+        paddingTop: "50px",
+        paddingBottom: "20px",
+        width: { xl: "90vw", lg: "90vw", md: "80vw", sm: "90vw", xs: "95vw" },
+        //maxWidth: "1520px",
       }}
     >
       <Typography
@@ -52,29 +58,32 @@ const Promotions = () => {
             xs: "30px",
           },
           textAlign: "center",
-          paddingBottom: "4%",
+          paddingBottom: "10px",
         }}
       >
         Promotions
       </Typography>
-      <Carousel
-        responsive={responsive}
-        autoPlay={true}
-        swipeable={true}
-        draggable={true}
-        showDots={true}
-        infinite={true}
-        partialVisible={false}
-        dotListClass="custom-dot-list-style"
-      >
-        {products.map((product: IProductTypes, index: number) => {
-          return (
-            <div className="slider" key={index}>
-              <ProductItem product={product} key={product.id} />
-            </div>
-          );
-        })}
-      </Carousel>
+      <div style={{ border: "red solid 2px" }}>
+        <Carousel
+          responsive={responsive}
+          autoPlay={true}
+          swipeable={true}
+          draggable={true}
+          showDots={true}
+          infinite={true}
+          partialVisible={false}
+          dotListClass="custom-dot-list-style"
+          centerMode={true}
+        >
+          {products.map((product: IProductTypes, index: number) => {
+            return (
+              <div className="slider" key={index}>
+                <ProductItem product={product} key={product.id} />
+              </div>
+            );
+          })}
+        </Carousel>
+      </div>
     </Box>
   );
 };

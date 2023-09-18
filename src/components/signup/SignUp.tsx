@@ -48,7 +48,7 @@ const SignUp = () => {
     console.log("confirmpassword", confirmPassword);
   };
 
-  async function checkCredentials() {
+  function checkCredentials() {
     if (
       userName.length === 0 ||
       password.length === 0 ||
@@ -66,6 +66,8 @@ const SignUp = () => {
     } else {
       setLogInError("");
     }
+  }
+  async function LogIn() {
     try {
       const res = await axios.post(
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7dR70_Rzaj6DAmgNS1tbUvfV-LqDBLmQ",
@@ -81,7 +83,7 @@ const SignUp = () => {
       sx={{
         display: "flex",
         width: "100vw",
-        height: "100vh",
+        minHeight: "100vh",
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -91,15 +93,19 @@ const SignUp = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          flexWrap: "wrap",
-          alignContent: "center",
           alignItems: "center",
-          width: "100%",
-          maxWidth: "1200px",
+          justifyContent: "center",
+          width: "100vw",
+          minHeight: "100vh",
         }}
       >
         <Typography
-          sx={{ fontFamily: "Montserrat", fontWeight: 500, fontSize: "60px" }}
+          sx={{
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "50px",
+            marginTop: "150px",
+          }}
           variant="h3"
           gutterBottom
         >
@@ -151,61 +157,6 @@ const SignUp = () => {
           onChange={onChangeConfirmPassword}
           value={confirmPassword}
         />
-        <Button
-          sx={{
-            width: "210px",
-            marginTop: "15px",
-            fontFamily: "Montserrat",
-            fontWeight: 500,
-            fontSize: "15px",
-            backgroundColor: "#c75146",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "#ad2e24",
-            },
-          }}
-          variant="contained"
-          onClick={checkCredentials}
-        >
-          Sign up
-        </Button>
-        <Button
-          sx={{
-            width: "210px",
-            marginTop: "15px",
-            fontFamily: "Montserrat",
-            fontWeight: 500,
-            fontSize: "15px",
-            backgroundColor: "#c75146",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "#ad2e24",
-            },
-          }}
-          variant="contained"
-        >
-          Forget Password
-        </Button>
-        <Link to={"/logIn"}>
-          <Button
-            sx={{
-              width: "210px",
-              marginTop: "15px",
-              marginBottom: "15px",
-              fontFamily: "Montserrat",
-              fontWeight: 500,
-              fontSize: "15px",
-              backgroundColor: "#c75146",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "#ad2e24",
-              },
-            }}
-            variant="contained"
-          >
-            Do you have already account?
-          </Button>
-        </Link>
         {logInError ? (
           <Alert
             sx={{
@@ -255,6 +206,44 @@ const SignUp = () => {
             Email exist
           </Alert>
         ) : null}
+        <Button
+          sx={{
+            width: "210px",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "15px",
+            backgroundColor: "#c75146",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "#ad2e24",
+            },
+          }}
+          variant="contained"
+          onClick={checkCredentials}
+        >
+          Sign up
+        </Button>
+        <Link to={"/logIn"}>
+          <Button
+            sx={{
+              width: "210px",
+              marginTop: "15px",
+              marginBottom: "15px",
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+              backgroundColor: "#c75146",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "#ad2e24",
+              },
+            }}
+            variant="contained"
+          >
+            Do you have already account?
+          </Button>
+        </Link>
       </Box>
     </Box>
   );

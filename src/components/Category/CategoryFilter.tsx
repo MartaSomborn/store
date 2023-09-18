@@ -43,9 +43,8 @@ const CategoryFilter = () => {
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",
-          justifyContent: "center",
           alignItems: "center",
-          padding: "10%",
+          paddingBottom: "40px",
         }}
       >
         <Filter
@@ -59,7 +58,20 @@ const CategoryFilter = () => {
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
-            gap: "150px",
+            gap: {
+              xl: "150px",
+              lg: "100px",
+              md: "80px",
+              sm: "30px",
+              xs: "10px",
+            },
+            marginTop: {
+              xl: "-200px",
+              lg: "-200px",
+              md: "-200px",
+              sm: "-220px",
+              xs: "-160px",
+            },
           }}
         >
           {filterByRating.length > 0

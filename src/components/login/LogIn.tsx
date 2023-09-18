@@ -13,7 +13,7 @@ interface IFormTypes {
 
 const LogIn = () => {
   const [form, setForm] = useState<IFormTypes>({ login: "", password: "" });
-  const [logError, setLogError] = useState<IFormTypes>({
+  let [logError, setLogError] = useState<IFormTypes>({
     login: "",
     password: "",
   });
@@ -27,28 +27,64 @@ const LogIn = () => {
 
   const checkErrors = () => {
     if (form.login.length === 0) {
-      setLogError({ ...logError, login: "The field cannot be empty" });
-      return "The field cannot be empty";
+      setLogError((prev) => {
+        return {
+          ...prev,
+          login: "The username field cannot be empty",
+        };
+      });
+      console.log(logError, "logError Login");
+      return "The username field cannot be empty";
     } else if (form.password.length === 0) {
-      setLogError({ ...logError, password: "The field cannot be empty" });
-      return "The field cannot be empty";
+      setLogError((prev) => {
+        return {
+          ...prev,
+          password: "The password field cannot be empty",
+        };
+      });
+      console.log(logError, "logError Password");
+      return "The password field cannot be empty";
     } else if (form.login.length < 4) {
-      setLogError({
-        ...logError,
-        login: "The field cannot have less than 4 signs",
+      setLogError((prev) => {
+        return {
+          ...prev,
+          login: "The login field cannot have less than 4 signs",
+        };
       });
-      return "The field cannot have less than 4 signs";
+      return "The login field cannot have less than 4 signs";
     } else if (form.password.length < 5) {
-      setLogError({
-        ...logError,
-        password: "The field cannot have less than 5 signs",
+      setLogError((prev) => {
+        return {
+          ...prev,
+          password: "The password field cannot have less than 5 signs",
+        };
       });
-      return "The field cannot have less than 5 signs";
+      return "The password field cannot have less than 5 signs";
     }
+
+    return null;
   };
 
   async function checkCredentials() {
+    setLogError({ login: "", password: "" });
+    console.log(logError, "error in Credentials");
     const checkedErrors = checkErrors();
+
+    if (checkedErrors) {
+      if (checkedErrors === "The username field cannot be empty") {
+        return "The username field cannot be empty";
+      } else if (checkedErrors === "The password field cannot be empty") {
+        return "The password field cannot be empty";
+      } else if (
+        checkedErrors === "The login field cannot have less than 4 signs"
+      ) {
+        return "The login field cannot have less than 4 signs";
+      } else if (
+        checkedErrors === "The password field cannot have less than 5 signs"
+      ) {
+        return "The password field cannot have less than 5 signs";
+      }
+    }
 
     if (checkedErrors) {
       toast.error("Login was not successful", {
@@ -85,7 +121,7 @@ const LogIn = () => {
       sx={{
         display: "flex",
         width: "100vw",
-        height: "100vh",
+        minHeight: "100vh",
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -95,11 +131,10 @@ const LogIn = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          flexWrap: "wrap",
-          alignContent: "center",
           alignItems: "center",
+          justifyContent: "center",
           width: "100%",
-          maxWidth: "1200px",
+          minHeight: "100vh",
         }}
       >
         <Typography
@@ -107,16 +142,15 @@ const LogIn = () => {
             fontFamily: "Montserrat",
             fontWeight: 500,
             fontSize: {
-              xl: "60px",
-              lg: "60px",
-              md: "50px",
+              xl: "50px",
+              lg: "50px",
+              md: "40px",
               sm: "40px",
               xs: "30px",
             },
-            marginTop: { sm: "-40px", xs: "80px" },
+            marginTop: { sm: "40px", xs: "80px" },
           }}
           variant="h3"
-          gutterBottom
         >
           Login
         </Typography>
@@ -144,62 +178,6 @@ const LogIn = () => {
           value={form.password}
           name="password"
         />
-        <Button
-          sx={{
-            width: "210px",
-            marginTop: "15px",
-            fontFamily: "Montserrat",
-            fontWeight: 500,
-            fontSize: "15px",
-            backgroundColor: "#c75146",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "#ad2e24",
-            },
-          }}
-          variant="contained"
-          onClick={checkCredentials}
-        >
-          Login
-        </Button>
-        <Button
-          sx={{
-            width: "210px",
-            marginTop: "15px",
-            fontFamily: "Montserrat",
-            fontWeight: 500,
-            fontSize: "15px",
-            backgroundColor: "#c75146",
-            color: "white",
-            "&:hover": {
-              backgroundColor: "#ad2e24",
-            },
-          }}
-          variant="contained"
-        >
-          Forget Password
-        </Button>
-
-        <Link to={"/signup"}>
-          <Button
-            sx={{
-              width: "210px",
-              marginTop: "15px",
-              fontFamily: "Montserrat",
-              fontWeight: 500,
-              fontSize: "15px",
-              backgroundColor: "#c75146",
-              color: "white",
-              "&:hover": {
-                backgroundColor: "#ad2e24",
-              },
-            }}
-            variant="contained"
-          >
-            Do you have an account?
-          </Button>
-        </Link>
-
         {logError.login ? (
           <Alert
             sx={{
@@ -222,18 +200,6 @@ const LogIn = () => {
             severity="error"
           >
             {logError.password}
-          </Alert>
-        ) : null}
-        {msgError ? (
-          <Alert
-            sx={{
-              fontFamily: "Montserrat",
-              fontWeight: 500,
-              fontSize: "15px",
-            }}
-            severity="error"
-          >
-            {msgError}
           </Alert>
         ) : null}
         {msgError === "INVALID_EMAIL" ? (
@@ -284,6 +250,44 @@ const LogIn = () => {
             Invalid password
           </Alert>
         ) : null}
+        <Button
+          sx={{
+            width: "210px",
+            marginTop: "15px",
+            fontFamily: "Montserrat",
+            fontWeight: 500,
+            fontSize: "15px",
+            backgroundColor: "#c75146",
+            color: "white",
+            "&:hover": {
+              backgroundColor: "#ad2e24",
+            },
+          }}
+          variant="contained"
+          onClick={checkCredentials}
+        >
+          Login
+        </Button>
+
+        <Link to={"/signup"}>
+          <Button
+            sx={{
+              width: "210px",
+              marginTop: "15px",
+              fontFamily: "Montserrat",
+              fontWeight: 500,
+              fontSize: "15px",
+              backgroundColor: "#c75146",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "#ad2e24",
+              },
+            }}
+            variant="contained"
+          >
+            Do you have an account?
+          </Button>
+        </Link>
       </Box>
       <ToastContainer />
     </Box>

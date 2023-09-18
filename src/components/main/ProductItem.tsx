@@ -54,8 +54,14 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
     <Box
       key={key}
       sx={{
-        width: "300px",
-        height: "600px",
+        width: {
+          xl: "15vw",
+          lg: "20vw",
+          md: "35vw",
+          sm: "40vw",
+          xs: "40vw",
+        },
+        height: "550px",
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
@@ -63,16 +69,21 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
         justifyContent: "center",
         marginTop: "5%",
         position: "relative",
+        backgroundColor: "#e5e5e5",
+        borderRadius: "5px",
+        "&:hover": {
+          transofrm: "scale(1.5)",
+        },
       }}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
     >
-      <div>
+      <div style={{ width: "100%" }}>
         <Link to={"/product/" + product.id}>
-          <div>
+          <div style={{ width: "100%" }}>
             <div
               style={{
-                width: "220px",
+                width: "100%",
                 display: "flex",
                 flexDirection: "column",
                 flexWrap: "wrap",
@@ -83,7 +94,8 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
               <img
                 style={{
                   height: "300px",
-                  width: "200px",
+                  width: "100%",
+                  borderRadius: "5px",
                 }}
                 src={product.photo}
               />
@@ -91,8 +103,7 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
               <Typography
                 sx={{
                   fontFamily: "Montserrat",
-                  fontWeight: 500,
-                  fontSize: "25px",
+                  fontSize: "20px",
                   textAlign: "center",
                   padding: "10px 0",
                 }}
@@ -128,7 +139,8 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
             variant="contained"
             sx={{
               position: "absolute",
-              bottom: "0",
+              bottom: "3%",
+              left: "25px",
               width: "150px",
               fontFamily: "Montserrat",
               fontWeight: 500,
@@ -145,7 +157,7 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
           </Button>
 
           <IconButton
-            sx={{ position: "absolute", bottom: "-5px", right: "25px" }}
+            sx={{ position: "absolute", bottom: "2%", right: "25px" }}
           >
             <FavouriteBorderIcon
               sx={{

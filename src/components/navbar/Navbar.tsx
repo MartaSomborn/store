@@ -66,8 +66,8 @@ const Navbar = () => {
             width: {
               xl: "800px",
               lg: "700px",
-              md: "400px",
-              sm: "500px",
+              md: "500px",
+              sm: "350px",
               xs: "200px",
             },
           }}

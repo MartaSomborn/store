@@ -32,12 +32,12 @@ const Announcement = () => {
     <Box
       className="parent"
       sx={{
-        marginTop: "200px",
+        marginTop: "100px",
         backgroundColor: "white",
-        borderRadius: "55px",
-        paddingTop: "100px",
-        paddingBottom: "100px",
-        width: { xl: "80vw", lg: "80vw", md: "80vw", sm: "90vw", xs: "95vw" },
+        borderRadius: "25px",
+        paddingTop: "50px",
+        paddingBottom: "20px",
+        width: { xl: "90vw", lg: "50vw", md: "80vw", sm: "90vw", xs: "95vw" },
       }}
     >
       <Typography
@@ -52,7 +52,7 @@ const Announcement = () => {
             xs: "30px",
           },
           textAlign: "center",
-          paddingBottom: "4%",
+          paddingBottom: "10px",
         }}
       >
         Announcement

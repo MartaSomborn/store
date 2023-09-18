@@ -157,7 +157,7 @@ const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
               sm: "15px",
               xs: "15px",
             },
-            textAlign: "center",
+            textAlign: "justify",
             fontStyle: "italic",
           }}
         >
@@ -169,7 +169,12 @@ const ButtonNavigation: React.FC<IDescription> = ({ imgDescription, id }) => {
           ? getProductWithComment.map((comment: IComment) => {
               return (
                 <Paper style={{ padding: "40px 20px", marginBottom: "10px" }}>
-                  <Grid container wrap="nowrap" spacing={2}>
+                  <Grid
+                    style={{ alignItems: "center" }}
+                    container
+                    wrap="nowrap"
+                    spacing={2}
+                  >
                     <Grid item>
                       <Avatar alt="Ubuntu" src={imgLink} />
                     </Grid>

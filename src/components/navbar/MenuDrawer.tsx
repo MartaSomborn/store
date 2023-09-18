@@ -1,4 +1,9 @@
-import { Container } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Container,
+} from "@mui/material";
 import {
   Box,
   Typography,
@@ -17,6 +22,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NavbarBasketIcon from "./NavbarBasketIcon";
 import NavbarFavoriteIcon from "./NavbarFavoriteIcon";
 import NavbarDrawer from "./NavbarDrawer";
+import CloseIcon from "@mui/icons-material/Close";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type Anchor = "right";
 
@@ -95,6 +102,7 @@ const MenuDrawer = () => {
           sm: "flex",
           xs: "flex",
         },
+        position: "relative",
       }}
     >
       {(["right"] as const).map((anchor) => (
@@ -125,6 +133,41 @@ const MenuDrawer = () => {
             onClose={toggleDrawer(anchor, false)}
           >
             {list(anchor)}
+            <Accordion
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography sx={{ textAlign: "center" }}>Kategorie</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Link to="/">
+                  <Typography>Business</Typography>
+                </Link>
+              </AccordionDetails>
+              <AccordionDetails>
+                <Typography>Comedy</Typography>
+              </AccordionDetails>
+              <AccordionDetails>
+                <Typography>Travel</Typography>
+              </AccordionDetails>
+            </Accordion>
+            <CloseIcon
+              onClick={toggleDrawer(anchor, false)}
+              sx={{
+                position: "absolute",
+                right: "3%",
+                top: "3%",
+                display: "flex",
+              }}
+            />
           </Drawer>
         </Fragment>
       ))}

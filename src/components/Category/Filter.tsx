@@ -83,13 +83,22 @@ const Filter = (props: any) => {
       <Box
         sx={{
           width: "100vw",
-          minHeight: "100vh",
+          minHeight: "80vh",
           display: "flex",
           flexDirection: "column",
           flexWrap: "wrap",
           justifyContent: "center",
           alignItems: "center",
-          padding: "10%",
+          gap: {
+            xl: "80px",
+            lg: "70px",
+            md: "60px",
+            sm: "30px",
+            xs: "20px",
+          },
+          marginBottom: {
+            xs: "70px",
+          },
         }}
       >
         <Box
@@ -105,8 +114,20 @@ const Filter = (props: any) => {
             flexWrap: "wrap",
             alignItems: "center",
             justifyContent: "center",
-            paddingTop: "40px",
-            gap: "50px",
+            gap: {
+              xl: "100px",
+              lg: "100px",
+              md: "100px",
+              sm: "60px",
+              xs: "30px",
+            },
+            marginTop: {
+              xl: "-50px",
+              lg: "-50px",
+              md: "-50px",
+              sm: "0px",
+              xs: "0px",
+            },
           }}
         >
           <Box
@@ -129,8 +150,6 @@ const Filter = (props: any) => {
           >
             <Typography
               sx={{
-                position: "absolute",
-                top: 0,
                 fontFamily: "Montserrat",
                 fontWeight: 500,
                 fontSize: "25px",
