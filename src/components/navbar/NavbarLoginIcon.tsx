@@ -60,9 +60,9 @@ const NavbarLoginIcon = () => {
               onClose={handleClose}
             >
               <Link to={"/"}>
-                <MenuItem onClick={logOut}>Wyloguj się</MenuItem>
+                <MenuItem onClick={logOut}>Logout</MenuItem>
               </Link>
-              <MenuItem onClick={handleClose}>Zamknij</MenuItem>
+              <MenuItem onClick={handleClose}>Close</MenuItem>
             </Menu>
           </Box>
         </>

@@ -56,18 +56,29 @@ const SignUp = () => {
       surname.length === 0
     ) {
       setLogInError("The field cannot be empty");
-      return;
+      return "The field cannot be empty";
     } else {
       setLogInError("");
       console.log("Successfuly login");
     }
     if (password !== confirmPassword) {
       setLogInError("Password need to be the same");
+      return "Password need to be the same";
     } else {
       setLogInError("");
     }
   }
-  async function LogIn() {
+  async function SignUp() {
+    const checkedCredentials = checkCredentials();
+
+    if (checkedCredentials) {
+      if (checkedCredentials === "The field cannot be empty") {
+        return "The field cannot be empty";
+      } else if (checkedCredentials === "Password need to be the same") {
+        return "Password need to be the same";
+      }
+    }
+
     try {
       const res = await axios.post(
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA7dR70_Rzaj6DAmgNS1tbUvfV-LqDBLmQ",
@@ -220,7 +231,7 @@ const SignUp = () => {
             },
           }}
           variant="contained"
-          onClick={checkCredentials}
+          onClick={SignUp}
         >
           Sign up
         </Button>
