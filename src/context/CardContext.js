@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const CardContext = createContext();
 
@@ -33,6 +34,9 @@ export function CardProvider({ children }) {
     }
 
     setNewPrice(newPrice - existItem.price);
+    toast.error("Deleted from box !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
 
   const removeAll = () => {

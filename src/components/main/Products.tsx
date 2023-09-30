@@ -18,7 +18,8 @@ const Products = () => {
         backgroundColor: "white",
         width: "80%",
         borderRadius: "55px",
-        padding: "100px",
+        paddingTop: "10%",
+        paddingBottom: "10%",
       }}
     >
       {products.map((prod: IProductTypes) => {

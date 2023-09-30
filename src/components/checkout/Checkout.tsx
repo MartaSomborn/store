@@ -4,6 +4,7 @@ import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import "./../../App.css";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const Checkout = () => {
   const { items, addToCard, removeSingle, newPrice } = useContext(CardContext);
@@ -229,6 +230,7 @@ const Checkout = () => {
           </Box>
         </div>
       )}
+      <ToastContainer />
     </Box>
   );
 };

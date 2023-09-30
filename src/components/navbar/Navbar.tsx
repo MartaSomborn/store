@@ -10,16 +10,17 @@ import NavbarLoginIcon from "./NavbarLoginIcon";
 import NavbarDrawer from "./NavbarDrawer";
 import NavbarBasketIcon from "./NavbarBasketIcon";
 import NavbarFavoriteIcon from "./NavbarFavoriteIcon";
-import MenuDrawer from "./MenuDrawer";
-import CategoryNavbar from "./CategoryNavbar";
-import { Box } from "@material-ui/core";
+import { Box, Hidden } from "@material-ui/core";
+import MobileSearch from "./MobileSearch";
 
 const Navbar = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [openSearch, setOpenSearch] = useState(false);
+
   const ariaLabel = { "aria-label": "description" };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", minHeight: "130px" }}>
       <AppBar
         sx={{
           background: "white",
@@ -30,6 +31,7 @@ const Navbar = () => {
           flexWrap: "wrap",
           alignItems: "center",
           justifyContent: "space-between",
+          visibility: openSearch ? "hidden" : "visible",
         }}
       >
         <Tooltip title="Home">
@@ -37,6 +39,7 @@ const Navbar = () => {
             <IconButton>
               <HomeIcon
                 sx={{
+                  marginLeft: "10px",
                   width: {
                     xl: "40px",
                     lg: "40px",
@@ -61,14 +64,20 @@ const Navbar = () => {
           component="form"
           sx={{
             p: "2px 4px",
-            display: "flex",
+            display: {
+              xl: "flex",
+              lg: "flex",
+              md: "flex",
+              sm: "flex",
+              xs: "none",
+            },
             alignItems: "center",
             width: {
               xl: "800px",
               lg: "700px",
               md: "500px",
-              sm: "350px",
-              xs: "200px",
+              sm: "200px",
+              xs: "none",
             },
           }}
         >
@@ -98,14 +107,31 @@ const Navbar = () => {
           </Link>
         </Paper>
         <div style={{ display: "flex" }}>
+          <IconButton
+            type="button"
+            sx={{
+              display: {
+                xl: "none",
+                lg: "none",
+                md: "none",
+                sm: "none",
+                xs: "flex",
+              },
+            }}
+            aria-label="search"
+            onClick={() => setOpenSearch(true)}
+          >
+            <SearchIcon sx={{ width: "1.5em", height: "1.5em" }} />
+          </IconButton>
           <NavbarLoginIcon />
           <NavbarBasketIcon />
           <NavbarFavoriteIcon />
           <NavbarDrawer />
-          <MenuDrawer />
         </div>
       </AppBar>
-      {/* <CategoryNavbar /> */}
+      {openSearch ? (
+        <MobileSearch label={ariaLabel} onOnpenSearch={setOpenSearch} />
+      ) : null}
     </Box>
   );
 };

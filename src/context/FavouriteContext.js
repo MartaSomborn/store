@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 const FavouriteContext = createContext();
 
@@ -24,6 +25,9 @@ export function FavouriteProvider({ children }) {
       const itemAfterRemove = favouriteItems.filter((item) => item.id !== id);
       setFavouriteItems(itemAfterRemove);
     }
+    toast.error("Deleted from favourites !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   };
 
   return (

@@ -28,18 +28,7 @@ const NavbarLoginIcon = () => {
     "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
 
   return (
-    <Box
-      sx={{
-        display: {
-          xl: "flex",
-          lg: "flex",
-          md: "flex",
-          sm: "none",
-          xs: "none",
-        },
-        flexDirection: "column",
-      }}
-    >
+    <Box>
       {user ? (
         <>
           <IconButton onClick={handleClick}>
@@ -73,7 +62,7 @@ const NavbarLoginIcon = () => {
               <Box sx={{ flexDirection: "column" }}>
                 <PersonIcon
                   onClick={handleClick}
-                  sx={{ width: "2em", height: "2em" }}
+                  sx={{ width: "1.5em", height: "2em" }}
                 />
               </Box>
             </IconButton>

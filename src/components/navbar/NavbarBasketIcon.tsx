@@ -10,23 +10,22 @@ const NavbarBasketIcon = (props: any) => {
   const { items } = useContext(CardContext);
 
   return (
-    <Badge
-      badgeContent={items.length}
-      color="primary"
-      sx={{
-        display: {
-          xl: "block",
-          lg: "block",
-          md: "block",
-          sm: props.mobile ? "block" : "none",
-          xs: props.mobile ? "block" : "none",
-        },
-      }}
-    >
+    <Badge badgeContent={items.length} color="primary">
       <Link to={"/checkout"}>
         <Tooltip title="Shopping basket">
           <IconButton>
-            <ShoppingCartIcon sx={{ width: "2em", height: "2em" }} />
+            <ShoppingCartIcon
+              sx={{
+                width: {
+                  xl: "2em",
+                  lg: "2em",
+                  md: "2em",
+                  sm: "2em",
+                  xs: "1.5em",
+                },
+                height: "2em",
+              }}
+            />
           </IconButton>
         </Tooltip>
       </Link>

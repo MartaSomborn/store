@@ -10,23 +10,22 @@ const NavbarFavoriteIcon = (props: any) => {
   const { favouriteItems } = useContext(FavouriteContext);
 
   return (
-    <Badge
-      badgeContent={favouriteItems.length}
-      color="primary"
-      sx={{
-        display: {
-          xl: "block",
-          lg: "block",
-          md: "block",
-          sm: props.mobile ? "block" : "none",
-          xs: props.mobile ? "block" : "none",
-        },
-      }}
-    >
+    <Badge badgeContent={favouriteItems.length} color="primary">
       <Tooltip title="Favorites">
         <Link to={"/favourite"}>
           <IconButton>
-            <FavouriteBorderIcon sx={{ width: "2em", height: "2em" }} />
+            <FavouriteBorderIcon
+              sx={{
+                width: {
+                  xl: "2em",
+                  lg: "2em",
+                  md: "2em",
+                  sm: "2em",
+                  xs: "1.5em",
+                },
+                height: "2em",
+              }}
+            />
           </IconButton>
         </Link>
       </Tooltip>

@@ -77,21 +77,22 @@ const NavbarDrawer = (props: any) => {
     </Box>
   );
   return (
-    <Container
-      sx={{
-        display: {
-          xl: "block",
-          lg: "block",
-          md: "block",
-          sm: props.mobile ? "flex" : "none",
-          xs: props.mobile ? "flex" : "none",
-        },
-      }}
-    >
+    <Container>
       {(["right"] as const).map((anchor) => (
         <Fragment key={anchor}>
           <IconButton onClick={toggleDrawer(anchor, true)}>
-            <MenuBookIcon sx={{ width: "2em", height: "2em" }} />
+            <MenuBookIcon
+              sx={{
+                width: {
+                  xl: "2em",
+                  lg: "2em",
+                  md: "2em",
+                  sm: "2em",
+                  xs: "1.5em",
+                },
+                height: "2em",
+              }}
+            />
           </IconButton>
           <Drawer
             anchor={anchor}

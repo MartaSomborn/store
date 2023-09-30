@@ -71,23 +71,23 @@ const ProductPage = () => {
                 >
                   <Box
                     component="img"
-                    // sx={{
-                    //   height: {
-                    //     xl: "500px",
-                    //     lg: "500px",
-                    //     md: "400px",
-                    //     sm: "300px",
-                    //     xs: "300px",
-                    //   },
-                    //   width: {
-                    //     xl: "400px",
-                    //     lg: "400px",
-                    //     md: "300px",
-                    //     sm: "200px",
-                    //     xs: "200px",
-                    //   },
-                    // }}
-                    sx={{ height: "500px", width: "400px" }}
+                    sx={{
+                      height: {
+                        xl: "500px",
+                        lg: "500px",
+                        md: "400px",
+                        sm: "300px",
+                        xs: "300px",
+                      },
+                      width: {
+                        xl: "300px",
+                        lg: "300px",
+                        md: "300px",
+                        sm: "200px",
+                        xs: "200px",
+                      },
+                    }}
+                    // sx={{ height: "500px", width: "400px" }}
                     src={prod.photo}
                   />
                   <Box

@@ -4,6 +4,7 @@ import { Box, Button, Typography } from "@mui/material";
 import Navbar from "../navbar/Navbar";
 import { Link } from "react-router-dom";
 import { IProductTypes } from "../main/ProductItem";
+import { ToastContainer } from "react-toastify";
 
 const Favourites = () => {
   const { removeSingleFavourite, favouriteItems } =
@@ -146,6 +147,7 @@ const Favourites = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </Box>
   );
 };

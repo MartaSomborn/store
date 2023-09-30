@@ -7,7 +7,7 @@ import FavouriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavouriteContext from "../../context/FavouriteContext";
 import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export interface IProductTypes {
@@ -50,6 +50,13 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
     });
   };
 
+  const addToastFavourite = () => {
+    addToFavourite(product.id, product.photo, product.name, product.price);
+    toast.success("Added to favourites !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
   return (
     <Box
       key={key}
@@ -59,7 +66,7 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
           lg: "20vw",
           md: "35vw",
           sm: "40vw",
-          xs: "40vw",
+          xs: "80vw",
         },
         height: "550px",
         display: "flex",
@@ -74,6 +81,7 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
         "&:hover": {
           transofrm: "scale(1.5)",
         },
+        border: "2px solid blue",
       }}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
@@ -164,19 +172,11 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
                 width: "1.5em",
                 height: "1.5em",
               }}
-              onClick={() =>
-                addToFavourite(
-                  product.id,
-                  product.photo,
-                  product.name,
-                  product.price
-                )
-              }
+              onClick={addToastFavourite}
             />
           </IconButton>
         </div>
       </div>
-      <ToastContainer />
     </Box>
   );
 };

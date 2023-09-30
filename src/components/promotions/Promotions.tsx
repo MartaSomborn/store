@@ -9,7 +9,7 @@ const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
-    items: 5,
+    items: 4,
   },
   desktop: {
     breakpoint: { max: 3000, min: 1300 },
@@ -18,7 +18,7 @@ const responsive = {
   },
   tablet: {
     breakpoint: { max: 1300, min: 1218 },
-    items: 3,
+    items: 2,
     slidesToSlide: 3, // optional, default to 1.
   },
   mobile: {
@@ -42,7 +42,7 @@ const Promotions = () => {
         borderRadius: "25px",
         paddingTop: "50px",
         paddingBottom: "20px",
-        width: { xl: "90vw", lg: "90vw", md: "80vw", sm: "90vw", xs: "95vw" },
+        width: { xl: "70vw", lg: "70vw", md: "80vw", sm: "90vw", xs: "95vw" },
         //maxWidth: "1520px",
       }}
     >

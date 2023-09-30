@@ -6,12 +6,12 @@ import Promotions from "../promotions/Promotions";
 import Recommended from "../recommended/Recommended";
 import "./../../App.css";
 import CategoryNavbar from "../navbar/CategoryNavbar";
+import { ToastContainer } from "react-toastify";
 
 const Layout = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Navbar />
-      {/* <CategoryNavbar /> */}
       <div
         style={{
           paddingBottom: "200px",
@@ -24,6 +24,7 @@ const Layout = () => {
         <Announcement />
         <Recommended />
         <Products />
+        <ToastContainer />
       </div>
     </div>
   );
