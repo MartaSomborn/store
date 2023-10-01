@@ -113,17 +113,17 @@ const ProductPage = () => {
                         fontFamily: "Montserrat",
                         fontWeight: 500,
                         fontSize: {
-                          xl: "40px",
-                          lg: "40px",
-                          md: "30px",
-                          sm: "30px",
-                          xs: "30px",
+                          xl: "30px",
+                          lg: "30px",
+                          md: "20px",
+                          sm: "20px",
+                          xs: "20px",
                         },
                         textAlign: "center",
                         padding: "10px 0",
                       }}
                     >
-                      Tytuł: {prod.name}
+                      Title: {prod.name}
                     </Typography>
 
                     <Typography
@@ -131,11 +131,11 @@ const ProductPage = () => {
                         fontFamily: "Montserrat",
                         fontWeight: 500,
                         fontSize: {
-                          xl: "30px",
-                          lg: "30px",
+                          xl: "20px",
+                          lg: "20px",
                           md: "20px",
-                          sm: "20px",
-                          xs: "20px",
+                          sm: "15px",
+                          xs: "15px",
                         },
                         textAlign: "center",
                         padding: "10px 0",
@@ -148,11 +148,11 @@ const ProductPage = () => {
                         fontFamily: "Montserrat",
                         fontWeight: 500,
                         fontSize: {
-                          xl: "30px",
-                          lg: "30px",
-                          md: "20px",
-                          sm: "20px",
-                          xs: "20px",
+                          xl: "20px",
+                          lg: "20px",
+                          md: "15px",
+                          sm: "15px",
+                          xs: "15px",
                         },
                         textAlign: "center",
                         padding: "10px 0",
