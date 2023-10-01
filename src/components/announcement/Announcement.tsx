@@ -37,7 +37,7 @@ const Announcement = () => {
         borderRadius: "25px",
         paddingTop: "50px",
         paddingBottom: "20px",
-        width: { xl: "90vw", lg: "50vw", md: "80vw", sm: "90vw", xs: "95vw" },
+        width: { xl: "70vw", lg: "70vw", md: "80vw", sm: "90vw", xs: "95vw" },
       }}
     >
       <Typography

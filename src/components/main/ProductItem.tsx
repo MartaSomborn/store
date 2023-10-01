@@ -62,11 +62,11 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
       key={key}
       sx={{
         width: {
-          xl: "15vw",
-          lg: "20vw",
-          md: "35vw",
-          sm: "40vw",
-          xs: "80vw",
+          xl: "250px",
+          lg: "230px",
+          md: "230px",
+          sm: "230px",
+          xs: "230px",
         },
         height: "550px",
         display: "flex",
@@ -74,14 +74,8 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
         flexWrap: "wrap",
         alignItems: "flex-start",
         justifyContent: "center",
-        marginTop: "5%",
+        // marginTop: "10px",
         position: "relative",
-        backgroundColor: "#e5e5e5",
-        borderRadius: "5px",
-        "&:hover": {
-          transofrm: "scale(1.5)",
-        },
-        border: "2px solid blue",
       }}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
@@ -102,7 +96,7 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
               <img
                 style={{
                   height: "300px",
-                  width: "100%",
+                  width: "200px",
                   borderRadius: "5px",
                 }}
                 src={product.photo}
@@ -148,7 +142,7 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
             sx={{
               position: "absolute",
               bottom: "3%",
-              left: "25px",
+
               width: "150px",
               fontFamily: "Montserrat",
               fontWeight: 500,

@@ -41,19 +41,13 @@ const Navbar = () => {
                 sx={{
                   marginLeft: "10px",
                   width: {
-                    xl: "40px",
-                    lg: "40px",
-                    md: "40px",
-                    sm: "40px",
-                    xs: "40px",
+                    xl: "2em",
+                    lg: "2em",
+                    md: "2em",
+                    sm: "2em",
+                    xs: "1.5em",
                   },
-                  height: {
-                    xl: "40px",
-                    lg: "40px",
-                    md: "40px",
-                    sm: "40px",
-                    xs: "40px",
-                  },
+                  height: "2em",
                 }}
               />
             </IconButton>

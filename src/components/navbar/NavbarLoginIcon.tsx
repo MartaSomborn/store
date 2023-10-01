@@ -62,7 +62,16 @@ const NavbarLoginIcon = () => {
               <Box sx={{ flexDirection: "column" }}>
                 <PersonIcon
                   onClick={handleClick}
-                  sx={{ width: "1.5em", height: "2em" }}
+                  sx={{
+                    width: {
+                      xl: "2em",
+                      lg: "2em",
+                      md: "2em",
+                      sm: "2em",
+                      xs: "1.5em",
+                    },
+                    height: "2em",
+                  }}
                 />
               </Box>
             </IconButton>

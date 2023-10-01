@@ -44,6 +44,7 @@ const Favourites = () => {
         <div
           style={{
             display: "flex",
+            flexWrap: "wrap",
             justifyContent: "center",
             flexDirection: "column",
             alignItems: "center",
@@ -64,16 +65,20 @@ const Favourites = () => {
             {favouriteItems.map((item: IProductTypes, index: number) => {
               return (
                 <Box key={index + " " + item.id}>
-                  <div
-                    style={{
-                      width: "600px",
+                  <Box
+                    sx={{
+                      width: {
+                        xl: "80vw",
+                        lg: "80vw",
+                        md: "80vw",
+                        sm: "60vw",
+                        xs: "60vw",
+                      },
                       display: "flex",
                       flexDirection: "row",
-                      flexWrap: "wrap",
-                      alignContent: "center",
                       alignItems: "center",
-                      marginTop: "30px",
-                      justifyContent: "space-between",
+                      justifyContent: "space-evenly",
+                      flexWrap: "wrap",
                     }}
                   >
                     <Link to={"/product/" + item.id}>
@@ -126,6 +131,7 @@ const Favourites = () => {
                           fontWeight: 500,
                           fontSize: "15px",
                           marginTop: "10px",
+                          marginBottom: "30px",
                           backgroundColor: "#c75146",
                           color: "white",
                           "&:hover": {
@@ -140,7 +146,7 @@ const Favourites = () => {
                         Delete from favorites
                       </Button>
                     </Box>
-                  </div>
+                  </Box>
                 </Box>
               );
             })}

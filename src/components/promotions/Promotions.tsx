@@ -6,24 +6,19 @@ import "react-multi-carousel/lib/styles.css";
 import "../carousel/Slider.css";
 
 const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 4,
-  },
   desktop: {
-    breakpoint: { max: 3000, min: 1300 },
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+    slidesToSlide: 4, // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 768 },
     items: 3,
     slidesToSlide: 3, // optional, default to 1.
   },
-  tablet: {
-    breakpoint: { max: 1300, min: 1218 },
-    items: 2,
-    slidesToSlide: 3, // optional, default to 1.
-  },
   mobile: {
-    breakpoint: { max: 1218, min: 464 },
-    items: 1,
+    breakpoint: { max: 767, min: 464 },
+    items: 2,
     slidesToSlide: 1, // optional, default to 1.
   },
 };
@@ -43,7 +38,6 @@ const Promotions = () => {
         paddingTop: "50px",
         paddingBottom: "20px",
         width: { xl: "70vw", lg: "70vw", md: "80vw", sm: "90vw", xs: "95vw" },
-        //maxWidth: "1520px",
       }}
     >
       <Typography
@@ -63,27 +57,24 @@ const Promotions = () => {
       >
         Promotions
       </Typography>
-      <div style={{ border: "red solid 2px" }}>
-        <Carousel
-          responsive={responsive}
-          autoPlay={true}
-          swipeable={true}
-          draggable={true}
-          showDots={true}
-          infinite={true}
-          partialVisible={false}
-          dotListClass="custom-dot-list-style"
-          centerMode={true}
-        >
-          {products.map((product: IProductTypes, index: number) => {
-            return (
-              <div className="slider" key={index}>
-                <ProductItem product={product} key={product.id} />
-              </div>
-            );
-          })}
-        </Carousel>
-      </div>
+      <Carousel
+        responsive={responsive}
+        autoPlay={true}
+        swipeable={true}
+        draggable={true}
+        showDots={true}
+        infinite={true}
+        partialVisible={false}
+        dotListClass="custom-dot-list-style"
+      >
+        {products.map((product: IProductTypes, index: number) => {
+          return (
+            <div className="slider" key={index}>
+              <ProductItem product={product} key={product.id} />
+            </div>
+          );
+        })}
+      </Carousel>
     </Box>
   );
 };

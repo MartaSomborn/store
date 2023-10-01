@@ -14,12 +14,12 @@ const Products = () => {
         gap: "20px",
         justifyContent: "center",
         minWidth: "90vw",
-        marginTop: "200px",
+        marginTop: "100px",
         backgroundColor: "white",
         width: "80%",
         borderRadius: "55px",
-        paddingTop: "10%",
-        paddingBottom: "10%",
+        paddingTop: "50px",
+        paddingBottom: "20px",
       }}
     >
       {products.map((prod: IProductTypes) => {
