@@ -74,8 +74,11 @@ const ProductItem: React.FC<IPropsTypes> = ({ product, key }) => {
         flexWrap: "wrap",
         alignItems: "flex-start",
         justifyContent: "center",
-        // marginTop: "10px",
         position: "relative",
+        transition: "transform .2s",
+        "&:hover": {
+          transform: "scale(1.1)",
+        },
       }}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
